@@ -1,37 +1,37 @@
 package com.gregoire.testv1;
 
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
-import java.util.Set;
 
 public class MainPage {
 
-    public WebElement usernameInput;
+    private final WebElement usernameInput;
+    private final WebElement passwordInput;
+    private final WebElement authsigninsubmitButton;
 
-    public WebElement passwordInput;
+    public MainPage(ChromeDriver chromeDriver, String url) {
 
-    public WebElement authsigninsubmitButton;
+        // connect to the web site
+        chromeDriver.get(url);
 
-    public MainPage(ChromeDriver chromeDriver) {
-        chromeDriver.get("https://ggally.demo.simplicite.io");
+        // find elements on the page for authentification
         usernameInput = chromeDriver.findElement(By.id("auth-signin-username"));
         passwordInput = chromeDriver.findElement(By.id("auth-signin-password"));
         authsigninsubmitButton = chromeDriver.findElement(By.id("auth-signin-submit"));
+
     }
 
-    public void MainPageAuthName() {
+    public void MainPageAuthName(String usr, String psw) {
+
+        // fill login data on sign-in page
         if (usernameInput != null)
-            usernameInput.sendKeys("usertest");
+            usernameInput.sendKeys(usr);
         if (passwordInput != null)
-            passwordInput.sendKeys("usertest");
+            passwordInput.sendKeys(psw);
+
+        // click on the button to validate the information
+
         authsigninsubmitButton.click();
     }
 }
