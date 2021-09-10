@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Browsers.FIREFOX;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -24,7 +25,10 @@ public class MainPageTest {
 
     @BeforeAll
     public static void setUpAll() {
+
         Configuration.browserSize = "1280x800";
+        Configuration.browser = FIREFOX;
+        Configuration.headless = false;
     }
 
     @BeforeEach
@@ -54,8 +58,8 @@ public class MainPageTest {
 
     @Test
     public void createModule() {
-            Authentification auth = new Authentification("designer", "designer1903");
-            auth.Connect();
+            /*Authentification auth = new Authentification("designer", "designer1903");
+            auth.Connect();*/
             SimpliciteModule module = new SimpliciteModule();
             module.createModule("trainv2", "trv");
             module.createGroup("SUPERADMIN", "trv");
