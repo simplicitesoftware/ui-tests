@@ -1,24 +1,27 @@
 package com.gregoire.testv1;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class MainPage {
 
     private final WebElement usernameInput;
     private final WebElement passwordInput;
     private final WebElement authsigninsubmitButton;
+    public final WebDriver driver;
 
-    public MainPage(ChromeDriver chromeDriver, String url) {
+    public MainPage(RemoteWebDriver driver, String url) {
 
         // connect to the web site
-        chromeDriver.get(url);
+        this.driver = driver;
+        this.driver.get(url);
 
         // find elements on the page for authentification
-        usernameInput = chromeDriver.findElement(By.id("auth-signin-username"));
-        passwordInput = chromeDriver.findElement(By.id("auth-signin-password"));
-        authsigninsubmitButton = chromeDriver.findElement(By.id("auth-signin-submit"));
+        usernameInput = this.driver.findElement(By.id("auth-signin-username"));
+        passwordInput = this.driver.findElement(By.id("auth-signin-password"));
+        authsigninsubmitButton = this.driver.findElement(By.id("auth-signin-submit"));
 
     }
 
@@ -31,7 +34,6 @@ public class MainPage {
             passwordInput.sendKeys(psw);
 
         // click on the button to validate the information
-
         authsigninsubmitButton.click();
     }
 }
