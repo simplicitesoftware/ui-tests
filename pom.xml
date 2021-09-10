@@ -38,7 +38,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- Not really needed Use for diagnostic log on Selenide (Stable) -->
+        <!-- Not really needed Use for diagnostic log on Selenide (Stable) serve as a simple facade for frameworks-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
