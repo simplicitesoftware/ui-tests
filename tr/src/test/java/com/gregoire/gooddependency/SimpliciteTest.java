@@ -18,8 +18,7 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith({ScreenShooterExtension.class})
-public class MainPageTest {
-    MainPage mainPage = new MainPage();
+public class SimpliciteTest {
     String url = "http://localhost";
     int port = 80;
 
