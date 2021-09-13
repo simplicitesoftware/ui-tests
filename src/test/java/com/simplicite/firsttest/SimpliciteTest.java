@@ -1,12 +1,17 @@
-package com.gregoire.gooddependency;
+package com.simplicite.firsttest;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
+import com.simplicite.account.Authentication;
+import com.simplicite.optionmenu.Cache;
+import com.simplicite.optionmenu.DropDownMenu;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.time.Duration;
 
@@ -66,5 +71,16 @@ public class SimpliciteTest {
         module.createDomain("TrnDomain", "Formation", "Training");
         module.addGroupToDomain("TRV_SUPERADMIN");
         module.addIconToDomain("book", 2);
+    }
+
+    @Test
+    public void clearCache()
+    {
+        Authentication auth = new Authentication("designer", "designer1903");
+        auth.Connect();
+        DropDownMenu drop = new DropDownMenu();
+        drop.click(4);
+        Cache.click(auth, 'u');
+        auth.authentificationSucced();
     }
 }

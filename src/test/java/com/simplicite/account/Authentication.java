@@ -1,4 +1,4 @@
-package com.gregoire.gooddependency;
+package com.simplicite.account;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;

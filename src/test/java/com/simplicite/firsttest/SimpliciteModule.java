@@ -1,4 +1,4 @@
-package com.gregoire.gooddependency;
+package com.simplicite.firsttest;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
