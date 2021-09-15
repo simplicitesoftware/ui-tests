@@ -1,17 +1,20 @@
-package com.simplicite.firsttest;
+package com.simplicite.test;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
+import com.simplicite.menu.administration.SimpliciteDomain;
+import com.simplicite.menu.administration.SimpliciteModuleAssitant;
+import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
+import com.simplicite.utils.Icon;
+import com.simplicite.utils.Traduction;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.time.Duration;
 
@@ -27,6 +30,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class SimpliciteTest {
     String url = "http://localhost";
     int port = 80;
+    SimpliciteModuleAssitant moduleAssitant = new SimpliciteModuleAssitant("trainv2", "trv");
+    SimpliciteGroup group = new SimpliciteGroup("TRV_SUPERADMIN", moduleAssitant);
+    SimpliciteDomain domain = new SimpliciteDomain("TrvDomain", Icon.CONSOLE, moduleAssitant);
 
     @BeforeAll
     public static void setUpAll() {
@@ -65,14 +71,21 @@ public class SimpliciteTest {
     public void createModule() {
         Authentication auth = new Authentication("designer", "designer1903");
         auth.Connect();
-        SimpliciteModule module = new SimpliciteModule();
-        module.createModule("trainv2", "trv");
-        module.createGroup("SUPERADMIN", "trv");
-        module.createDomain("TrnDomain", "Formation", "Training");
-        module.addGroupToDomain("TRV_SUPERADMIN");
-        module.addIconToDomain("book", 2);
+        moduleAssitant.click();
+        moduleAssitant.createModule();
+        moduleAssitant.createGroup(group);
+        moduleAssitant.createDomain(domain, Traduction.FORMATION, Traduction.TRAINING);
+        moduleAssitant.addGroupToDomain(group);
+        moduleAssitant.addIconToDomain(domain.getIcon());
     }
 
+    @Test
+    public void deleteModule(){
+        Authentication auth = new Authentication("designer", "designer1903");
+        auth.Connect();
+        moduleAssitant.click();
+        moduleAssitant.delete();
+    }
     @Test
     public void clearCache()
     {
@@ -83,4 +96,5 @@ public class SimpliciteTest {
         Cache.click(auth, 'u');
         auth.authentificationSucced();
     }
+
 }
