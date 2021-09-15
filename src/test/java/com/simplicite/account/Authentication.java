@@ -51,8 +51,7 @@ public class Authentication {
     /** Test if the authentification succed if a pop-up error appear return false */
     public boolean authentificationSucced() {
         SelenideElement element = $("span.user-name");
-        if (!element.exists())
-            return false;
+        element.should(Condition.exist);
         element.shouldHave(Condition.text(usrname));
         return true;
     }

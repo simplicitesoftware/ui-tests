@@ -23,8 +23,7 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.url;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith({ScreenShooterExtension.class})
 public class SimpliciteTest {
@@ -39,7 +38,7 @@ public class SimpliciteTest {
 
         Configuration.browserSize = "1280x800";
         Configuration.browser = FIREFOX;
-        Configuration.headless = false;
+        Configuration.headless = true;
     }
 
     @BeforeEach
@@ -53,8 +52,7 @@ public class SimpliciteTest {
         auth.Connect();
         SelenideElement element = $(".auth-signin-error");
         element.shouldNot(exist, Duration.ofSeconds(2));
-        auth.authentificationSucced();
-        //assertEquals(url + "/ui/", url());
+        assertTrue(auth.authentificationSucced());
     }
 
     @Test
@@ -63,7 +61,6 @@ public class SimpliciteTest {
         auth.Connect();
         SelenideElement element = $(".auth-signin-error");
         element.shouldBe(exist);
-        assertFalse(auth.authentificationSucced());
         assertNotEquals(url + "/ui/", url());
     }
 
@@ -77,6 +74,7 @@ public class SimpliciteTest {
         moduleAssitant.createDomain(domain, Traduction.FORMATION, Traduction.TRAINING);
         moduleAssitant.addGroupToDomain(group);
         moduleAssitant.addIconToDomain(domain.getIcon());
+        assertTrue(moduleAssitant.isSuccess());
     }
 
     @Test
