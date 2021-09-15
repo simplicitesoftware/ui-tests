@@ -1,8 +1,7 @@
-package com.simplicite.menu.administration.CreationAssistant;
+package com.simplicite.menu.administration.module;
 
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.administration.SimpliciteDomain;
-import com.simplicite.menu.administration.SimpliciteModule;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.utils.Icon;
 import com.simplicite.utils.Traduction;

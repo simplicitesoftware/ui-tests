@@ -3,6 +3,7 @@ package com.simplicite.menu.administration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.selector.ByText;
 import com.simplicite.menu.MainMenuProperties;
+import com.simplicite.menu.administration.module.SimpliciteModule;
 import com.simplicite.utils.Icon;
 
 import static com.codeborne.selenide.Selenide.$;

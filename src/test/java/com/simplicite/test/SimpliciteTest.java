@@ -4,8 +4,10 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
-import com.simplicite.menu.administration.CreationAssistant.SimpliciteBusinessObjectAssistant;
-import com.simplicite.menu.administration.CreationAssistant.SimpliciteModuleAssitant;
+import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjectAssistant;
+import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjects;
+import com.simplicite.menu.administration.module.SimpliciteModule;
+import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
 import com.simplicite.menu.administration.SimpliciteDomain;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.optionmenu.Cache;
@@ -100,6 +102,15 @@ public class SimpliciteTest {
         assertTrue(boassistant.isSuccess());
     }
 
+    @Test
+    public void editTemplate()
+    {
+        Authentication auth = new Authentication("designer", "designer1903");
+        auth.Connect();
+        boassistant.click();
+        boassistant.find();
+        boassistant.getEditor().addField();
+    }
     @Test
     public void clearCache() {
         Authentication auth = new Authentication("designer", "designer1903");

@@ -1,9 +1,11 @@
-package com.simplicite.menu.administration;
+package com.simplicite.menu.administration.businessobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.selector.ByText;
 import com.simplicite.menu.MainMenuProperties;
+import com.simplicite.menu.administration.module.SimpliciteModule;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class SimpliciteBusinessObjects implements MainMenuProperties {
 
@@ -11,6 +13,8 @@ public class SimpliciteBusinessObjects implements MainMenuProperties {
     private final String table;
     private final SimpliciteModule module;
     private final String prefix;
+
+    private SimpliciteTemplateEditor editor = null;
 
     public SelenideElement objectbutton = mainmenu.find("[data-obj=\"ObjectInternal\"]");
 
@@ -39,8 +43,8 @@ public class SimpliciteBusinessObjects implements MainMenuProperties {
 
     @Override
     public void find() {
-        work.find("#field_obo_name").setValue(code).pressEnter();
-        work.find("[data-field=\"mdl_name\"]").shouldHave(Condition.textCaseSensitive(code)).click();
+        work.find("#obo_name").setValue(code).pressEnter();
+        work.find("[data-field=\"obo_name\"]").shouldHave(Condition.textCaseSensitive(code)).click();
     }
 
     public boolean isSuccess(){
@@ -62,5 +66,17 @@ public class SimpliciteBusinessObjects implements MainMenuProperties {
 
     public String getCode() {
         return code;
+    }
+
+
+    public SimpliciteTemplateEditor getEditor() {
+        if (editor == null)
+            editor = new SimpliciteTemplateEditor();
+        $("button[data-action=\"editTemplate\"]").click();
+        return editor;
+    }
+
+    public void setEditor(SimpliciteTemplateEditor editor) {
+        this.editor = editor;
     }
 }

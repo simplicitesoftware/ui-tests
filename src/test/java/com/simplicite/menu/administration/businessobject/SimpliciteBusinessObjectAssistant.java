@@ -1,10 +1,8 @@
-package com.simplicite.menu.administration.CreationAssistant;
+package com.simplicite.menu.administration.businessobject;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
-import com.simplicite.menu.administration.SimpliciteBusinessObjects;
 import com.simplicite.menu.administration.SimpliciteDomain;
-import com.simplicite.menu.administration.SimpliciteModule;
+import com.simplicite.menu.administration.module.SimpliciteModule;
 import com.simplicite.utils.Traduction;
 
 public class SimpliciteBusinessObjectAssistant extends SimpliciteBusinessObjects {
