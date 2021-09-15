@@ -4,8 +4,9 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
+import com.simplicite.menu.administration.CreationAssistant.SimpliciteBusinessObjectAssistant;
+import com.simplicite.menu.administration.CreationAssistant.SimpliciteModuleAssitant;
 import com.simplicite.menu.administration.SimpliciteDomain;
-import com.simplicite.menu.administration.SimpliciteModuleAssitant;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
@@ -23,7 +24,8 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.url;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith({ScreenShooterExtension.class})
 public class SimpliciteTest {
@@ -32,13 +34,14 @@ public class SimpliciteTest {
     SimpliciteModuleAssitant moduleAssitant = new SimpliciteModuleAssitant("trainv2", "trv");
     SimpliciteGroup group = new SimpliciteGroup("TRV_SUPERADMIN", moduleAssitant);
     SimpliciteDomain domain = new SimpliciteDomain("TrvDomain", Icon.CONSOLE, moduleAssitant);
+    SimpliciteBusinessObjectAssistant boassistant = new SimpliciteBusinessObjectAssistant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
 
     @BeforeAll
     public static void setUpAll() {
 
         Configuration.browserSize = "1280x800";
         Configuration.browser = FIREFOX;
-        Configuration.headless = true;
+        Configuration.headless = false;
     }
 
     @BeforeEach
@@ -78,15 +81,27 @@ public class SimpliciteTest {
     }
 
     @Test
-    public void deleteModule(){
+    public void deleteModule() {
         Authentication auth = new Authentication("designer", "designer1903");
         auth.Connect();
         moduleAssitant.click();
         moduleAssitant.delete();
     }
+
     @Test
-    public void clearCache()
-    {
+    public void createBusinessObject() {
+        Authentication auth = new Authentication("designer", "designer1903");
+        auth.Connect();
+        boassistant.click();
+        boassistant.createObject();
+        boassistant.makeTraduction(Traduction.FORMATION, Traduction.SUPPLIER);
+        boassistant.grantObject();
+        boassistant.addDomain(domain);
+        assertTrue(boassistant.isSuccess());
+    }
+
+    @Test
+    public void clearCache() {
         Authentication auth = new Authentication("designer", "designer1903");
         auth.Connect();
         DropDownMenu drop = new DropDownMenu();

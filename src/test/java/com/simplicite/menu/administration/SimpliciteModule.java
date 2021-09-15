@@ -45,7 +45,7 @@ public class SimpliciteModule implements MainMenuProperties {
     @Override
     public void find() {
         work.find("#mdl_name").setValue(name).pressEnter();
-        work.find("[data-field=\"mdl_name\"]").find(new ByText(name)).click();
+        work.find("[data-field=\"mdl_name\"]").shouldHave(Condition.textCaseSensitive(name)).click();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.simplicite.utils;
 
+import static com.simplicite.menu.MainMenuProperties.work;
+
 public enum Traduction {
 
     SUPPLIER("Supplier", "EN"),
@@ -33,6 +35,12 @@ public enum Traduction {
      */
     public String getLanguage() {
         return language;
+    }
+
+    public void doTraduction(Traduction traduction)
+    {
+        work.find("input[name*=\"EN\"]").sendKeys(getTraduction());
+        work.find("input[name*=\"FR\"]").sendKeys(traduction.getTraduction());
     }
 }
 

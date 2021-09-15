@@ -1,6 +1,8 @@
-package com.simplicite.menu.administration;
+package com.simplicite.menu.administration.CreationAssistant;
 
 import com.codeborne.selenide.SelenideElement;
+import com.simplicite.menu.administration.SimpliciteDomain;
+import com.simplicite.menu.administration.SimpliciteModule;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.utils.Icon;
 import com.simplicite.utils.Traduction;
@@ -53,8 +55,7 @@ public class SimpliciteModuleAssitant extends SimpliciteModule {
     public void createDomain(SimpliciteDomain domain, Traduction fr, Traduction en) {
         domain.create();
         save();
-        work.find("input[name*=\"EN\"]").sendKeys(en.getTraduction());
-        work.find("input[name*=\"FR\"]").sendKeys(fr.getTraduction());
+        en.doTraduction(fr);
         save();
     }
 
