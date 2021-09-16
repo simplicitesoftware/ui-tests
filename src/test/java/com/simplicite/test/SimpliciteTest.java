@@ -12,6 +12,7 @@ import com.simplicite.menu.administration.SimpliciteDomain;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
+import com.simplicite.utils.ConfigTest;
 import com.simplicite.utils.Icon;
 import com.simplicite.utils.Traduction;
 import org.junit.jupiter.api.BeforeAll;
@@ -37,18 +38,18 @@ public class SimpliciteTest {
     SimpliciteGroup group = new SimpliciteGroup("TRV_SUPERADMIN", moduleAssitant);
     SimpliciteDomain domain = new SimpliciteDomain("TrvDomain", Icon.CONSOLE, moduleAssitant);
     SimpliciteBusinessObjectAssistant boassistant = new SimpliciteBusinessObjectAssistant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
+    static ConfigTest configTest = new ConfigTest();
 
     @BeforeAll
     public static void setUpAll() {
-
-        Configuration.browserSize = "1280x800";
-        Configuration.browser = FIREFOX;
-        Configuration.headless = false;
+        Configuration.browserSize = configTest.browsersize;
+        Configuration.browser = configTest.browser;
+        Configuration.headless = configTest.headless;
     }
 
     @BeforeEach
     public void setUp() {
-        open(url + ":" + port);
+        open(configTest.url);
     }
 
     @Test

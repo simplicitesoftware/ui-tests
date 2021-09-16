@@ -18,6 +18,11 @@ public class ConfigTest {
         readFile();
     }
 
+    public ConfigTest(String path){
+        this.path = path;
+        readFile();
+    }
+
     public void readFile(){
         StringBuilder linebuilder = new StringBuilder();
         try {
