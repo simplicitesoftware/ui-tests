@@ -85,7 +85,6 @@ public class SimpliciteDemoTest {
     {
         boassistant.click();
         boassistant.find();
-        boassistant.setEditor(new SimpliciteTemplateEditor("tmp"));
         boassistant.getEditor().addField("code", "20", true, true);
     }
 
