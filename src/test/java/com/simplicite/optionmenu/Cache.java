@@ -15,7 +15,7 @@ public class Cache {
         keyAction.keyDown(Keys.ALT).sendKeys("c").sendKeys().keyUp(Keys.ALT).keyUp(Keys.SHIFT).perform();
     }
 
-    public static void click(Authentication authentication, char type) {
+    public static void click(char type) {
         if (type == 'u')
             $("*[src=\"http://localhost/images/image/cc1.png\"]").click();
 
@@ -24,10 +24,7 @@ public class Cache {
 
         else if (type == 'c') {
             $("*[src=\"http://localhost/images/image/cc3.png\"]").click();
-            $(".btn-OK[data-action=\"OK\"]");
+            $(".btn-OK[data-action=\"OK\"]").click();
         }
-        else
-            return;
-        authentication.Connect();
     }
 }

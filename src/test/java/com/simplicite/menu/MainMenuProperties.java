@@ -54,4 +54,9 @@ public interface MainMenuProperties {
         SelenideElement delete = work.find("div.card > div.card-header > div > div.form-actionbar > div " +
                 "> div.dropdown.show > ul > li[data-action=\"delete\"]");
     }
+
+    default void close()
+    {
+        $("button[data-action=\"close\"]").click();
+    }
 }

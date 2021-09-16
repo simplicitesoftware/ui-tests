@@ -55,4 +55,11 @@ public class Authentication {
         element.shouldHave(Condition.text(usrname));
         return true;
     }
+
+    public void deconnection()
+    {
+        $(".logged-user").click();
+        $(".user-logout").click();
+        $("#dlgmodal_CONFIRM_LOGOUT").find("button[data-action=\"OK\"]").click();
+    }
 }

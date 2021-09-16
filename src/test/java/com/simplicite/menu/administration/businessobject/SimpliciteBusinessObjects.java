@@ -72,7 +72,8 @@ public class SimpliciteBusinessObjects implements MainMenuProperties {
     public SimpliciteTemplateEditor getEditor() {
         if (editor == null)
             editor = new SimpliciteTemplateEditor();
-        $("button[data-action=\"editTemplate\"]").click();
+        else
+            editor.click();
         return editor;
     }
 

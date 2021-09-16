@@ -58,6 +58,7 @@ public class SimpliciteTest {
         SelenideElement element = $(".auth-signin-error");
         element.shouldNot(exist, Duration.ofSeconds(2));
         assertTrue(auth.authentificationSucced());
+        auth.deconnection();
     }
 
     @Test
@@ -69,56 +70,15 @@ public class SimpliciteTest {
         assertNotEquals(url + "/ui/", url());
     }
 
-    @Test
-    public void createModule() {
-        Authentication auth = new Authentication("designer", "designer1903");
-        auth.Connect();
-        moduleAssitant.click();
-        moduleAssitant.createModule();
-        moduleAssitant.createGroup(group);
-        moduleAssitant.createDomain(domain, Traduction.FORMATION, Traduction.TRAINING);
-        moduleAssitant.addGroupToDomain(group);
-        moduleAssitant.addIconToDomain(domain.getIcon());
-        assertTrue(moduleAssitant.isSuccess());
-    }
-
-    @Test
-    public void deleteModule() {
-        Authentication auth = new Authentication("designer", "designer1903");
-        auth.Connect();
-        moduleAssitant.click();
-        moduleAssitant.delete();
-    }
-
-    @Test
-    public void createBusinessObject() {
-        Authentication auth = new Authentication("designer", "designer1903");
-        auth.Connect();
-        boassistant.click();
-        boassistant.createObject();
-        boassistant.makeTraduction(Traduction.FORMATION, Traduction.SUPPLIER);
-        boassistant.grantObject();
-        boassistant.addDomain(domain);
-        assertTrue(boassistant.isSuccess());
-    }
-
-    @Test
-    public void editTemplate()
-    {
-        Authentication auth = new Authentication("designer", "designer1903");
-        auth.Connect();
-        boassistant.click();
-        boassistant.find();
-        boassistant.getEditor().addField();
-    }
-    @Test
+   @Test
     public void clearCache() {
         Authentication auth = new Authentication("designer", "designer1903");
         auth.Connect();
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
-        Cache.click(auth, 'u');
+        Cache.click('u');
         auth.authentificationSucced();
+        auth.deconnection();
     }
 
 }
