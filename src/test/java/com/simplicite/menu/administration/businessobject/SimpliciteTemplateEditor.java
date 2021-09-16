@@ -19,7 +19,6 @@ public class SimpliciteTemplateEditor implements MainMenuProperties {
     }
 
     public SimpliciteTemplateEditor(String tmp) {
-        click();
     }
 
     public void addField(String name, String width, boolean functionalkey, boolean required)
@@ -37,7 +36,7 @@ public class SimpliciteTemplateEditor implements MainMenuProperties {
             modal.find("label[for=\"key\"]").click();
         if (required)
             modal.find("label[for=\"req\"]").click();
-        modal.find("button[data-action=\"SAVE\"]").pressEnter().click();
+        modal.find("button[data-action=\"SAVE\"]").click();
         save();
     }
 
@@ -45,7 +44,8 @@ public class SimpliciteTemplateEditor implements MainMenuProperties {
     public void save()
     {
         $("button[data-action=\"save\"]").click();
-        $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").doubleClick();
+        $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").click();
+        $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").click();
         close();
     }
     @Override
