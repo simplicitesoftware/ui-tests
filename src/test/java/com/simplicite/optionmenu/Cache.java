@@ -1,6 +1,5 @@
 package com.simplicite.optionmenu;
 
-import com.simplicite.account.Authentication;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;

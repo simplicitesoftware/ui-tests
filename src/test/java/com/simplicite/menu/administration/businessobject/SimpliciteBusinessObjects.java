@@ -5,8 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 import com.simplicite.menu.administration.module.SimpliciteModule;
 
-import static com.codeborne.selenide.Selenide.$;
-
 public class SimpliciteBusinessObjects implements MainMenuProperties {
 
     private final String code;

@@ -5,7 +5,6 @@ import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
 import com.simplicite.menu.administration.SimpliciteDomain;
 import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjectAssistant;
-import com.simplicite.menu.administration.businessobject.SimpliciteTemplateEditor;
 import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.optionmenu.Cache;
@@ -16,7 +15,6 @@ import com.simplicite.utils.Traduction;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static com.codeborne.selenide.Browsers.FIREFOX;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -89,7 +87,6 @@ public class SimpliciteDemoTest {
         boassistant.getEditor().addField("test", "20", true, true);
     }
 
-    @Disabled("Run to create demo without delete")
     @Test
     @Order(4)
     public void deleteModule() {

@@ -3,19 +3,15 @@ package com.simplicite.menu.administration.businessobject;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.administration.SimpliciteField;
-
-import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.simplicite.menu.MainMenuProperties.work;
 
 public class SimpliciteTemplateEditor implements MainMenuProperties {
 
     public SimpliciteTemplateEditor()
     {
         click();
-        $(".img-flow > img:nth-child(1)").click();
+        $("#dlgmodal").find(".img-flow > img:nth-child(1)").doubleClick();
     }
 
     public SimpliciteTemplateEditor(String tmp) {

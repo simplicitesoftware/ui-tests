@@ -4,17 +4,14 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
-import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjectAssistant;
-import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjects;
-import com.simplicite.menu.administration.module.SimpliciteModule;
-import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
 import com.simplicite.menu.administration.SimpliciteDomain;
+import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjectAssistant;
+import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
 import com.simplicite.utils.ConfigTest;
 import com.simplicite.utils.Icon;
-import com.simplicite.utils.Traduction;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +19,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Browsers.FIREFOX;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;

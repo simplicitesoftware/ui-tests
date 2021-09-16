@@ -43,7 +43,7 @@ public class ConfigTest {
         else if (line.contains("port="))
             port = line.substring(5);
         else if (line.contains("headless="))
-            headless = line.substring(10).equals("true");
+            headless = line.substring(9).equals("true");
         else if (line.contains("browser="))
             browser=line.substring(8);
         else if (line.contains("browsersize="))

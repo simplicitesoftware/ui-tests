@@ -12,18 +12,15 @@ import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
 import com.simplicite.utils.ConfigTest;
 import com.simplicite.utils.Icon;
-import com.simplicite.utils.Traduction;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static com.codeborne.selenide.Browsers.FIREFOX;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith({ScreenShooterExtension.class})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class SimpleUnitaryTest {
+public class SimpliciteUnitaryTest {
 
     SimpliciteModuleAssitant moduleAssitant = new SimpliciteModuleAssitant("Training", "trn");
     SimpliciteGroup group = new SimpliciteGroup("TRN_SUPERADMIN", moduleAssitant);
