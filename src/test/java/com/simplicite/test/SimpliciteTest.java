@@ -22,14 +22,10 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.url;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith({ScreenShooterExtension.class})
 public class SimpliciteTest {
-    String url = "http://localhost";
-    int port = 80;
     SimpliciteModuleAssitant moduleAssitant = new SimpliciteModuleAssitant("trainv2", "trv");
     SimpliciteGroup group = new SimpliciteGroup("TRV_SUPERADMIN", moduleAssitant);
     SimpliciteDomain domain = new SimpliciteDomain("TrvDomain", Icon.CONSOLE, moduleAssitant);
@@ -64,7 +60,6 @@ public class SimpliciteTest {
         auth.connect();
         SelenideElement element = $(".auth-signin-error");
         element.shouldBe(exist);
-        assertNotEquals(url + "/ui/", url());
     }
 
    @Test
@@ -74,6 +69,7 @@ public class SimpliciteTest {
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
         Cache.click('u');
+        auth.connect();
         auth.authentificationSucced();
         auth.deconnection();
     }

@@ -5,7 +5,7 @@ url=http://localhost:80
 ---------Browser------
 
 //headless false or true
-headless=false
+headless=true
 
 //browser chrome / ie / internet explorer / edge / firefox / opera /safari
 browser=firefox

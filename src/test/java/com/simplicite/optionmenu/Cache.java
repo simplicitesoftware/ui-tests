@@ -16,13 +16,13 @@ public class Cache {
 
     public static void click(char type) {
         if (type == 'u')
-            $("*[src=\"http://localhost/images/image/cc1.png\"]").click();
+            $("*[src$=\"cc1.png\"]").click();
 
         else if (type == 's')
-            $("*[src=\"http://localhost/images/image/cc2.png\"]").click();
+            $("*[src$=\"cc2.png\"]").click();
 
         else if (type == 'c') {
-            $("*[src=\"http://localhost/images/image/cc3.png\"]").click();
+            $("*[src$=\"cc3.png\"]").click();
             $(".btn-OK[data-action=\"OK\"]").click();
         }
     }

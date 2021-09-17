@@ -23,8 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith({ScreenShooterExtension.class})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SimpliciteDemoTest {
-     String url = "http://localhost";
-    int port = 80;
     SimpliciteModuleAssitant moduleAssitant = new SimpliciteModuleAssitant("Training", "trn");
     SimpliciteGroup group = new SimpliciteGroup("TRN_SUPERADMIN", moduleAssitant);
     SimpliciteDomain domain = new SimpliciteDomain("TrnDomain", Icon.CONSOLE, moduleAssitant);
@@ -102,10 +100,12 @@ public class SimpliciteDemoTest {
 
         Authentication auth = new Authentication(user.getName(), user.getPassword());
         auth.connect();
+        assertTrue(auth.authentificationSucced());
         auth.deconnection();
         designer.connect();
     }
 
+    @Disabled
     @Test
     @Order(20)
     public void deleteModule() {
