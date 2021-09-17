@@ -10,15 +10,16 @@ import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
-import com.simplicite.utils.ConfigTest;
 import com.simplicite.utils.Icon;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
@@ -31,28 +32,35 @@ public class SimpliciteTest {
     SimpliciteGroup group = new SimpliciteGroup("TRV_SUPERADMIN", moduleAssitant);
     SimpliciteDomain domain = new SimpliciteDomain("TrvDomain", Icon.CONSOLE, moduleAssitant);
     SimpliciteBusinessObjectAssistant boassistant = new SimpliciteBusinessObjectAssistant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
-    static ConfigTest configTest = new ConfigTest();
+    static Properties properties = new Properties();
+    static Authentication auth;
 
     @BeforeAll
     public static void setUpAll() {
-        Configuration.browserSize = configTest.browsersize;
-        Configuration.browser = configTest.browser;
-        Configuration.headless = configTest.headless;
+        try {
+            properties.load(new FileReader("src/test/resources/config.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Configuration.browserSize = properties.getProperty("browsersize");
+        Configuration.browser = properties.getProperty("browser");
+        Configuration.headless = properties.getProperty("headless").equals("true");
+        auth = new Authentication(properties.getProperty("name")
+                , properties.getProperty("password"));
     }
 
     @BeforeEach
     public void setUp() {
-        open(configTest.url);
-    }
+        open(properties.getProperty("url"));}
 
 
     @Test
     public void authentication() {
-        configTest.auth.connect();
+        auth.connect();
         SelenideElement element = $(".auth-signin-error");
         element.shouldNot(exist, Duration.ofSeconds(2));
-        assertTrue(configTest.auth.authentificationSucced());
-        configTest.auth.deconnection();
+        assertTrue(auth.authentificationSucced());
+        auth.deconnection();
     }
 
     @Test
@@ -65,13 +73,13 @@ public class SimpliciteTest {
 
    @Test
     public void clearCache() {
-        configTest.auth.connect();
+        auth.connect();
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
         Cache.click('u');
-        configTest.auth.connect();
-        configTest.auth.authentificationSucced();
-        configTest.auth.deconnection();
+        auth.connect();
+        auth.authentificationSucced();
+        auth.deconnection();
     }
 
 }

@@ -1,6 +1,6 @@
 ---------WebSite----------
 
-url=https://scamptestui.demo.simplicite.io/
+url=http://localhost:80
 
 ---------Browser------
 

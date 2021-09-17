@@ -3,7 +3,6 @@ package com.simplicite.menu.usersandrights;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.optionmenu.Cache;
 
 import static com.codeborne.selenide.Selenide.$;
 

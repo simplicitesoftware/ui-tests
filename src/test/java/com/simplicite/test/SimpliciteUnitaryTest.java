@@ -10,10 +10,13 @@ import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
-import com.simplicite.utils.ConfigTest;
 import com.simplicite.utils.Icon;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -26,20 +29,28 @@ public class SimpliciteUnitaryTest {
     SimpliciteGroup group = new SimpliciteGroup("TRN_SUPERADMIN", moduleAssitant);
     SimpliciteDomain domain = new SimpliciteDomain("TrnDomain", Icon.CONSOLE, moduleAssitant);
     SimpliciteBusinessObjectAssistant boassistant = new SimpliciteBusinessObjectAssistant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
-    static ConfigTest configTest = new ConfigTest();
+    static Properties properties = new Properties();
+    static Authentication auth;
 
     @BeforeAll
     public static void setUpAll() {
-        Configuration.browserSize = configTest.browsersize;
-        Configuration.browser = configTest.browser;
-        Configuration.headless = configTest.headless;
+        try {
+            properties.load(new FileReader("src/test/resources/config.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Configuration.browserSize = properties.getProperty("browsersize");
+        Configuration.browser = properties.getProperty("browser");
+        Configuration.headless = properties.getProperty("headless").equals("true");
+        auth = new Authentication(properties.getProperty("name")
+                , properties.getProperty("password"));
     }
 
     @BeforeEach
     public void setUp() {
-        open(configTest.url);
+        open(properties.getProperty("url"));
         if ($("#auth-main").exists()) {
-            configTest.auth.connect();
+            auth.connect();
         }
     }
 
