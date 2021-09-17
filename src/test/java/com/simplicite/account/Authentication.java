@@ -26,7 +26,7 @@ public class Authentication {
     }
 
     /** Connect the user **/
-    public void Connect() {
+    public void connect() {
         usrelement.setValue(usrname);
         password.setValue(pssword);
         connection.click();

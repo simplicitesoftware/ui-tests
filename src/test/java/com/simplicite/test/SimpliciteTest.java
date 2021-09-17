@@ -51,7 +51,7 @@ public class SimpliciteTest {
     @Test
     public void authentication() {
         Authentication auth = new Authentication("designer", "designer1903");
-        auth.Connect();
+        auth.connect();
         SelenideElement element = $(".auth-signin-error");
         element.shouldNot(exist, Duration.ofSeconds(2));
         assertTrue(auth.authentificationSucced());
@@ -61,7 +61,7 @@ public class SimpliciteTest {
     @Test
     public void nonAuthentication() {
         Authentication auth = new Authentication("error", "error");
-        auth.Connect();
+        auth.connect();
         SelenideElement element = $(".auth-signin-error");
         element.shouldBe(exist);
         assertNotEquals(url + "/ui/", url());
@@ -70,7 +70,7 @@ public class SimpliciteTest {
    @Test
     public void clearCache() {
         Authentication auth = new Authentication("designer", "designer1903");
-        auth.Connect();
+        auth.connect();
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
         Cache.click('u');

@@ -7,6 +7,7 @@ import com.simplicite.menu.administration.SimpliciteDomain;
 import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjectAssistant;
 import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
 import com.simplicite.menu.usersandrights.SimpliciteGroup;
+import com.simplicite.menu.usersandrights.SimpliciteUser;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
 import com.simplicite.utils.ConfigTest;
@@ -28,6 +29,7 @@ public class SimpliciteDemoTest {
     SimpliciteGroup group = new SimpliciteGroup("TRN_SUPERADMIN", moduleAssitant);
     SimpliciteDomain domain = new SimpliciteDomain("TrnDomain", Icon.CONSOLE, moduleAssitant);
     SimpliciteBusinessObjectAssistant boassistant = new SimpliciteBusinessObjectAssistant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
+    Authentication designer = new Authentication("designer", "designer1903");
     static ConfigTest configTest = new ConfigTest();
 
     @BeforeAll
@@ -42,8 +44,7 @@ public class SimpliciteDemoTest {
         open(configTest.url);
         if ($("#auth-main").exists())
         {
-            Authentication auth = new Authentication("designer", "designer1903");
-            auth.Connect();
+            designer.connect();
         }
     }
 
@@ -89,6 +90,24 @@ public class SimpliciteDemoTest {
 
     @Test
     @Order(4)
+    public void createUser()
+    {
+        SimpliciteUser user = new SimpliciteUser("usertest");
+        user.create();
+        user.associateGroup(group);
+
+        DropDownMenu drop = new DropDownMenu();
+        drop.click(4);
+        Cache.click('u');
+
+        Authentication auth = new Authentication(user.getName(), user.getPassword());
+        auth.connect();
+        auth.deconnection();
+        designer.connect();
+    }
+
+    @Test
+    @Order(20)
     public void deleteModule() {
         moduleAssitant.click();
         moduleAssitant.delete();

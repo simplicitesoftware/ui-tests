@@ -40,7 +40,7 @@ public class SimpliciteUnitaryTest {
         open(configTest.url);
         if ($("#auth-main").exists()) {
             Authentication auth = new Authentication("designer", "designer1903");
-            auth.Connect();
+            auth.connect();
         }
     }
 
