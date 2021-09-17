@@ -1,5 +1,7 @@
 package com.simplicite.utils;
 
+import com.simplicite.account.Authentication;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,13 +15,16 @@ public class ConfigTest {
     public String browser;
     public String browsersize;
 
+    public Authentication auth;
     public ConfigTest(){
         path = "src/test/resources/Configuration.txt";
+        auth = new Authentication();
         readFile();
     }
 
     public ConfigTest(String path){
         this.path = path;
+        auth = new Authentication();
         readFile();
     }
 
@@ -48,5 +53,9 @@ public class ConfigTest {
             browser=line.substring(8);
         else if (line.contains("browsersize="))
             browsersize=line.substring(12);
+        else if (line.contains("name="))
+            auth.setUsername(line.substring(5));
+        else if (line.contains("password="))
+            auth.setPassword(line.substring(9));
     }
 }

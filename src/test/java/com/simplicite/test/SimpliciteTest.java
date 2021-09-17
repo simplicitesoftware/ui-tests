@@ -12,6 +12,7 @@ import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
 import com.simplicite.utils.ConfigTest;
 import com.simplicite.utils.Icon;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,34 +45,33 @@ public class SimpliciteTest {
         open(configTest.url);
     }
 
+
     @Test
     public void authentication() {
-        Authentication auth = new Authentication("designer", "designer1903");
-        auth.connect();
+        configTest.auth.connect();
         SelenideElement element = $(".auth-signin-error");
         element.shouldNot(exist, Duration.ofSeconds(2));
-        assertTrue(auth.authentificationSucced());
-        auth.deconnection();
+        assertTrue(configTest.auth.authentificationSucced());
+        configTest.auth.deconnection();
     }
 
     @Test
     public void nonAuthentication() {
-        Authentication auth = new Authentication("error", "error");
-        auth.connect();
+        Authentication error = new Authentication("error", "error");
+        error.connect();
         SelenideElement element = $(".auth-signin-error");
         element.shouldBe(exist);
     }
 
    @Test
     public void clearCache() {
-        Authentication auth = new Authentication("designer", "designer1903");
-        auth.connect();
+        configTest.auth.connect();
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
         Cache.click('u');
-        auth.connect();
-        auth.authentificationSucced();
-        auth.deconnection();
+        configTest.auth.connect();
+        configTest.auth.authentificationSucced();
+        configTest.auth.deconnection();
     }
 
 }

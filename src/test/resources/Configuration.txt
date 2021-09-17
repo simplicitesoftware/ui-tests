@@ -1,6 +1,6 @@
 ---------WebSite----------
 
-url=http://localhost:80
+url=https://scamptestui.demo.simplicite.io/
 
 ---------Browser------
 
@@ -12,3 +12,7 @@ browser=firefox
 
 //browsersize [0-9]+x[0-9]+
 browsersize=1280x800
+
+--------Account--------
+name=designer
+password=designer1903

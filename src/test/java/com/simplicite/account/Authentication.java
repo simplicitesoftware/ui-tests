@@ -11,8 +11,8 @@ public class Authentication {
     public SelenideElement usrelement = $("#auth-signin-username");
     public SelenideElement password = $("#auth-signin-password");
     public SelenideElement connection = $("#auth-signin-submit");
-    private final String usrname;
-    private final String pssword;
+    private String usrname;
+    private String pssword;
 
     /** Create an authentification
      *
@@ -24,7 +24,7 @@ public class Authentication {
         this.pssword = pssword;
 
     }
-
+    public Authentication(){}
     /** Connect the user **/
     public void connect() {
         usrelement.setValue(usrname);
@@ -61,5 +61,14 @@ public class Authentication {
         $(".logged-user").click();
         $(".user-logout").click();
         $("#dlgmodal_CONFIRM_LOGOUT").find("button[data-action=\"OK\"]").click();
+    }
+
+    public void setUsername(String username) {
+        usrname = username;
+    }
+
+    public void setPassword(String password)
+    {
+        pssword = password;
     }
 }

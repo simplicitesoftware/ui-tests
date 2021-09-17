@@ -27,7 +27,6 @@ public class SimpliciteDemoTest {
     SimpliciteGroup group = new SimpliciteGroup("TRN_SUPERADMIN", moduleAssitant);
     SimpliciteDomain domain = new SimpliciteDomain("TrnDomain", Icon.CONSOLE, moduleAssitant);
     SimpliciteBusinessObjectAssistant boassistant = new SimpliciteBusinessObjectAssistant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
-    Authentication designer = new Authentication("designer", "designer1903");
     static ConfigTest configTest = new ConfigTest();
 
     @BeforeAll
@@ -42,7 +41,7 @@ public class SimpliciteDemoTest {
         open(configTest.url);
         if ($("#auth-main").exists())
         {
-            designer.connect();
+            configTest.auth.connect();
         }
     }
 
@@ -102,7 +101,7 @@ public class SimpliciteDemoTest {
         auth.connect();
         assertTrue(auth.authentificationSucced());
         auth.deconnection();
-        designer.connect();
+        configTest.auth.connect();
     }
 
     @Disabled
