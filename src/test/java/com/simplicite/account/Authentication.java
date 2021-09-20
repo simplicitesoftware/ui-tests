@@ -71,4 +71,20 @@ public class Authentication {
     {
         pssword = password;
     }
+
+    public void connectFirstTime(String newpssword) {
+        connect();
+        $("#auth-signin-password1").setValue(newpssword);
+        $("#auth-signin-password2").setValue(newpssword);
+        $("#auth-signin-save").click();
+        setPassword(newpssword);
+    }
+
+    public void changePassword(String newPassword) {
+        $("#auth-signin-password1").setValue(newPassword);
+        $("#auth-signin-password2").setValue(newPassword);
+        $("#auth-signin-save").click();
+        setPassword(newPassword);
+
+    }
 }

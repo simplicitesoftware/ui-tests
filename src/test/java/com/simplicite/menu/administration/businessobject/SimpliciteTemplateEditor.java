@@ -4,13 +4,15 @@ import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.actions;
 
 public class SimpliciteTemplateEditor implements MainMenuProperties {
 
     public SimpliciteTemplateEditor()
     {
         click();
-        $("#dlgmodal").find(".img-flow > img:nth-child(1)").doubleClick();
+        SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)");
+        actions().moveToElement(element).click(element).perform();
     }
 
     public SimpliciteTemplateEditor(String tmp) {

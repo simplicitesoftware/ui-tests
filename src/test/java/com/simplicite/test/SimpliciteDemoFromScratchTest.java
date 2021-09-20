@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith({ScreenShooterExtension.class})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class SimpliciteDemoTest {
+public class SimpliciteDemoFromScratchTest {
     SimpliciteModuleAssitant moduleAssitant = new SimpliciteModuleAssitant("Training", "trn");
     SimpliciteGroup group = new SimpliciteGroup("TRN_SUPERADMIN", moduleAssitant);
     SimpliciteDomain domain = new SimpliciteDomain("TrnDomain", Icon.CONSOLE, moduleAssitant);
@@ -46,7 +46,7 @@ public class SimpliciteDemoTest {
         Configuration.browser = properties.getProperty("browser");
         Configuration.headless = properties.getProperty("headless").equals("true");
         auth = new Authentication(properties.getProperty("name")
-                , properties.getProperty("password"));
+                , properties.getProperty("oldpassword"));
     }
 
     @BeforeEach
@@ -67,14 +67,15 @@ public class SimpliciteDemoTest {
     @Test
     @Order(0)
     public void newSession(){
-        /*String newPassword = properties.getProperty("password");
-        auth.changePassword(newPassword);*/
+        String newPassword = properties.getProperty("password");
+        auth.changePassword(newPassword);
 
+        //change to Super Admin
         auth.deconnection();
         auth.connect();
         $(".logged-scope").click();
         $(".logged-scope").find("[data-home=\"Home\"]").click();
-        //change to Super Admin
+        $(".scope-icon > img[src*=\"code=VIEW_ADMIN\"]").shouldBe(Condition.exist);
         assertTrue(auth.authentificationSucced());
     }
 
@@ -122,17 +123,9 @@ public class SimpliciteDemoTest {
 
         Authentication newauth = new Authentication(user.getName(), user.getPassword());
         newauth.connect();
+        //newauth.connectFirstTime(user.getPassword());
         assertTrue(newauth.authentificationSucced());
         newauth.deconnection();
         auth.connect();
     }
-
-    @Disabled
-    @Test
-    @Order(20)
-    public void deleteModule() {
-        moduleAssitant.click();
-        moduleAssitant.delete();
-    }
-
 }

@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.actions;
 
 public class SimpliciteUser implements MainMenuProperties {
     SelenideElement domain = mainmenu.find("[data-domain=\"DomainGrant\"]");
@@ -50,8 +51,9 @@ public class SimpliciteUser implements MainMenuProperties {
             $("[data-list=\"list_Group_ref_ajax_Group\"]").find("[data-field=\"grp_name\"]").click();
         }
         $("button[data-action=\"multiselect\"]").click();
-        $("#dlgmodal_create_Responsability_link_ajax_Responsability")
-                .find("button[data-action=\"saveclose\"]").shouldBe(Condition.visible).hover().click();
+        SelenideElement buttonsaveclose = $("#dlgmodal_create_Responsability_link_ajax_Responsability")
+                .find("button[data-action=\"saveclose\"]").shouldBe(Condition.visible);
+        actions().moveToElement(buttonsaveclose).click(buttonsaveclose).perform();
     }
 
     public String getPassword() {

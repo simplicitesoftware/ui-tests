@@ -15,4 +15,4 @@ browsersize=1280x800
 
 --------Account--------
 name=designer
-password=designer1903
+password=simplicite
