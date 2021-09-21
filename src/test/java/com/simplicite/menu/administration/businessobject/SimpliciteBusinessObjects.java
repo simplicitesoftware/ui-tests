@@ -35,7 +35,7 @@ public class SimpliciteBusinessObjects implements MainMenuProperties {
         work.find("#field_obo_dbtable").setValue(table);
         SelenideElement modulename = work.find("#field_row_module_id__mdl_name");
         modulename.click();
-        modulename.setValue(module.getName()).pressEnter();
+        modulename.setValue(module.getMdl_name()).pressEnter();
         work.find("#field_obo_prefix").setValue(prefix);
     }
 
