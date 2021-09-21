@@ -5,29 +5,58 @@ import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 import com.simplicite.menu.administration.module.SimpliciteModule;
 
-public class BusinessObject{
+public class BusinessObject implements MainMenuProperties {
 
-    public String code;
-    public String table;
-    //public SimpliciteModule module;
-    public String prefix;
+    private final String code;
+    private final String table;
+    private final SimpliciteModule module;
+    private final String prefix;
 
-    //public SimpliciteTemplateEditor editor = null;
+    private SimpliciteTemplateEditor editor = null;
 
-    public BusinessObject(String code, String table, String prefix) {
+    public SelenideElement objectbutton = mainmenu.find("[data-obj=\"ObjectInternal\"]");
+
+    public BusinessObject(String code, String table, SimpliciteModule module, String prefix) {
         this.code = code;
         this.table = table;
-        //this.module = module;
+        this.module = module;
         this.prefix = prefix;
+    }
+
+    @Override
+    public void click() {
+        administration.click();
+        objectbutton.click();
+    }
+
+    @Override
+    public void create() {
+        work.find("#field_obo_name").setValue(code);
+        work.find("#field_obo_dbtable").setValue(table);
+        SelenideElement modulename = work.find("#field_row_module_id__mdl_name");
+        modulename.click();
+        modulename.setValue(module.getMdl_name()).pressEnter();
+        work.find("#field_obo_prefix").setValue(prefix);
+    }
+
+    @Override
+    public void find() {
+        work.find("#obo_name").setValue(code).pressEnter();
+        work.find("[data-field=\"obo_name\"]").shouldHave(Condition.textCaseSensitive(code)).click();
+    }
+
+    public boolean isSuccess(){
+        work.find("#field_obo_name").should(Condition.exist).shouldHave(Condition.value(code));
+        return true;
     }
 
     public String getPrefix() {
         return prefix;
     }
 
-    /*public SimpliciteModule getModule() {
+    public SimpliciteModule getModule() {
         return module;
-    }*/
+    }
 
     public String getTable() {
         return table;
@@ -37,12 +66,8 @@ public class BusinessObject{
         return code;
     }
 
-    @Override
-    public String toString(){
-        return "code= " + code + ", data = [table=" + table + ", prefix=" + prefix + "]";
-    }
 
-    /*public SimpliciteTemplateEditor getEditor() {
+    public SimpliciteTemplateEditor getEditor() {
         if (editor == null)
             editor = new SimpliciteTemplateEditor();
         else
@@ -52,6 +77,5 @@ public class BusinessObject{
 
     public void setEditor(SimpliciteTemplateEditor editor) {
         this.editor = editor;
-    }*/
+    }
 }
-
