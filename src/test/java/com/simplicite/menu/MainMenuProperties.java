@@ -24,7 +24,7 @@ public interface MainMenuProperties {
     /**
      * Access to the menu of creation then create the component
      */
-    void create();
+    void createObject();
 
     /**
      * Find the component in the list of the component type
@@ -45,6 +45,11 @@ public interface MainMenuProperties {
         $("button[data-action=\"saveclose\"]").click();
     }
 
+    default void create() {
+        $("button[data-action=\"create\"]").click();
+        createObject();
+    }
+
     /**
      * Delete the component of the programme
      */
@@ -55,8 +60,7 @@ public interface MainMenuProperties {
                 "> div.dropdown.show > ul > li[data-action=\"delete\"]");
     }
 
-    default void close()
-    {
+    default void close() {
         $("button[data-action=\"close\"]").click();
     }
 }

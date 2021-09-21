@@ -3,17 +3,17 @@ package com.simplicite.menu.administration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.selector.ByText;
 import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.administration.module.SimpliciteModule;
+import com.simplicite.menu.administration.module.Module;
 import com.simplicite.utils.Icon;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class SimpliciteDomain implements MainMenuProperties {
+public class Domain implements MainMenuProperties {
 
 
     private final String name;
     private Icon icon;
-    private SimpliciteModule module;
+    private Module module;
 
     /**
      * Constructor of the domain for designer in Simplicite
@@ -22,7 +22,7 @@ public class SimpliciteDomain implements MainMenuProperties {
      * @param icon   the icon of the domain
      * @param module the module link to the domain
      */
-    public SimpliciteDomain(String name, Icon icon, SimpliciteModule module) {
+    public Domain(String name, Icon icon, Module module) {
         this.name = name;
         this.icon = icon;
         this.module = module;
@@ -34,7 +34,7 @@ public class SimpliciteDomain implements MainMenuProperties {
     }
 
     @Override
-    public void create() {
+    public void createObject() {
 
         SelenideElement obdname = $("#field_obd_name");
         obdname.clear();

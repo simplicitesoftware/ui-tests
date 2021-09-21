@@ -3,22 +3,27 @@ package com.simplicite.menu.administration.businessobject;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.administration.module.SimpliciteModule;
+import com.simplicite.menu.administration.module.Module;
+import com.simplicite.menu.usersandrights.Function;
+import org.apache.commons.lang3.StringUtils;
 
-public class SimpliciteBusinessObjects implements MainMenuProperties {
+import java.util.Locale;
+
+public class BusinessObject implements MainMenuProperties {
 
     private final String code;
     private final String table;
-    private final SimpliciteModule module;
+    private final Module module;
     private final String prefix;
 
-    private SimpliciteTemplateEditor editor = null;
-
+    private TemplateEditor editor = null;
+    private Function fonction;
     public SelenideElement objectbutton = mainmenu.find("[data-obj=\"ObjectInternal\"]");
 
-    public SimpliciteBusinessObjects(String code, String table, SimpliciteModule module, String prefix) {
-        this.code = code;
-        this.table = table;
+    public BusinessObject(String code, String table, Module module, String prefix) {
+
+        this.code = StringUtils.capitalize(module.getPrefix()) + code;
+        this.table = module.getPrefix() + "_" + table;
         this.module = module;
         this.prefix = prefix;
     }
@@ -30,7 +35,7 @@ public class SimpliciteBusinessObjects implements MainMenuProperties {
     }
 
     @Override
-    public void create() {
+    public void createObject() {
         work.find("#field_obo_name").setValue(code);
         work.find("#field_obo_dbtable").setValue(table);
         SelenideElement modulename = work.find("#field_row_module_id__mdl_name");
@@ -45,7 +50,7 @@ public class SimpliciteBusinessObjects implements MainMenuProperties {
         work.find("[data-field=\"obo_name\"]").shouldHave(Condition.textCaseSensitive(code)).click();
     }
 
-    public boolean isSuccess(){
+    public boolean isSuccess() {
         work.find("#field_obo_name").should(Condition.exist).shouldHave(Condition.value(code));
         return true;
     }
@@ -54,7 +59,7 @@ public class SimpliciteBusinessObjects implements MainMenuProperties {
         return prefix;
     }
 
-    public SimpliciteModule getModule() {
+    public Module getModule() {
         return module;
     }
 
@@ -67,15 +72,18 @@ public class SimpliciteBusinessObjects implements MainMenuProperties {
     }
 
 
-    public SimpliciteTemplateEditor getEditor() {
+    public TemplateEditor getEditor() {
         if (editor == null)
-            editor = new SimpliciteTemplateEditor();
+            editor = new TemplateEditor();
         else
             editor.click();
         return editor;
     }
 
-    public void setEditor(SimpliciteTemplateEditor editor) {
+    public void setEditor(TemplateEditor editor) {
         this.editor = editor;
+    }
+
+    public void addFunction() {
     }
 }

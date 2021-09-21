@@ -7,12 +7,12 @@ import com.simplicite.menu.MainMenuProperties;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 
-public class SimpliciteUser implements MainMenuProperties {
+public class User implements MainMenuProperties {
     SelenideElement domain = mainmenu.find("[data-domain=\"DomainGrant\"]");
     private String name;
     private String pswd;
 
-    public SimpliciteUser(String name)
+    public User(String name)
     {
         this.name = name;
     }
@@ -23,7 +23,7 @@ public class SimpliciteUser implements MainMenuProperties {
     }
 
     @Override
-    public void create() {
+    public void createObject() {
         click();
         SelenideElement user = mainmenu.find("[data-obj=\"User\"]");
         user.click();
@@ -43,7 +43,7 @@ public class SimpliciteUser implements MainMenuProperties {
     public void find() {
     }
 
-    public void associateGroup(SimpliciteGroup...groups)
+    public void associateGroup(Group...groups)
     {
         work.find("[data-action=\"associate-User-rsp_login_id-Group-rsp_group_id\"]").click();
         for ( var group: groups) {

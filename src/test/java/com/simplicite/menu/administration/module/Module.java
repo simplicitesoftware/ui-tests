@@ -6,7 +6,7 @@ import com.simplicite.menu.MainMenuProperties;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class SimpliciteModule implements MainMenuProperties {
+public class Module implements MainMenuProperties {
 
     private final String name;
     private final String prefix;
@@ -19,7 +19,7 @@ public class SimpliciteModule implements MainMenuProperties {
      * @param name   the name of the module
      * @param prefix the prefixe of the module
      */
-    public SimpliciteModule(String name, String prefix) {
+    public Module(String name, String prefix) {
         this.name = name;
         this.prefix = prefix;
     }
@@ -31,7 +31,7 @@ public class SimpliciteModule implements MainMenuProperties {
     }
 
     @Override
-    public void create() {
+    public void createObject() {
         SelenideElement fieldname = $("#field_mdl_name");
         fieldname.clear();
         fieldname.sendKeys(name);

@@ -3,11 +3,11 @@ package com.simplicite.test;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
-import com.simplicite.menu.administration.SimpliciteDomain;
-import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjectAssistant;
-import com.simplicite.menu.administration.businessobject.SimpliciteTemplateEditor;
-import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
-import com.simplicite.menu.usersandrights.SimpliciteGroup;
+import com.simplicite.menu.administration.Domain;
+import com.simplicite.menu.administration.businessobject.BOAssitant;
+import com.simplicite.menu.administration.businessobject.TemplateEditor;
+import com.simplicite.menu.administration.module.MAssitant;
+import com.simplicite.menu.usersandrights.Group;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
 import com.simplicite.utils.Icon;
@@ -25,10 +25,10 @@ import static com.codeborne.selenide.Selenide.open;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SimpliciteUnitaryTest {
 
-    SimpliciteModuleAssitant moduleAssitant = new SimpliciteModuleAssitant("Training", "trn");
-    SimpliciteGroup group = new SimpliciteGroup("TRN_SUPERADMIN", moduleAssitant);
-    SimpliciteDomain domain = new SimpliciteDomain("TrnDomain", Icon.CONSOLE, moduleAssitant);
-    SimpliciteBusinessObjectAssistant boassistant = new SimpliciteBusinessObjectAssistant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
+    MAssitant moduleAssitant = new MAssitant("Training", "trn");
+    Group group = new Group("TRN_SUPERADMIN", moduleAssitant);
+    Domain domain = new Domain("TrnDomain", Icon.CONSOLE, moduleAssitant);
+    BOAssitant boassistant = new BOAssitant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
     static Properties properties = new Properties();
     static Authentication auth;
 
@@ -65,7 +65,7 @@ public class SimpliciteUnitaryTest {
     public void newFieldTemplate() {
         boassistant.click();
         boassistant.find();
-        boassistant.setEditor(new SimpliciteTemplateEditor("new"));
+        boassistant.setEditor(new TemplateEditor("new"));
         boassistant.getEditor().addField("testa", "20", false, true);
     }
 

@@ -1,16 +1,16 @@
 package com.simplicite.test;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
-import com.simplicite.menu.administration.SimpliciteDomain;
-import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjectAssistant;
-import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
-import com.simplicite.menu.usersandrights.SimpliciteGroup;
-import com.simplicite.menu.usersandrights.SimpliciteUser;
+import com.simplicite.menu.administration.Domain;
+import com.simplicite.menu.administration.businessobject.BOAssitant;
+import com.simplicite.menu.administration.module.MAssitant;
+import com.simplicite.menu.usersandrights.Group;
+import com.simplicite.menu.usersandrights.User;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
+import com.simplicite.test.data.ModelCreation;
 import com.simplicite.utils.Icon;
 import com.simplicite.utils.Traduction;
 import org.junit.jupiter.api.*;
@@ -27,10 +27,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith({ScreenShooterExtension.class})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SimpliciteDemoTest {
-    SimpliciteModuleAssitant moduleAssitant = new SimpliciteModuleAssitant("Training", "trn");
-    SimpliciteGroup group = new SimpliciteGroup("TRN_SUPERADMIN", moduleAssitant);
-    SimpliciteDomain domain = new SimpliciteDomain("TrnDomain", Icon.CONSOLE, moduleAssitant);
-    SimpliciteBusinessObjectAssistant boassistant = new SimpliciteBusinessObjectAssistant("TrnSupplier",
+    MAssitant moduleAssitant = new MAssitant("Training", "trn");
+    Group group = new Group("TRN_SUPERADMIN", moduleAssitant);
+    Domain domain = new Domain("TrnDomain", Icon.CONSOLE, moduleAssitant);
+    BOAssitant boassistant = new BOAssitant("TrnSupplier",
             "trn_supplier", moduleAssitant, "sup");
     static Properties properties = new Properties();
     static Authentication auth;
@@ -66,7 +66,7 @@ public class SimpliciteDemoTest {
 
     @Test
     @Order(0)
-    public void newSession(){
+    public void newSession() {
         /*String newPassword = properties.getProperty("password");
         auth.changePassword(newPassword);*/
 
@@ -112,8 +112,8 @@ public class SimpliciteDemoTest {
     @Test
     @Order(4)
     public void createUser() {
-        SimpliciteUser user = new SimpliciteUser("usertest");
-        user.create();
+        User user = new User("usertest");
+        user.createObject();
         user.associateGroup(group);
 
         DropDownMenu drop = new DropDownMenu();
@@ -125,6 +125,18 @@ public class SimpliciteDemoTest {
         assertTrue(newauth.authentificationSucced());
         newauth.deconnection();
         auth.connect();
+    }
+
+    @Test
+    @Order(5)
+    public void addmanyBusinessObject() {
+        var test = ModelCreation.createModel(moduleAssitant);
+        for (var a : test) {
+            a.click();
+            a.create();
+            a.addFunction();
+            a.saveAndClose();
+        }
     }
 
     @Disabled

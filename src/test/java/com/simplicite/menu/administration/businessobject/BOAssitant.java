@@ -1,13 +1,13 @@
 package com.simplicite.menu.administration.businessobject;
 
 import com.codeborne.selenide.Condition;
-import com.simplicite.menu.administration.SimpliciteDomain;
-import com.simplicite.menu.administration.module.SimpliciteModule;
+import com.simplicite.menu.administration.Domain;
+import com.simplicite.menu.administration.module.Module;
 import com.simplicite.utils.Traduction;
 
-public class SimpliciteBusinessObjectAssistant extends SimpliciteBusinessObjects {
+public class BOAssitant extends BusinessObject {
 
-    public SimpliciteBusinessObjectAssistant(String code, String table, SimpliciteModule module, String prefix) {
+    public BOAssitant(String code, String table, Module module, String prefix) {
         super(code, table, module, prefix);
     }
 
@@ -19,7 +19,7 @@ public class SimpliciteBusinessObjectAssistant extends SimpliciteBusinessObjects
     public void createObject()
     {
         work.find("button[data-action=\"ObjectCreateProcess\"]").click();
-        create();
+        super.createObject();
         save();
     }
 
@@ -33,7 +33,7 @@ public class SimpliciteBusinessObjectAssistant extends SimpliciteBusinessObjects
         save();
     }
 
-    public void addDomain(SimpliciteDomain domain)
+    public void addDomain(Domain domain)
     {
         work.find("#obd_name").setValue(domain.getName()).pressEnter();
         work.find("#obd_nohome").selectOptionByValue("true");

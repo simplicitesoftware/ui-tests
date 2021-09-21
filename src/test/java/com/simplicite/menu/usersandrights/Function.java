@@ -1,8 +1,13 @@
-package com.simplicite.menu.administration;
+package com.simplicite.menu.usersandrights;
 
 import com.simplicite.menu.MainMenuProperties;
 
-public class SimpliciteField implements MainMenuProperties {
+public class Function implements MainMenuProperties {
+
+    public Function()
+    {
+
+    }
 
     @Override
     public void click() {
@@ -10,7 +15,7 @@ public class SimpliciteField implements MainMenuProperties {
     }
 
     @Override
-    public void create() {
+    public void createObject() {
 
     }
 
