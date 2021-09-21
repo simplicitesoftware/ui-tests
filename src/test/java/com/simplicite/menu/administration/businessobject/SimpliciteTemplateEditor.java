@@ -1,5 +1,6 @@
 package com.simplicite.menu.administration.businessobject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 
@@ -11,7 +12,7 @@ public class SimpliciteTemplateEditor implements MainMenuProperties {
     public SimpliciteTemplateEditor()
     {
         click();
-        SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)");
+        SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.visible);
         actions().moveToElement(element).click(element).perform();
     }
 
