@@ -3,7 +3,6 @@ package com.simplicite.menu.administration.module;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
-import org.json.JSONPropertyName;
 
 import static com.codeborne.selenide.Selenide.$;
 

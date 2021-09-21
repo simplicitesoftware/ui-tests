@@ -1,0 +1,175 @@
+{
+  "objects": [
+    {
+      "name": "Module",
+      "data": [
+        {
+          "mdl_name": "Training",
+          "mdl_version": "0.1",
+          "mdl_prefix": "trn",
+          "mdl_comment": "A module to train your personal skill on simplicite"
+        }
+      ]
+    },
+    {
+      "name": "Group",
+      "data": [
+        {
+          "grp_name": "TRN_SUPERADMIN",
+          "grp_comment": "Administrator",
+          "grp_type": "G;D;W;R",
+          "grp_parent_id.grp_name": "",
+          "grp_home_id.viw_name": "",
+          "row_module_id.mdl_name": "Training"
+        }
+      ]
+    },
+    {
+      "name": "Domain",
+      "data": [
+        {
+          "obd_name": "TrnDomain",
+          "obd_comment": "",
+          "obd_type": "D",
+          "obd_view_id.viw_name": "",
+          "obd_nohome": "0",
+          "obd_icon": "",
+          "obd_order": "70000",
+          "obd_domain_id.obd_name": "",
+          "row_module_id.mdl_name": "Training"
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "data": [
+        {
+          "usr_image_id": "",
+          "usr_login": "usertest",
+          "usr_timezone": "",
+          "usr_minrows": "10",
+          "usr_maxrows": "20",
+          "usr_title": "MS",
+          "usr_first_name": "Barbara",
+          "usr_last_name": "SMITH",
+          "usr_lang": "ENU",
+          "usr_email": "demo@simplicite.fr",
+          "usr_active": "1",
+          "usr_home_id.viw_name": "",
+          "usr_address1": "",
+          "usr_address2": "",
+          "usr_zipcode": "",
+          "usr_city": "",
+          "usr_state": "",
+          "usr_country": "",
+          "row_module_id.mdl_name": "Training",
+          "usr_menu": "1",
+          "usr_menu_defcollapsed": "0",
+          "usr_menu_defdomain_id.obd_name": "",
+          "usr_logout": "2019-04-09 11:33:13",
+          "usr_last_logon": "2021-04-13 10:51:31",
+          "usr_dateformat": "",
+          "usr_lang_pref": "ENU"
+        }
+      ]
+    },
+    {
+      "name": "ObjectInternal",
+      "action": "upsert",
+      "data": [
+        {
+          "obo_name": "DemoClient",
+          "obo_dbtable": "demo_client",
+          "obo_class": "",
+          "obo_script_id": "",
+          "obo_usets": "1",
+          "obo_nosearch": "1",
+          "obo_comment": "The **client** business object corresponds\nto the customer who places order.\n\nHis address is geolocalized using GoogleMaps&reg; API.",
+          "obo_type": "O",
+          "obo_searchspec": "",
+          "obo_delspec": "",
+          "obo_exportorder": "3",
+          "obo_distinct": "0",
+          "obo_indexable": "1",
+          "obo_groupby": "0",
+          "obo_dfltref": "DemoOrder;demoOrdCliId",
+          "obo_template_id.tpl_name": "DemoClient",
+          "obo_cache": "S",
+          "obo_copy": "1",
+          "obo_export": "1",
+          "obo_pagine": "1",
+          "obo_srh_predef": "1",
+          "obo_selrow": "1",
+          "obo_updall": "1",
+          "obo_delall": "1",
+          "obo_listsearch": "1",
+          "obo_list_edit": "N;U",
+          "obo_useform": "1",
+          "obo_title": "",
+          "obo_icon": "img/color/view_user",
+          "obo_refcount": "1",
+          "obo_tree": "0",
+          "obo_viewmode": "T",
+          "obo_historic": "3",
+          "obo_printable": "1",
+          "obo_followlink": "1",
+          "obo_mergeable": "1",
+          "obo_social": "1",
+          "obo_rowid_id.fld_name": "",
+          "obo_extend_id.obj_name": "",
+          "row_module_id.mdl_name": "Demo",
+          "obo_btn_reload": "P",
+          "obo_btn_prefs": "P",
+          "obo_btn_del": "P",
+          "obo_btn_copy": "P",
+          "obo_btn_export": "P",
+          "obo_btn_listadd": "1",
+          "obo_btn_listedit": "1",
+          "obo_btn_listupsert": "1",
+          "obo_btn_updall": "P",
+          "obo_btn_delall": "P",
+          "obo_btn_merge": "P",
+          "obo_btn_save": "1",
+          "obo_btn_saveclose": "1",
+          "obo_btn_savenew": "1",
+          "obo_btn_savecopy": "1",
+          "obo_btn_close": "1",
+          "obo_tray": "1",
+          "obo_dashboard": "1",
+          "obo_prefix": "cli",
+          "obo_search_ts": "",
+          "obo_minrows": "",
+          "obo_maxrows": "",
+          "obo_sortable": "1",
+          "obo_list_areas": "1"
+        }
+      ]
+    },    {
+      "name": "View",
+      "data": [
+        {
+          "viw_name": "TmgHome",
+          "viw_ui": "<div><div class=\"area\" data-area=\"1:=\"><\/div><div class=\"area\" data-area=\"2\"><\/div><\/div>",
+          "viw_order": "10",
+          "viw_icon": "",
+          "viw_disp_id.dis_code": "",
+          "viw_scope": "",
+          "row_module_id.mdl_name": "TrainManagement",
+          "viw_theme_id.thm_name": "",
+          "viw_lang": ""
+        },
+        {
+          "viw_name": "TmgScope",
+          "viw_ui": "",
+          "viw_order": "10",
+          "viw_icon": "img/color/book_shelf",
+          "viw_disp_id.dis_code": "",
+          "viw_scope": "",
+          "row_module_id.mdl_name": "TrainManagement",
+          "viw_theme_id.thm_name": "TmgThem",
+          "viw_lang": ""
+        }
+      ]
+    }
+  ]
+}
