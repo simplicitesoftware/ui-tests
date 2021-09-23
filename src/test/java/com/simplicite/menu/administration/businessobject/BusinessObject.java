@@ -7,8 +7,6 @@ import com.simplicite.menu.administration.module.Module;
 import com.simplicite.menu.usersandrights.Function;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Locale;
-
 public class BusinessObject implements MainMenuProperties {
 
     private final String code;
