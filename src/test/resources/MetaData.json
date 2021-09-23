@@ -46,9 +46,6 @@
         {
           "usr_image_id": "",
           "usr_login": "usertest",
-          "usr_timezone": "",
-          "usr_minrows": "10",
-          "usr_maxrows": "20",
           "usr_title": "MS",
           "usr_first_name": "Barbara",
           "usr_last_name": "SMITH",
@@ -75,7 +72,6 @@
     },
     {
       "name": "ObjectInternal",
-      "action": "upsert",
       "data": [
         {
           "obo_name": "DemoClient",
