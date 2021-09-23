@@ -1,7 +1,6 @@
-package com.simplicite.test.data;
+package com.simplicite.utils.datastore;
 
 import com.simplicite.menu.administration.Field;
-import com.simplicite.menu.administration.businessobject.BusinessObject;
 import com.simplicite.menu.administration.businessobject.BusinessObject;
 import com.simplicite.menu.administration.module.Module;
 

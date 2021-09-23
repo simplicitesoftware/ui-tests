@@ -10,9 +10,9 @@ import com.simplicite.menu.usersandrights.Group;
 import com.simplicite.menu.usersandrights.User;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
-import com.simplicite.test.data.ModelCreation;
 import com.simplicite.utils.Icon;
 import com.simplicite.utils.Traduction;
+import com.simplicite.utils.datastore.ModelCreation;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 

@@ -1,7 +1,9 @@
 package com.simplicite.menu.usersandrights;
 
+import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 import com.simplicite.menu.administration.module.Module;
+import com.simplicite.utils.Component;
 
 public class Grant implements MainMenuProperties {
 
@@ -18,15 +20,17 @@ public class Grant implements MainMenuProperties {
     }
     @Override
     public void click() {
-        domain.click();
+        SelenideElement element =mainmenu.find("[data-obj=\"Grant\"]");
+        if (!element.isDisplayed())
+            domain.click();
         mainmenu.find("[data-obj=\"Grant\"]").click();
     }
 
     @Override
     public void createObject() {
-        work.find("#field_grt_group_id__grp_name").pressEnter().setValue(group.getName()).pressEnter();
-        work.find("#field_row_module_id__mdl_name").pressEnter().setValue(module.getName()).pressEnter();
-        work.find("#ield_grt_function_id__fct_name").pressEnter().setValue(function.getName()).pressEnter();
+        Component.sendFormControl(work.find("#field_grt_group_id__grp_name"), group.getName());
+        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), module.getName());
+        Component.sendFormControl(work.find("field_grt_function_id__fct_name"), module.getName());
     }
 
     @Override

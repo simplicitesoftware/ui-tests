@@ -7,6 +7,7 @@ import com.simplicite.menu.administration.Domain;
 import com.simplicite.menu.administration.businessobject.BOAssitant;
 import com.simplicite.menu.administration.businessobject.TemplateEditor;
 import com.simplicite.menu.administration.module.MAssitant;
+import com.simplicite.menu.usersandrights.Function;
 import com.simplicite.menu.usersandrights.Group;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
@@ -69,5 +70,21 @@ public class SimpliciteUnitaryTest {
         boassistant.getEditor().addField("testa", "20", false, true);
     }
 
+    @Test
+    public void newFunctionWithAddGrant()
+    {
+        Function function = new Function("test", "CMS", moduleAssitant);
+        function.create();
+        function.save();
+        function.addGrant(group);
+    }
+
+    @Test
+    public void newFunctionWithAssociateGrant()
+    {
+        Function function = new Function("test2", "CMS", moduleAssitant);
+        function.create();
+        function.associateGroup(group);
+    }
 }
 

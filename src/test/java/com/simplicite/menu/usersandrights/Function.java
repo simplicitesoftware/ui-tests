@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 import com.simplicite.menu.administration.module.Module;
+import com.simplicite.utils.Component;
 
 import java.util.ArrayList;
 
@@ -64,10 +65,9 @@ public class Function implements MainMenuProperties {
     @Override
     public void createObject() {
         work.find("#field_fct_name").setValue(field_fct_name);
-        work.find("#field_fct_function").selectOptionByValue(field_fct_function);
-        SelenideElement modulename = work.find("#field_row_module_id__mdl_name");
-        modulename.click();
-        modulename.setValue(module.getName()).pressEnter();
+        work.find("#select2-field_fct_function-container").click();
+        work.find("#select2-field_fct_function-results").find("[id$=\"" + field_fct_function+ "\"]").click();
+        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), module.getName());
     }
 
     public void addGrant(Group group) {

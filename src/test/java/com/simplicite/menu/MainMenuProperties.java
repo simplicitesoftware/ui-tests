@@ -47,6 +47,7 @@ public interface MainMenuProperties {
     }
 
     default void create() {
+        click();
         $("button[data-action=\"create\"]").click();
         createObject();
     }
