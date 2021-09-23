@@ -40,7 +40,7 @@ public class BusinessObject implements MainMenuProperties {
         work.find("#field_obo_dbtable").setValue(table);
         SelenideElement modulename = work.find("#field_row_module_id__mdl_name");
         modulename.click();
-        modulename.setValue(module.getMdl_name()).pressEnter();
+        modulename.setValue(module.getName()).pressEnter();
         work.find("#field_obo_prefix").setValue(prefix);
     }
 
