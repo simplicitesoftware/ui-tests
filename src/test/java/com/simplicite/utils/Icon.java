@@ -5,6 +5,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
 
 public enum Icon {
@@ -35,7 +37,7 @@ public enum Icon {
         SelenideElement serachtxt = selectdatamap.find("input");
         serachtxt.sendKeys(name + Keys.ENTER);
 
-        $("#iptab0").find("*[data-tab=\"" + type + "\"]").click();
+        $("#iptab0").find("*[data-tab=\"" + type + "\"]").shouldBe(Condition.visible, Duration.ofSeconds(6)).click();
         SelenideElement subtable = selectdatamap.find("#iptab0_" + type);
         ElementsCollection test = subtable.findAll("img");
         test.find(Condition.visible).click();

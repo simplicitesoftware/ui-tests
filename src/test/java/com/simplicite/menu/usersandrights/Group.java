@@ -3,14 +3,14 @@ package com.simplicite.menu.usersandrights;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.selector.ByText;
 import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.administration.module.SimpliciteModule;
+import com.simplicite.menu.administration.module.Module;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class SimpliciteGroup implements MainMenuProperties {
+public class Group implements MainMenuProperties {
 
     private final String name;
-    private final SimpliciteModule module;
+    private final Module module;
 
     /**
      * Constructor for the component group of Simplicite framework
@@ -18,7 +18,7 @@ public class SimpliciteGroup implements MainMenuProperties {
      * @param name   the name of the group
      * @param module the module associate to the group
      */
-    public SimpliciteGroup(String name, SimpliciteModule module) {
+    public Group(String name, Module module) {
         this.name = name;
         this.module = module;
     }
@@ -29,7 +29,7 @@ public class SimpliciteGroup implements MainMenuProperties {
 
     }
 
-    public void create() {
+    public void createObject() {
         SelenideElement grpname = $("#field_grp_name");
         grpname.clear();
         grpname.sendKeys(name);
@@ -53,7 +53,7 @@ public class SimpliciteGroup implements MainMenuProperties {
     /**
      * @return module associate to the group
      */
-    public SimpliciteModule getModule() {
+    public Module getModule() {
         return module;
     }
 }

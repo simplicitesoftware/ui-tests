@@ -15,6 +15,7 @@ public interface MainMenuProperties {
     SelenideElement mainmenu = $("#menu");
     SelenideElement work = $("#work");
     SelenideElement administration = mainmenu.find("*[data-domain=\"DomainAdmin\"]");
+    SelenideElement domain = mainmenu.find("[data-domain=\"DomainGrant\"]");
 
     /**
      * Click on the component, Navigate to the element needed in the menu
@@ -24,7 +25,7 @@ public interface MainMenuProperties {
     /**
      * Access to the menu of creation then create the component
      */
-    void create();
+    void createObject();
 
     /**
      * Find the component in the list of the component type
@@ -45,6 +46,12 @@ public interface MainMenuProperties {
         $("button[data-action=\"saveclose\"]").click();
     }
 
+    default void create() {
+        click();
+        $("button[data-action=\"create\"]").click();
+        createObject();
+    }
+
     /**
      * Delete the component of the programme
      */
@@ -55,8 +62,7 @@ public interface MainMenuProperties {
                 "> div.dropdown.show > ul > li[data-action=\"delete\"]");
     }
 
-    default void close()
-    {
+    default void close() {
         $("button[data-action=\"close\"]").click();
     }
 }

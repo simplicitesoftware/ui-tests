@@ -1,21 +1,22 @@
 package com.simplicite.menu.administration.businessobject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 
-public class SimpliciteTemplateEditor implements MainMenuProperties {
+public class TemplateEditor implements MainMenuProperties {
 
-    public SimpliciteTemplateEditor()
+    public TemplateEditor()
     {
         click();
-        SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)");
+        SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.visible);
         actions().moveToElement(element).click(element).perform();
     }
 
-    public SimpliciteTemplateEditor(String tmp) {
+    public TemplateEditor(String tmp) {
     }
 
     public void addField(String name, String width, boolean functionalkey, boolean required)
@@ -51,7 +52,7 @@ public class SimpliciteTemplateEditor implements MainMenuProperties {
     }
 
     @Override
-    public void create() {
+    public void createObject() {
 
     }
 

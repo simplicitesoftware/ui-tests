@@ -1,22 +1,22 @@
 package com.simplicite.menu.administration.module;
 
 import com.codeborne.selenide.SelenideElement;
-import com.simplicite.menu.administration.SimpliciteDomain;
-import com.simplicite.menu.usersandrights.SimpliciteGroup;
+import com.simplicite.menu.administration.Domain;
+import com.simplicite.menu.usersandrights.Group;
 import com.simplicite.utils.Icon;
 import com.simplicite.utils.Traduction;
 
 import static com.codeborne.selenide.Selectors.byCssSelector;
 import static com.codeborne.selenide.Selectors.byText;
 
-public class SimpliciteModuleAssitant extends SimpliciteModule {
+public class MAssitant extends Module {
 
     /** Create a module with the assistant system
      *
      * @param name the name of the module
      * @param prefix the prefix of the module
      */
-    public SimpliciteModuleAssitant(String name, String prefix) {
+    public MAssitant(String name, String prefix) {
         super(name, prefix);
     }
 
@@ -31,7 +31,7 @@ public class SimpliciteModuleAssitant extends SimpliciteModule {
     public void createModule() {
         SelenideElement createassistant = work.find("*[data-action=\"ModuleCreateProcess\"]");
         createassistant.click();
-        create();
+        createObject();
         save();
     }
 
@@ -39,8 +39,8 @@ public class SimpliciteModuleAssitant extends SimpliciteModule {
      *
      * @param group the group to be created
      */
-    public void createGroup(SimpliciteGroup group) {
-        group.create();
+    public void createGroup(Group group) {
+        group.createObject();
         save();
     }
 
@@ -51,8 +51,8 @@ public class SimpliciteModuleAssitant extends SimpliciteModule {
      * @param en the traduction in english
      */
 
-    public void createDomain(SimpliciteDomain domain, Traduction fr, Traduction en) {
-        domain.create();
+    public void createDomain(Domain domain, Traduction fr, Traduction en) {
+        domain.createObject();
         save();
         en.doTraduction(fr);
         save();
@@ -63,7 +63,7 @@ public class SimpliciteModuleAssitant extends SimpliciteModule {
      *
      * @param group the group to add to the domain
      */
-    public void addGroupToDomain(SimpliciteGroup group) {
+    public void addGroupToDomain(Group group) {
         SelenideElement table = work.find(".table");
         SelenideElement line = table.find(byText(group.getName())).parent();
         SelenideElement checkbox = line.find(byCssSelector("input[type=\"checkbox\"]"));

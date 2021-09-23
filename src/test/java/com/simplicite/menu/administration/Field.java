@@ -2,7 +2,7 @@ package com.simplicite.menu.administration;
 
 import com.simplicite.menu.MainMenuProperties;
 
-public class SimpliciteField implements MainMenuProperties {
+public class Field implements MainMenuProperties {
 
     @Override
     public void click() {
@@ -10,7 +10,7 @@ public class SimpliciteField implements MainMenuProperties {
     }
 
     @Override
-    public void create() {
+    public void createObject() {
 
     }
 

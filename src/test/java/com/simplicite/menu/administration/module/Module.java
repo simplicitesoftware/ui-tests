@@ -6,10 +6,10 @@ import com.simplicite.menu.MainMenuProperties;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class SimpliciteModule implements MainMenuProperties {
+public class Module implements MainMenuProperties {
 
-    private final String mdl_name;
-    private final String mdl_prefix;
+    private final String name;
+    private final String prefix;
 
     public SelenideElement modulebutton = mainmenu.find("*[data-obj=\"Module\"]");
 
@@ -19,9 +19,9 @@ public class SimpliciteModule implements MainMenuProperties {
      * @param name   the name of the module
      * @param prefix the prefixe of the module
      */
-    public SimpliciteModule(String name, String prefix) {
-        this.mdl_name = name;
-        this.mdl_prefix = prefix;
+    public Module(String name, String prefix) {
+        this.name = name;
+        this.prefix = prefix;
     }
 
     @Override
@@ -31,20 +31,20 @@ public class SimpliciteModule implements MainMenuProperties {
     }
 
     @Override
-    public void create() {
+    public void createObject() {
         SelenideElement fieldname = $("#field_mdl_name");
         fieldname.clear();
-        fieldname.sendKeys(mdl_name);
+        fieldname.sendKeys(name);
 
         SelenideElement fieldprefix = $("#field_mdl_prefix");
         fieldprefix.clear();
-        fieldprefix.sendKeys(mdl_prefix);
+        fieldprefix.sendKeys(prefix);
     }
 
     @Override
     public void find() {
-        work.find("#mdl_name").setValue(mdl_name).pressEnter();
-        work.find("[data-field=\"mdl_name\"]").shouldHave(Condition.textCaseSensitive(mdl_name)).click();
+        work.find("#mdl_name").setValue(name).pressEnter();
+        work.find("[data-field=\"mdl_name\"]").shouldHave(Condition.textCaseSensitive(name)).click();
     }
 
     @Override
@@ -65,20 +65,20 @@ public class SimpliciteModule implements MainMenuProperties {
     /**
      * @return the name of the module
      */
-    public String getMdl_name() {
-        return mdl_name;
+    public String getName() {
+        return name;
     }
 
     /**
      * @return the prefix of the module
      */
-    public String getMdl_prefix() {
-        return mdl_prefix;
+    public String getPrefix() {
+        return prefix;
     }
 
     public boolean isSuccess()
     {
-        work.find("#field_mdl_name").should(Condition.exist).shouldHave(Condition.value(mdl_name));
+        work.find("#field_mdl_name").should(Condition.exist).shouldHave(Condition.value(name));
         return true;
     }
 }

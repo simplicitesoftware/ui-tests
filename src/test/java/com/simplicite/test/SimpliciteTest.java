@@ -4,10 +4,10 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
-import com.simplicite.menu.administration.SimpliciteDomain;
-import com.simplicite.menu.administration.businessobject.SimpliciteBusinessObjectAssistant;
-import com.simplicite.menu.administration.module.SimpliciteModuleAssitant;
-import com.simplicite.menu.usersandrights.SimpliciteGroup;
+import com.simplicite.menu.administration.Domain;
+import com.simplicite.menu.administration.businessobject.BOAssitant;
+import com.simplicite.menu.administration.module.MAssitant;
+import com.simplicite.menu.usersandrights.Group;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
 import com.simplicite.utils.Icon;
@@ -28,10 +28,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith({ScreenShooterExtension.class})
 public class SimpliciteTest {
-    SimpliciteModuleAssitant moduleAssitant = new SimpliciteModuleAssitant("trainv2", "trv");
-    SimpliciteGroup group = new SimpliciteGroup("TRV_SUPERADMIN", moduleAssitant);
-    SimpliciteDomain domain = new SimpliciteDomain("TrvDomain", Icon.CONSOLE, moduleAssitant);
-    SimpliciteBusinessObjectAssistant boassistant = new SimpliciteBusinessObjectAssistant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
+    MAssitant moduleAssitant = new MAssitant("trainv2", "trv");
+    Group group = new Group("TRV_SUPERADMIN", moduleAssitant);
+    Domain domain = new Domain("TrvDomain", Icon.CONSOLE, moduleAssitant);
+    BOAssitant boassistant = new BOAssitant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
     static Properties properties = new Properties();
     static Authentication auth;
 
