@@ -8,9 +8,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 
 public class User implements MainMenuProperties {
-    SelenideElement domain = mainmenu.find("[data-domain=\"DomainGrant\"]");
     private String name;
     private String pswd;
+
+    SelenideElement user = mainmenu.find("[data-obj=\"User\"]");
 
     public User(String name)
     {
@@ -25,7 +26,6 @@ public class User implements MainMenuProperties {
     @Override
     public void createObject() {
         click();
-        SelenideElement user = mainmenu.find("[data-obj=\"User\"]");
         user.click();
         mainmenu.find("[data-obj=\"User\"][data-state=\"\"]").click();
         work.find("button[data-action=\"create\"]").click();

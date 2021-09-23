@@ -15,6 +15,7 @@ public interface MainMenuProperties {
     SelenideElement mainmenu = $("#menu");
     SelenideElement work = $("#work");
     SelenideElement administration = mainmenu.find("*[data-domain=\"DomainAdmin\"]");
+    SelenideElement domain = mainmenu.find("[data-domain=\"DomainGrant\"]");
 
     /**
      * Click on the component, Navigate to the element needed in the menu
