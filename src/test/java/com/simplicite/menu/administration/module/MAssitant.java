@@ -78,11 +78,8 @@ public class MAssitant extends Module {
      */
 
     public void addIconToDomain(Icon icon) {
-        SelenideElement search = work.find("*[data-action=\"dmsel_field_viw_icon\"][data-toggle=\"tooltip\"]");
 
-        search.click();
         icon.addIcon();
-
         save();
     }
 }

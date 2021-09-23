@@ -3,7 +3,10 @@ package com.simplicite.utils;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.conditions.Visible;
 import org.openqa.selenium.Keys;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -30,12 +33,14 @@ public enum Icon {
      * Add an icon to a component with the data map
      */
     public void addIcon() {
+        SelenideElement search = $("#work").find("*[data-action=\"dmsel_field_viw_icon\"][data-toggle=\"tooltip\"]");
+        search.click();
         SelenideElement selectdatamap = $("#dlgmodal_selectDatamap");
 
         SelenideElement serachtxt = selectdatamap.find("input");
         serachtxt.sendKeys(name + Keys.ENTER);
 
-        $("#iptab0").find("*[data-tab=\"" + type + "\"]").click();
+        $("#iptab0").find("*[data-tab=\"" + type + "\"]").shouldBe(Condition.visible, Duration.ofSeconds(6)).click();
         SelenideElement subtable = selectdatamap.find("#iptab0_" + type);
         ElementsCollection test = subtable.findAll("img");
         test.find(Condition.visible).click();
