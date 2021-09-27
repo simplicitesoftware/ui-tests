@@ -35,9 +35,11 @@ public class BusinessObject {
         next();
         next();
         next();
+
         work.find("#obd_name").setValue(dmn_name).pressEnter();
         work.find("#obd_nohome").selectOptionByValue("true");
         work.find(".text-left").shouldHave(Condition.exactTextCaseSensitive(dmn_name)).click();
+        next();
         next();
     }
 
@@ -51,13 +53,44 @@ public class BusinessObject {
         return true;
     }
 
-    public static void navigateToEditor(boolean first) {
+    public static void navigateToEditor() {
         $("button[data-action=\"editTemplate\"]").click();
         SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.visible);
         actions().moveToElement(element).click(element).perform();
     }
 
-    public static void addField(String name, int type, boolean required, boolean functionalkey, String width) {
+    /**
+     *  3 => Short text
+     *  13 => Long text
+     *  1 => Integer
+     *  2 => Decimal (double)
+     *  26 => Decimal (100,32)
+     *  4 => Date
+     *  5 => Date and time
+     *  6 => Time
+     *  7 => Enumeration
+     *  14 => Multiple enumeration
+     *  8 => Boolean
+     *  10 => URL
+     *  11 => HTML content
+     *  12 => Email
+     *  15 => Validated text
+     *  17 => Document
+     *  0 => Internal ID
+     *  24 => Object
+     *  9 => Password
+     *  19 => External file
+     *  20 => Image
+     *  21 => Notepad
+     *  22 => Phone number
+     *  23 => Color
+     *  25 => Geographical coordinates
+     * @param name name
+     * @param type type
+     * @param required required
+     * @param functionalkey fonctionnalkey
+     */
+    public static void addField(String name, int type, boolean required, boolean functionalkey) {
 
 
         SelenideElement area = work.find("#area1");
@@ -71,7 +104,6 @@ public class BusinessObject {
 
         SelenideElement modal = $("#dlgmodal");
         modal.find("#label").setValue(name);
-        modal.find("#size").setValue(width);
 
         if (functionalkey)
             modal.find("label[for=\"key\"]").click();
@@ -79,8 +111,15 @@ public class BusinessObject {
             modal.find("label[for=\"req\"]").click();
         modal.find("button[data-action=\"SAVE\"]").click();
 
+    }
+
+    public static void save()
+    {
         $("button[data-action=\"save\"]").click();
         SelenideElement element = $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]");
         actions().moveToElement(element).click(element).perform();
+    }
+    public static void clickEditor() {
+        $("button[data-action=\"editTemplate\"]").click();
     }
 }

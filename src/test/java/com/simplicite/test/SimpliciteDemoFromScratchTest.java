@@ -13,6 +13,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
@@ -29,7 +30,9 @@ public class SimpliciteDemoFromScratchTest {
     @BeforeAll
     public static void setUpAll() {
         try {
-            properties.load(new FileReader("src/test/resources/config.properties"));
+            var in = new FileReader("src/test/resources/config.properties");
+            properties.load(in);
+            in.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,6 +54,17 @@ public class SimpliciteDemoFromScratchTest {
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
         Cache.click('u');
+    }
+
+    @AfterAll
+    public static void setDownAll() {
+        try {
+            var out = new FileWriter("src/test/resources/config.properties");
+            properties.store(out, null);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -79,7 +93,7 @@ public class SimpliciteDemoFromScratchTest {
     @Order(2)
     public void createBusinessObject() {
         BusinessObject.click();
-        BusinessObject.createObjectAssistant("TrnSupplier", "trn_supplier", "Training", "sup","TrnDomain" );
+        BusinessObject.createObjectAssistant("TrnSupplier", "trn_supplier", "Training", "sup", "TrnDomain");
         assertTrue(BusinessObject.isSuccess("TrnSupplier"));
     }
 
@@ -88,8 +102,9 @@ public class SimpliciteDemoFromScratchTest {
     public void editTemplate() {
         BusinessObject.click();
         BusinessObject.find("TrnSupplier");
-        BusinessObject.navigateToEditor(true);
-        BusinessObject.addField("code", 3, true, true, "20");
+        BusinessObject.navigateToEditor();
+        BusinessObject.addField("code", 3, true, true);
+        BusinessObject.save();
     }
 
     @Test
@@ -108,5 +123,59 @@ public class SimpliciteDemoFromScratchTest {
         assertTrue(Authentication.authentificationSucced("usertest"));
         Authentication.deconnection();
         Authentication.connect(properties.getProperty("name"), properties.getProperty("password"));
+    }
+
+    @Test
+    @Order(4)
+    public void enrichModelSupplier() {
+        BusinessObject.click();
+        BusinessObject.find("TrnSupplier");
+        BusinessObject.clickEditor();
+        BusinessObject.addField("nom", 3, false, false);
+        BusinessObject.addField("téléphone", 22, false, false);
+        BusinessObject.addField("logo", 20, false, false);
+        BusinessObject.addField("site", 10, false, false);
+        BusinessObject.save();
+    }
+
+    @Test
+    @Order(5)
+    public void enrichModelProduct() {
+        BusinessObject.click();
+        BusinessObject.createObjectAssistant("TrnProduct", "trn_product", "Training", "prd", "TrnDomain");
+        BusinessObject.navigateToEditor();
+        BusinessObject.addField("référence", 3, true, true);
+        BusinessObject.addField("prix", 2, true, false);
+        BusinessObject.addField("stock", 1, true, false);
+        BusinessObject.addField("nom", 3, false, false);
+        BusinessObject.addField("description", 13, false, false);
+        BusinessObject.addField("photo", 20, false, false);
+        BusinessObject.save();
+    }
+
+    @Test
+    @Order(6)
+    public void enrichModelClient() {
+        BusinessObject.click();
+        BusinessObject.createObjectAssistant("TrnClient", "trn_client", "Training", "cli", "TrnDomain");
+        BusinessObject.navigateToEditor();
+        BusinessObject.addField("nom", 3, true, true);
+        BusinessObject.addField("prénom", 3, true, true);
+        BusinessObject.addField("mail", 12, false, false);
+        BusinessObject.addField("téléphone", 22, false, false);
+        BusinessObject.addField("adresse", 25, false, false);
+        BusinessObject.save();
+    }
+
+    @Test
+    @Order(7)
+    public void enrichModelOrder() {
+        BusinessObject.click();
+        BusinessObject.createObjectAssistant("TrnOrder", "trn_order", "Training", "ord", "TrnDomain");
+        BusinessObject.navigateToEditor();
+        BusinessObject.addField("numéro", 3, true, true);
+        BusinessObject.addField("quantité", 1, true, false);
+        BusinessObject.addField("date", 4, false, false);
+        BusinessObject.save();
     }
 }
