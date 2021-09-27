@@ -27,13 +27,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith({ScreenShooterExtension.class})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SimpliciteDemoFromScratchTest {
+    static Properties properties = new Properties();
+    static Authentication auth;
     MAssitant moduleAssitant = new MAssitant("Training", "trn");
     Group group = new Group("TRN_SUPERADMIN", moduleAssitant);
     Domain domain = new Domain("TrnDomain", Icon.CONSOLE, moduleAssitant);
     BOAssitant boassistant = new BOAssitant("TrnSupplier",
             "trn_supplier", moduleAssitant, "sup");
-    static Properties properties = new Properties();
-    static Authentication auth;
 
     @BeforeAll
     public static void setUpAll() {
@@ -66,7 +66,7 @@ public class SimpliciteDemoFromScratchTest {
 
     @Test
     @Order(0)
-    public void newSession(){
+    public void newSession() {
         String newPassword = properties.getProperty("password");
         auth.changePassword(newPassword);
 

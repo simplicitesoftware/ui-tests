@@ -28,12 +28,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith({ScreenShooterExtension.class})
 public class SimpliciteTest {
+    static Properties properties = new Properties();
+    static Authentication auth;
     MAssitant moduleAssitant = new MAssitant("trainv2", "trv");
     Group group = new Group("TRV_SUPERADMIN", moduleAssitant);
     Domain domain = new Domain("TrvDomain", Icon.CONSOLE, moduleAssitant);
     BOAssitant boassistant = new BOAssitant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
-    static Properties properties = new Properties();
-    static Authentication auth;
 
     @BeforeAll
     public static void setUpAll() {
@@ -51,7 +51,8 @@ public class SimpliciteTest {
 
     @BeforeEach
     public void setUp() {
-        open(properties.getProperty("url"));}
+        open(properties.getProperty("url"));
+    }
 
 
     @Test
@@ -71,7 +72,7 @@ public class SimpliciteTest {
         element.shouldBe(exist);
     }
 
-   @Test
+    @Test
     public void clearCache() {
         auth.connect();
         DropDownMenu drop = new DropDownMenu();

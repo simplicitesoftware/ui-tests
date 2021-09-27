@@ -11,16 +11,16 @@ public class Grant implements MainMenuProperties {
     private Function function;
     private Module module;
 
-    public Grant(Group group, Function function, Module module)
-    {
+    public Grant(Group group, Function function, Module module) {
 
         this.group = group;
         this.function = function;
         this.module = module;
     }
+
     @Override
     public void click() {
-        SelenideElement element =mainmenu.find("[data-obj=\"Grant\"]");
+        SelenideElement element = mainmenu.find("[data-obj=\"Grant\"]");
         if (!element.isDisplayed())
             domain.click();
         mainmenu.find("[data-obj=\"Grant\"]").click();

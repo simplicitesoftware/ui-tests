@@ -13,10 +13,9 @@ public class BusinessObject implements MainMenuProperties {
     private final String table;
     private final Module module;
     private final String prefix;
-
+    public SelenideElement objectbutton = mainmenu.find("[data-obj=\"ObjectInternal\"]");
     private TemplateEditor editor = null;
     private Function fonction;
-    public SelenideElement objectbutton = mainmenu.find("[data-obj=\"ObjectInternal\"]");
 
     public BusinessObject(String code, String table, Module module, String prefix) {
 

@@ -9,8 +9,7 @@ import static com.codeborne.selenide.Selenide.actions;
 
 public class TemplateEditor implements MainMenuProperties {
 
-    public TemplateEditor()
-    {
+    public TemplateEditor() {
         click();
         SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.visible);
         actions().moveToElement(element).click(element).perform();
@@ -19,8 +18,7 @@ public class TemplateEditor implements MainMenuProperties {
     public TemplateEditor(String tmp) {
     }
 
-    public void addField(String name, String width, boolean functionalkey, boolean required)
-    {
+    public void addField(String name, String width, boolean functionalkey, boolean required) {
         SelenideElement area = work.find("#area1");
         area.find("button").click();
         area.find("[data-menu=\"field\"]").click();
@@ -39,13 +37,13 @@ public class TemplateEditor implements MainMenuProperties {
     }
 
     @Override
-    public void save()
-    {
+    public void save() {
         $("button[data-action=\"save\"]").click();
         $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").click();
         $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").click();
         close();
     }
+
     @Override
     public void click() {
         $("button[data-action=\"editTemplate\"]").click();

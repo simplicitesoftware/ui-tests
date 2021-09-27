@@ -37,8 +37,7 @@ public enum Traduction {
         return language;
     }
 
-    public void doTraduction(Traduction traduction)
-    {
+    public void doTraduction(Traduction traduction) {
         work.find("input[name*=\"EN\"]").sendKeys(getTraduction());
         work.find("input[name*=\"FR\"]").sendKeys(traduction.getTraduction());
     }

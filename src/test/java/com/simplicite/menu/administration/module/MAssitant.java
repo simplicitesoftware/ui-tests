@@ -11,9 +11,10 @@ import static com.codeborne.selenide.Selectors.byText;
 
 public class MAssitant extends Module {
 
-    /** Create a module with the assistant system
+    /**
+     * Create a module with the assistant system
      *
-     * @param name the name of the module
+     * @param name   the name of the module
      * @param prefix the prefix of the module
      */
     public MAssitant(String name, String prefix) {
@@ -25,7 +26,8 @@ public class MAssitant extends Module {
         work.find("*[data-action=\"validate\"]").click();
     }
 
-    /** Click on the Create Assistant button then create the module
+    /**
+     * Click on the Create Assistant button then create the module
      * in the database on the web
      */
     public void createModule() {
@@ -35,7 +37,8 @@ public class MAssitant extends Module {
         save();
     }
 
-    /** Create the group in the database on the web
+    /**
+     * Create the group in the database on the web
      *
      * @param group the group to be created
      */
@@ -44,11 +47,12 @@ public class MAssitant extends Module {
         save();
     }
 
-    /** Create the domain in the database on the web
+    /**
+     * Create the domain in the database on the web
      *
      * @param domain the domain to be created
-     * @param fr the traduction in french
-     * @param en the traduction in english
+     * @param fr     the traduction in french
+     * @param en     the traduction in english
      */
 
     public void createDomain(Domain domain, Traduction fr, Traduction en) {
@@ -58,7 +62,8 @@ public class MAssitant extends Module {
         save();
     }
 
-    /** Find the line of the checkbox to check to add the group to the domain.
+    /**
+     * Find the line of the checkbox to check to add the group to the domain.
      * The line is find with the name of the group.
      *
      * @param group the group to add to the domain
@@ -72,7 +77,8 @@ public class MAssitant extends Module {
         save();
     }
 
-    /** Add the icon to the domain
+    /**
+     * Add the icon to the domain
      *
      * @param icon the icon need to be add to the domain
      */

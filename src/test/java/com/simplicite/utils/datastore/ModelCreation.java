@@ -7,9 +7,8 @@ import com.simplicite.menu.administration.module.Module;
 import java.util.ArrayList;
 
 public class ModelCreation {
-    
-    public static ArrayList<BusinessObject> createModel(Module module)
-    {
+
+    public static ArrayList<BusinessObject> createModel(Module module) {
         ArrayList<BusinessObject> objects = new ArrayList<>();
         //objects.add(new BusinessObject("Supplier", "supplier", module, "sup"));
         objects.add(new BusinessObject("Product", "product", module, "pro"));
@@ -18,8 +17,7 @@ public class ModelCreation {
         return objects;
     }
 
-    public ArrayList<Field> getFieldList(Field module)
-    {
+    public ArrayList<Field> getFieldList(Field module) {
         return null;
     }
 }

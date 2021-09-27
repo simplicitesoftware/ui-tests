@@ -76,8 +76,7 @@ public class Module implements MainMenuProperties {
         return prefix;
     }
 
-    public boolean isSuccess()
-    {
+    public boolean isSuccess() {
         work.find("#field_mdl_name").should(Condition.exist).shouldHave(Condition.value(name));
         return true;
     }

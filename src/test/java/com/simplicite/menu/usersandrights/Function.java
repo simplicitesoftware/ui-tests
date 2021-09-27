@@ -30,7 +30,7 @@ public class Function implements MainMenuProperties {
      * A   : ACTION
      * V   : VIEW
      *
-     * @param field_fct_name function name
+     * @param field_fct_name     function name
      * @param field_fct_function right function access
      */
 
@@ -66,7 +66,7 @@ public class Function implements MainMenuProperties {
     public void createObject() {
         work.find("#field_fct_name").setValue(field_fct_name);
         work.find("#select2-field_fct_function-container").click();
-        work.find("#select2-field_fct_function-results").find("[id$=\"" + field_fct_function+ "\"]").click();
+        work.find("#select2-field_fct_function-results").find("[id$=\"" + field_fct_function + "\"]").click();
         Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), module.getName());
     }
 
@@ -77,7 +77,7 @@ public class Function implements MainMenuProperties {
         grants.add(grant);
     }
 
-    public void associateGroup(Group...groups){
+    public void associateGroup(Group... groups) {
         work.find(".objlinks").find("[data-action=\"associate-Function-grt_function_id-Group-grt_group_id\"]").click();
         SelenideElement dlgmodal = $("#dlgmodal_selectObj_Group");
         for (Group group : groups) {

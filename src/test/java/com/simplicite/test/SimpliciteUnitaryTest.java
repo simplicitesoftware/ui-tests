@@ -26,12 +26,12 @@ import static com.codeborne.selenide.Selenide.open;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SimpliciteUnitaryTest {
 
+    static Properties properties = new Properties();
+    static Authentication auth;
     MAssitant moduleAssitant = new MAssitant("Training", "trn");
     Group group = new Group("TRN_SUPERADMIN", moduleAssitant);
     Domain domain = new Domain("TrnDomain", Icon.CONSOLE, moduleAssitant);
     BOAssitant boassistant = new BOAssitant("TrnSupplier", "trn_supplier", moduleAssitant, "sup");
-    static Properties properties = new Properties();
-    static Authentication auth;
 
     @BeforeAll
     public static void setUpAll() {
@@ -71,8 +71,7 @@ public class SimpliciteUnitaryTest {
     }
 
     @Test
-    public void newFunctionWithAddGrant()
-    {
+    public void newFunctionWithAddGrant() {
         Function function = new Function("test", "CMS", moduleAssitant);
         function.create();
         function.save();
@@ -80,8 +79,7 @@ public class SimpliciteUnitaryTest {
     }
 
     @Test
-    public void newFunctionWithAssociateGrant()
-    {
+    public void newFunctionWithAssociateGrant() {
         Function function = new Function("test2", "CMS", moduleAssitant);
         function.create();
         function.associateGroup(group);

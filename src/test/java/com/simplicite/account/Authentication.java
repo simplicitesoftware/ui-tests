@@ -7,14 +7,17 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class Authentication {
 
-    /** Elements needed to login **/
+    /**
+     * Elements needed to login
+     **/
     public SelenideElement usrelement = $("#auth-signin-username");
     public SelenideElement password = $("#auth-signin-password");
     public SelenideElement connection = $("#auth-signin-submit");
     private String usrname;
     private String pssword;
 
-    /** Create an authentification
+    /**
+     * Create an authentification
      *
      * @param usrname Username of the account needed to be connected to the website
      * @param pssword Password of the account needed to be connected to the website
@@ -24,8 +27,13 @@ public class Authentication {
         this.pssword = pssword;
 
     }
-    public Authentication(){}
-    /** Connect the user **/
+
+    public Authentication() {
+    }
+
+    /**
+     * Connect the user
+     **/
     public void connect() {
         usrelement.setValue(usrname);
         password.setValue(pssword);
@@ -33,22 +41,30 @@ public class Authentication {
     }
 
     /**
-     *
      * @return the username of the account needed to be connected
      */
     public String getUsername() {
         return usrname;
     }
 
+    public void setUsername(String username) {
+        usrname = username;
+    }
+
     /**
-     *
      * @return the password of the account needed to be connected
      */
     public String getPassword() {
         return pssword;
     }
 
-    /** Test if the authentification succed if a pop-up error appear return false */
+    public void setPassword(String password) {
+        pssword = password;
+    }
+
+    /**
+     * Test if the authentification succed if a pop-up error appear return false
+     */
     public boolean authentificationSucced() {
         SelenideElement element = $("span.user-name");
         element.should(Condition.exist);
@@ -56,20 +72,10 @@ public class Authentication {
         return true;
     }
 
-    public void deconnection()
-    {
+    public void deconnection() {
         $(".logged-user").click();
         $(".user-logout").click();
         $("#dlgmodal_CONFIRM_LOGOUT").find("button[data-action=\"OK\"]").click();
-    }
-
-    public void setUsername(String username) {
-        usrname = username;
-    }
-
-    public void setPassword(String password)
-    {
-        pssword = password;
     }
 
     public void connectFirstTime(String newpssword) {

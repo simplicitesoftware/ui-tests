@@ -16,25 +16,22 @@ public class BOAssitant extends BusinessObject {
         work.find("*[data-action=\"validate\"]").click();
     }
 
-    public void createObject()
-    {
+    public void createObject() {
         work.find("button[data-action=\"ObjectCreateProcess\"]").click();
         super.createObject();
         save();
     }
 
-    public void makeTraduction(Traduction fr, Traduction en)
-    {
+    public void makeTraduction(Traduction fr, Traduction en) {
         en.doTraduction(fr);
         save();
     }
-    public void grantObject()
-    {
+
+    public void grantObject() {
         save();
     }
 
-    public void addDomain(Domain domain)
-    {
+    public void addDomain(Domain domain) {
         work.find("#obd_name").setValue(domain.getName()).pressEnter();
         work.find("#obd_nohome").selectOptionByValue("true");
         work.find(".text-left").shouldHave(Condition.exactTextCaseSensitive(domain.getName())).click();
