@@ -3,19 +3,16 @@ package com.simplicite.menu.usersandrights;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.administration.module.Module;
+import com.simplicite.menu.administration.Module;
 import com.simplicite.utils.Component;
 
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.simplicite.menu.MainMenuProperties.*;
 
-public class Function implements MainMenuProperties {
+public class Function {
 
-    private final String field_fct_name;
-    private final String field_fct_function;
-    private final Module module;
-    private ArrayList<Grant> grants = new ArrayList<>();
 
     /**
      * READ | CREATE | UPDATE | DELETE | ACTION | VIEW
@@ -30,15 +27,8 @@ public class Function implements MainMenuProperties {
      * A   : ACTION
      * V   : VIEW
      *
-     * @param field_fct_name     function name
-     * @param field_fct_function right function access
+     *
      */
-
-    public Function(String field_fct_name, String field_fct_function, Module module) {
-        this.field_fct_name = addSuffix(field_fct_name, field_fct_function);
-        this.field_fct_function = field_fct_function;
-        this.module = module;
-    }
 
     private String addSuffix(String str, String suf) {
         String suffix;
@@ -56,28 +46,24 @@ public class Function implements MainMenuProperties {
         return str + "_" + suffix;
     }
 
-    @Override
     public void click() {
         domain.click();
         mainmenu.find("[data-obj=\"Function\"]").click();
     }
 
-    @Override
-    public void createObject() {
+    public void createObject(String mdl_name, String field_fct_name, String field_fct_function) {
         work.find("#field_fct_name").setValue(field_fct_name);
         work.find("#select2-field_fct_function-container").click();
         work.find("#select2-field_fct_function-results").find("[id$=\"" + field_fct_function + "\"]").click();
-        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), module.getName());
+        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), mdl_name);
     }
 
-    public void addGrant(Group group) {
-        Grant grant = new Grant(group, this, module);
-        grant.click();
-        grant.create();
-        grants.add(grant);
+    public void addGrant(String fct_name, String grp_name, String mdl_name) {
+        Grant.click();
+        Grant.createObject(grp_name, mdl_name,fct_name );
     }
 
-    public void associateGroup(Group... groups) {
+    /*public void associateGroup(Group... groups) {
         work.find(".objlinks").find("[data-action=\"associate-Function-grt_function_id-Group-grt_group_id\"]").click();
         SelenideElement dlgmodal = $("#dlgmodal_selectObj_Group");
         for (Group group : groups) {
@@ -88,19 +74,10 @@ public class Function implements MainMenuProperties {
         }
         dlgmodal.find("button[data-action=\"multiselect\"]").click();
         dlgmodal.find("button[data-action=\"saveclose\"]").click();
-    }
+    }*/
 
-    @Override
-    public void find() {
+    public void find(String field_fct_function, String field_fct_name) {
         work.find("#fct_name").setValue(field_fct_function).pressEnter();
         work.find("[data-field=\"fct_name\"]").shouldHave(Condition.textCaseSensitive(field_fct_name)).click();
-    }
-
-    public String getName() {
-        return field_fct_name;
-    }
-
-    public ArrayList<Grant> getGrants() {
-        return grants;
     }
 }

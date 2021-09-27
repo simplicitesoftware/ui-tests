@@ -3,11 +3,12 @@ package com.simplicite.menu.usersandrights;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.selector.ByText;
 import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.administration.module.Module;
+import com.simplicite.menu.administration.Module;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.simplicite.menu.MainMenuProperties.work;
 
-public class Group implements MainMenuProperties {
+public class Group {
 
     private final String name;
     private final Module module;
@@ -23,8 +24,6 @@ public class Group implements MainMenuProperties {
         this.module = module;
     }
 
-
-    @Override
     public void click() {
 
     }
@@ -35,7 +34,6 @@ public class Group implements MainMenuProperties {
         grpname.sendKeys(name);
     }
 
-    @Override
     public void find() {
 
         work.find("#grp_name").setValue(name).pressEnter();
@@ -43,17 +41,4 @@ public class Group implements MainMenuProperties {
 
     }
 
-    /**
-     * @return name of the group
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @return module associate to the group
-     */
-    public Module getModule() {
-        return module;
-    }
 }
