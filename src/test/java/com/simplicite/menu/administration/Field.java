@@ -2,19 +2,16 @@ package com.simplicite.menu.administration;
 
 import com.simplicite.menu.MainMenuProperties;
 
-public class Field implements MainMenuProperties {
+public class Field {
 
-    @Override
     public void click() {
 
     }
 
-    @Override
     public void createObject() {
 
     }
 
-    @Override
     public void find() {
 
     }

@@ -2,65 +2,54 @@ package com.simplicite.menu;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.util.Map;
+
 import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Create a base for the menu, default action useful to every item in the menu
  **/
-public interface MainMenuProperties {
+public class MainMenuProperties {
 
     /**
      * Element needed to accesto the menu and to restrain the search of new elements
      */
-    SelenideElement mainmenu = $("#menu");
-    SelenideElement work = $("#work");
-    SelenideElement administration = mainmenu.find("*[data-domain=\"DomainAdmin\"]");
+    public static SelenideElement mainmenu = $("#menu");
+    public static SelenideElement work = $("#work");
+    public static SelenideElement administration = mainmenu.find("*[data-domain=\"DomainAdmin\"]");
+    public static SelenideElement domain = mainmenu.find("[data-domain=\"DomainGrant\"]");
 
-    /**
-     * Click on the component, Navigate to the element needed in the menu
-     */
-    void click();
-
-    /**
-     * Access to the menu of creation then create the component
-     */
-    void createObject();
-
-    /**
-     * Find the component in the list of the component type
-     */
-    void find();
 
     /**
      * Save the component in the menu of creation
      */
-    default void save() {
+    public static void save() {
         $("button[data-action=\"save\"]").click();
     }
 
     /**
      * Save an close the component in the menu of creation
      */
-    default void saveAndClose() {
+    void saveAndClose() {
         $("button[data-action=\"saveclose\"]").click();
     }
 
-    default void create() {
+    void naviguateToCreate() {
         $("button[data-action=\"create\"]").click();
-        createObject();
     }
+
 
     /**
      * Delete the component of the programme
      */
-    default void delete() {
-        find();
+    static void delete(String name) {
         work.find("div.card > div.card-header > div > div.form-actionbar > div > div > button").click();
         SelenideElement delete = work.find("div.card > div.card-header > div > div.form-actionbar > div " +
                 "> div.dropdown.show > ul > li[data-action=\"delete\"]");
     }
 
-    default void close() {
+    static void close() {
         $("button[data-action=\"close\"]").click();
     }
+
 }

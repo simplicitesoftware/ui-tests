@@ -4,20 +4,18 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
-import com.simplicite.menu.administration.Domain;
-import com.simplicite.menu.administration.businessobject.BOAssitant;
-import com.simplicite.menu.administration.module.MAssitant;
-import com.simplicite.menu.usersandrights.Group;
+import com.simplicite.menu.administration.BusinessObject;
+import com.simplicite.menu.administration.Module;
 import com.simplicite.menu.usersandrights.User;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
-import com.simplicite.utils.Icon;
-import com.simplicite.utils.Traduction;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -27,33 +25,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith({ScreenShooterExtension.class})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SimpliciteDemoFromScratchTest {
-    MAssitant moduleAssitant = new MAssitant("Training", "trn");
-    Group group = new Group("TRN_SUPERADMIN", moduleAssitant);
-    Domain domain = new Domain("TrnDomain", Icon.CONSOLE, moduleAssitant);
-    BOAssitant boassistant = new BOAssitant("TrnSupplier",
-            "trn_supplier", moduleAssitant, "sup");
     static Properties properties = new Properties();
-    static Authentication auth;
 
     @BeforeAll
     public static void setUpAll() {
         try {
-            properties.load(new FileReader("src/test/resources/config.properties"));
+            var in = new FileReader("src/test/resources/config.properties");
+            properties.load(in);
+            in.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
         Configuration.browserSize = properties.getProperty("browsersize");
         Configuration.browser = properties.getProperty("browser");
         Configuration.headless = properties.getProperty("headless").equals("true");
-        auth = new Authentication(properties.getProperty("name")
-                , properties.getProperty("oldpassword"));
     }
 
     @BeforeEach
     public void setUp() {
         open(properties.getProperty("url"));
         if ($("#auth-main").exists()) {
-            auth.connect();
+            Authentication.connect(properties.getProperty("name"), properties.getProperty("password"));
         }
     }
 
@@ -64,68 +56,126 @@ public class SimpliciteDemoFromScratchTest {
         Cache.click('u');
     }
 
+    @AfterAll
+    public static void setDownAll() {
+        try {
+            var out = new FileWriter("src/test/resources/config.properties");
+            properties.store(out, null);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     @Order(0)
-    public void newSession(){
-        String newPassword = properties.getProperty("password");
-        auth.changePassword(newPassword);
+    public void newSession() {
+        String name = properties.getProperty("name");
+        String newpassword = "designer1903";
+        properties.setProperty("password", newpassword);
 
-        //change to Super Admin
-        auth.deconnection();
-        auth.connect();
+        Authentication.changePassword(newpassword);
         $(".logged-scope").click();
         $(".logged-scope").find("[data-home=\"Home\"]").click();
-        $(".scope-icon > img[src*=\"code=VIEW_ADMIN\"]").shouldBe(Condition.exist);
-        assertTrue(auth.authentificationSucced());
+        $(".scope-icon > img[src*=\"code=VIEW_ADMIN\"]").shouldBe(Condition.exist, Duration.ofSeconds(6));
+        assertTrue(Authentication.authentificationSucced(name));
     }
 
     @Test
     @Order(1)
     public void createModule() {
-        moduleAssitant.click();
-        moduleAssitant.createModule();
-        moduleAssitant.createGroup(group);
-        moduleAssitant.createDomain(domain, Traduction.FORMATION, Traduction.TRAINING);
-        moduleAssitant.addGroupToDomain(group);
-        moduleAssitant.addIconToDomain(domain.getIcon());
-        assertTrue(moduleAssitant.isSuccess());
+        Module.click();
+        Module.createModuleAssistant("Training", "trn", "SUPERADMIN", "TrnDomain", "img/color/console");
+        assertTrue(Module.isSuccess("Training"));
     }
 
     @Test
     @Order(2)
     public void createBusinessObject() {
-        boassistant.click();
-        boassistant.createObject();
-        boassistant.makeTraduction(Traduction.FORMATION, Traduction.SUPPLIER);
-        boassistant.grantObject();
-        boassistant.addDomain(domain);
-        assertTrue(boassistant.isSuccess());
+        BusinessObject.click();
+        BusinessObject.createObjectAssistant("TrnSupplier", "trn_supplier", "Training", "sup", "TrnDomain");
+        assertTrue(BusinessObject.isSuccess("TrnSupplier"));
     }
 
     @Test
     @Order(3)
     public void editTemplate() {
-        boassistant.click();
-        boassistant.find();
-        boassistant.getEditor().addField("test", "20", true, true);
+        BusinessObject.click();
+        BusinessObject.find("TrnSupplier");
+        BusinessObject.navigateToEditor();
+        BusinessObject.addField("code", 3, true, true);
+        BusinessObject.save();
     }
 
     @Test
     @Order(4)
     public void createUser() {
-        User user = new User("usertest");
-        user.createObject();
-        user.associateGroup(group);
+        User.click();
+        String password = User.createUser(properties.getProperty("firstusername"));
 
+        properties.setProperty("firstuserpassword", password);
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
         Cache.click('u');
 
-        Authentication newauth = new Authentication(user.getName(), user.getPassword());
-        newauth.connect();
-        //newauth.connectFirstTime(user.getPassword());
-        assertTrue(newauth.authentificationSucced());
-        newauth.deconnection();
-        auth.connect();
+        Authentication.connect(properties.getProperty("firstusername"), password);
+        Authentication.changePassword(properties.getProperty("firstuserpassword"));
+        assertTrue(Authentication.authentificationSucced("usertest"));
+        Authentication.deconnection();
+        Authentication.connect(properties.getProperty("name"), properties.getProperty("password"));
+    }
+
+    @Test
+    @Order(4)
+    public void enrichModelSupplier() {
+        BusinessObject.click();
+        BusinessObject.find("TrnSupplier");
+        BusinessObject.clickEditor();
+        BusinessObject.addField("nom", 3, false, false);
+        BusinessObject.addField("téléphone", 22, false, false);
+        BusinessObject.addField("logo", 20, false, false);
+        BusinessObject.addField("site", 10, false, false);
+        BusinessObject.save();
+    }
+
+    @Test
+    @Order(5)
+    public void enrichModelProduct() {
+        BusinessObject.click();
+        BusinessObject.createObjectAssistant("TrnProduct", "trn_product", "Training", "prd", "TrnDomain");
+        BusinessObject.navigateToEditor();
+        BusinessObject.addField("référence", 3, true, true);
+        BusinessObject.addField("prix", 2, true, false);
+        BusinessObject.addField("stock", 1, true, false);
+        BusinessObject.addField("nom", 3, false, false);
+        BusinessObject.addField("description", 13, false, false);
+        BusinessObject.addField("photo", 20, false, false);
+        BusinessObject.save();
+    }
+
+    @Test
+    @Order(6)
+    public void enrichModelClient() {
+        BusinessObject.click();
+        BusinessObject.createObjectAssistant("TrnClient", "trn_client", "Training", "cli", "TrnDomain");
+        BusinessObject.navigateToEditor();
+        BusinessObject.addField("nom", 3, true, true);
+        BusinessObject.addField("prénom", 3, true, true);
+        BusinessObject.addField("mail", 12, false, false);
+        BusinessObject.addField("téléphone", 22, false, false);
+        BusinessObject.addField("adresse", 25, false, false);
+        BusinessObject.save();
+    }
+
+    @Test
+    @Order(7)
+    public void enrichModelOrder() {
+        BusinessObject.click();
+        BusinessObject.createObjectAssistant("TrnOrder", "trn_order", "Training", "ord", "TrnDomain");
+        BusinessObject.navigateToEditor();
+        BusinessObject.addField("numéro", 3, true, true);
+        BusinessObject.addField("quantité", 1, true, false);
+        BusinessObject.addField("date", 4, false, false);
+        BusinessObject.save();
     }
 }
