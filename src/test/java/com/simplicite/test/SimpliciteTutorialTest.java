@@ -4,8 +4,11 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
+import com.simplicite.menu.administration.Action;
 import com.simplicite.menu.administration.BusinessObject;
+import com.simplicite.menu.administration.Link;
 import com.simplicite.menu.administration.Module;
+import com.simplicite.menu.usersandrights.Function;
 import com.simplicite.menu.usersandrights.User;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
@@ -20,11 +23,12 @@ import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static com.simplicite.utils.DataStore.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith({ScreenShooterExtension.class})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class SimpliciteDemoFromScratchTest {
+public class SimpliciteTutorialTest {
     static Properties properties = new Properties();
 
     @BeforeAll
@@ -71,10 +75,9 @@ public class SimpliciteDemoFromScratchTest {
     @Order(0)
     public void newSession() {
         String name = properties.getProperty("name");
-        String newpassword = "designer1903";
-        properties.setProperty("password", newpassword);
+        properties.setProperty("password", NEW_PASSWORD);
 
-        Authentication.changePassword(newpassword);
+        Authentication.changePassword(NEW_PASSWORD);
         $(".logged-scope").click();
         $(".logged-scope").find("[data-home=\"Home\"]").click();
         $(".scope-icon > img[src*=\"code=VIEW_ADMIN\"]").shouldBe(Condition.exist, Duration.ofSeconds(6));
@@ -85,25 +88,25 @@ public class SimpliciteDemoFromScratchTest {
     @Order(1)
     public void createModule() {
         Module.click();
-        Module.createModuleAssistant("Training", "trn", "SUPERADMIN", "TrnDomain", "img/color/console");
-        assertTrue(Module.isSuccess("Training"));
+        Module.createModuleAssistant(TRAINING, "trn", SUPERADMIN, DOMAIN, "img/color/console");
+        assertTrue(Module.isSuccess(TRAINING));
     }
 
     @Test
     @Order(2)
     public void createBusinessObject() {
         BusinessObject.click();
-        BusinessObject.createObjectAssistant("TrnSupplier", "trn_supplier", "Training", "sup", "TrnDomain");
-        assertTrue(BusinessObject.isSuccess("TrnSupplier"));
+        BusinessObject.createObjectAssistant(SUPPLIER, "trn_supplier", TRAINING, "sup", DOMAIN);
+        assertTrue(BusinessObject.isSuccess(SUPPLIER));
     }
 
     @Test
     @Order(3)
     public void editTemplate() {
         BusinessObject.click();
-        BusinessObject.find("TrnSupplier");
+        BusinessObject.find(SUPPLIER);
         BusinessObject.navigateToEditor();
-        BusinessObject.addField("code", 3, true, true);
+        BusinessObject.addField(SUPPLIERAREA1,"code", 3, true, true);
         BusinessObject.save();
     }
 
@@ -129,12 +132,12 @@ public class SimpliciteDemoFromScratchTest {
     @Order(4)
     public void enrichModelSupplier() {
         BusinessObject.click();
-        BusinessObject.find("TrnSupplier");
+        BusinessObject.find(SUPPLIER);
         BusinessObject.clickEditor();
-        BusinessObject.addField("nom", 3, false, false);
-        BusinessObject.addField("téléphone", 22, false, false);
-        BusinessObject.addField("logo", 20, false, false);
-        BusinessObject.addField("site", 10, false, false);
+        BusinessObject.addField(SUPPLIERAREA1,"nom", 3, false, false);
+        BusinessObject.addField(SUPPLIERAREA1,"téléphone", 22, false, false);
+        BusinessObject.addField(SUPPLIERAREA1,"logo", 20, false, false);
+        BusinessObject.addField(SUPPLIERAREA1,"site", 10, false, false);
         BusinessObject.save();
     }
 
@@ -142,14 +145,14 @@ public class SimpliciteDemoFromScratchTest {
     @Order(5)
     public void enrichModelProduct() {
         BusinessObject.click();
-        BusinessObject.createObjectAssistant("TrnProduct", "trn_product", "Training", "prd", "TrnDomain");
+        BusinessObject.createObjectAssistant(PRODUCT, "trn_product", TRAINING, "prd", DOMAIN);
         BusinessObject.navigateToEditor();
-        BusinessObject.addField("référence", 3, true, true);
-        BusinessObject.addField("prix", 2, true, false);
-        BusinessObject.addField("stock", 1, true, false);
-        BusinessObject.addField("nom", 3, false, false);
-        BusinessObject.addField("description", 13, false, false);
-        BusinessObject.addField("photo", 20, false, false);
+        BusinessObject.addField(PRODUCTAREA1,"référence", 3, true, true);
+        BusinessObject.addField(PRODUCTAREA1,"prix", 2, true, false);
+        BusinessObject.addField(PRODUCTAREA1,"stock", 1, true, false);
+        BusinessObject.addField(PRODUCTAREA1,"nom", 3, false, false);
+        BusinessObject.addField(PRODUCTAREA1,"description", 13, false, false);
+        BusinessObject.addField(PRODUCTAREA1,"photo", 20, false, false);
         BusinessObject.save();
     }
 
@@ -157,25 +160,57 @@ public class SimpliciteDemoFromScratchTest {
     @Order(6)
     public void enrichModelClient() {
         BusinessObject.click();
-        BusinessObject.createObjectAssistant("TrnClient", "trn_client", "Training", "cli", "TrnDomain");
+        BusinessObject.createObjectAssistant(CLIENT, "trn_client", TRAINING, "cli", DOMAIN);
         BusinessObject.navigateToEditor();
-        BusinessObject.addField("nom", 3, true, true);
-        BusinessObject.addField("prénom", 3, true, true);
-        BusinessObject.addField("mail", 12, false, false);
-        BusinessObject.addField("téléphone", 22, false, false);
-        BusinessObject.addField("adresse", 25, false, false);
+        BusinessObject.addField(CLIENTAREA1,"nom", 3, true, true);
+        BusinessObject.addField(CLIENTAREA1,"prénom", 3, true, true);
+        BusinessObject.addField(CLIENTAREA1,"mail", 12, false, false);
+        BusinessObject.addField(CLIENTAREA1,"téléphone", 22, false, false);
+        BusinessObject.addField(CLIENTAREA1,"adresse", 25, false, false);
         BusinessObject.save();
     }
 
     @Test
-    @Order(7)
+    @Order(6)
     public void enrichModelOrder() {
         BusinessObject.click();
-        BusinessObject.createObjectAssistant("TrnOrder", "trn_order", "Training", "ord", "TrnDomain");
+        BusinessObject.createObjectAssistant(ORDER, "trn_order", TRAINING, "ord", DOMAIN);
         BusinessObject.navigateToEditor();
-        BusinessObject.addField("numéro", 3, true, true);
-        BusinessObject.addField("quantité", 1, true, false);
-        BusinessObject.addField("date", 4, false, false);
+        BusinessObject.addField(ORDERAREA1,"numéro", 3, true, true);
+        BusinessObject.addField(ORDERAREA1,"quantité", 1, true, false);
+        BusinessObject.addField(ORDERAREA1,"date", 4, false, false);
         BusinessObject.save();
+    }
+
+    @Test
+    @Order(6)
+    public void createLink(){
+        Link.addLink(ORDER, CLIENT);
+        Link.addLink(ORDER, PRODUCT);
+        Link.addLink(PRODUCT, SUPPLIER, "TrnSupNom");
+    }
+
+    @Test
+    @Order(7)
+    public void createArea(){
+        BusinessObject.click();
+        BusinessObject.find(ORDER);
+        BusinessObject.clickEditor();
+        BusinessObject.addRow();
+        BusinessObject.addArea(ORDERAREA2);
+        BusinessObject.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliNom");
+        BusinessObject.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliPrnom");
+        BusinessObject.addArea(ORDERAREA3);
+        BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdNom");
+        BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdStock");
+    }
+
+    @Test
+    @Order(8)
+    public void createAction(){
+        Action.click();
+        Action.createAction(INCREASESTOCK, "javascript:alert(\"To be implemented...\")");
+        Action.addFunction(PRODUCT, "TRN_PRD_INCREASE_STOCK_A");
+        Function.associateGroup(TRAINING, INCREASESTOCK, SUPERADMIN);
     }
 }

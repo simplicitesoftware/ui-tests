@@ -1,7 +1,11 @@
 package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.simplicite.utils.Component;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
@@ -12,7 +16,8 @@ public class BusinessObject {
     public SelenideElement objectbutton = mainmenu.find("[data-obj=\"ObjectInternal\"]");
 
     public static void click() {
-        administration.click();
+        if (!administration.isDisplayed())
+            administration.click();
         mainmenu.find("[data-obj=\"ObjectInternal\"]").click();
     }
 
@@ -27,9 +32,7 @@ public class BusinessObject {
 
         work.find("#field_obo_name").setValue(obj_name);
         work.find("#field_obo_dbtable").setValue(obj_table);
-        SelenideElement modulename = work.find("#field_row_module_id__mdl_name");
-        modulename.click();
-        modulename.setValue(mdl_name).pressEnter();
+        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), mdl_name);
         work.find("#field_obo_prefix").setValue(prefix);
 
         next();
@@ -40,22 +43,22 @@ public class BusinessObject {
         work.find("#obd_nohome").selectOptionByValue("true");
         work.find(".text-left").shouldHave(Condition.exactTextCaseSensitive(dmn_name)).click();
         next();
-        next();
+        if ($("button[data-action=\"validate\"]").exists())
+            next();
     }
 
     public static void find(String name) {
-        work.find("#obo_name").setValue(name).pressEnter();
-        work.find("[data-field=\"obo_name\"]").shouldHave(Condition.textCaseSensitive(name)).click();
+        $("#obo_name").setValue(name).pressEnter();
+        $("[data-field=\"obo_name\"]").shouldHave(Condition.textCaseSensitive(name)).click();
     }
 
     public static boolean isSuccess(String name) {
-        work.find("#field_obo_name").should(Condition.exist).shouldHave(Condition.value(name));
-        return true;
+        return work.find("#field_obo_name").shouldHave(Condition.value(name)).exists();
     }
 
     public static void navigateToEditor() {
         $("button[data-action=\"editTemplate\"]").click();
-        SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.visible);
+        SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.appear);
         actions().moveToElement(element).click(element).perform();
     }
 
@@ -90,10 +93,10 @@ public class BusinessObject {
      * @param required required
      * @param functionalkey fonctionnalkey
      */
-    public static void addField(String name, int type, boolean required, boolean functionalkey) {
+    public static void addField(String areaname,String name, int type, boolean required, boolean functionalkey) {
 
 
-        SelenideElement area = work.find("#area1");
+        SelenideElement area = work.find("[data-areaname=\"" + areaname +"\"]");
 
         area.find("button").click();
         area.find("[data-menu=\"field\"]").click();
@@ -110,16 +113,42 @@ public class BusinessObject {
         if (required)
             modal.find("label[for=\"req\"]").click();
         modal.find("button[data-action=\"SAVE\"]").click();
+    }
+
+    public static void addRow()
+    {
+        SelenideElement area1 = work.find(".dock-zone[data-dz=\"1\"]");
+        area1.find("button").click();
+        area1.find("[data-menu=\"rowcols row2\"]").click();
+    }
+
+    public static void addArea(String name)
+    {
+        SelenideElement area = work.find(".dock-zone[data-dz=\"1\"]");
+        area.find("button").click();
+        area.find("[data-menu=\"area\"]").click();
 
     }
 
     public static void save()
     {
         $("button[data-action=\"save\"]").click();
-        SelenideElement element = $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]");
+        SelenideElement element = $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").shouldBe(Condition.appear);
         actions().moveToElement(element).click(element).perform();
     }
     public static void clickEditor() {
         $("button[data-action=\"editTemplate\"]").click();
+    }
+
+    public static void addFieldUnusedJoin(String areaname, String join, String field) {
+         SelenideElement area = work.find("[data-areaname=\"" + areaname +"\"]");
+
+        area.find("button").click();
+        area.find("[data-menu=\"field\"]").click();
+
+        SelenideElement type = $("#dlgmodal_field").find("#"+ join);
+        type.click();
+        type.find("[data-field=\"" + field+ "\"]").click();
+
     }
 }

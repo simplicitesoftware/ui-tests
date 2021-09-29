@@ -11,10 +11,6 @@ import static com.simplicite.menu.MainMenuProperties.*;
 
 public class Module {
 
-    public static void next() {
-        work.find("*[data-action=\"validate\"]").click();
-    }
-
     public static void createModuleAssistant(String mdl_name, String mdl_prefix, String grp_name, String dmn_name, String icone) {
         SelenideElement createassistant = work.find("*[data-action=\"ModuleCreateProcess\"]");
         createassistant.click();

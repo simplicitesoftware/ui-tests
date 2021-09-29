@@ -1,0 +1,54 @@
+package com.simplicite.menu.administration;
+
+import com.codeborne.selenide.Condition;
+import com.simplicite.menu.MainMenuProperties;
+import com.simplicite.menu.usersandrights.Function;
+import com.simplicite.utils.Component;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.actions;
+import static com.simplicite.menu.MainMenuProperties.*;
+import static com.simplicite.menu.MainMenuProperties.work;
+
+public class Action {
+
+    public static void click() {
+        if (!administration.isDisplayed())
+            administration.click();
+        mainmenu.find("[data-obj=\"Action\"]").click();
+    }
+
+    public static void createAction(String name, String url){
+        work.find("button[data-action=\"create\"]").click();
+        work.find("#field_act_name").setValue(name);
+
+        work.find("#select2-field_act_type-container").parent().click();
+        work.find(".select2-results").find("[id$=\"O\"]").shouldBe(Condition.visible).click();
+
+        work.find("#select2-field_act_exec-container").parent().click();
+        work.find(".select2-results").find("[id$=\"FRT\"]").shouldBe(Condition.visible).click();
+
+        work.find("#field_act_url").setValue(url);
+        save();
+    }
+
+    public static void addFunction(String target, String fct_name)
+    {
+        work.find("#linktab_Function_fct_action_id").click();
+        work.find("#view_Function_fct_action_id").find("button[data-action=\"create\"]").click();
+
+        work.find("#field_fct_name").setValue(fct_name);
+        work.find("[data-action=\"refsel_field_fct_object_id__obj_name\" ]").click();
+
+        $("#obj_name").setValue(target).pressEnter();
+        $("[data-field=\"obj_name\"]").shouldHave(Condition.textCaseSensitive(target)).click();
+
+        save();
+        actions().moveToElement(work.find(".btn-success")).click().perform();
+    }
+    public static void find(String name)
+    {
+        work.find("#act_name").setValue(name).pressEnter();
+        work.find("[data-field=\"act_name\"]").shouldHave(Condition.textCaseSensitive(name)).click();
+    }
+}
