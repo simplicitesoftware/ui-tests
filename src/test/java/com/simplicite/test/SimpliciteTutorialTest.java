@@ -43,6 +43,8 @@ public class SimpliciteTutorialTest {
         Configuration.browserSize = properties.getProperty("browsersize");
         Configuration.browser = properties.getProperty("browser");
         Configuration.headless = properties.getProperty("headless").equals("true");
+        Configuration.savePageSource = false;
+        Configuration.pageLoadTimeout = 60000;
     }
 
     @BeforeEach
