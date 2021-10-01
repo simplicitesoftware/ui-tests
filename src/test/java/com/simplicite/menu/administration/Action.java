@@ -18,7 +18,7 @@ public class Action {
         mainmenu.find("[data-obj=\"Action\"]").click();
     }
 
-    public static void createAction(String name, String url){
+    public static void createAction(String name, String module,String url){
         work.find("button[data-action=\"create\"]").click();
         work.find("#field_act_name").setValue(name);
 
@@ -28,6 +28,7 @@ public class Action {
         work.find("#select2-field_act_exec-container").parent().click();
         work.find(".select2-results").find("[id$=\"FRT\"]").shouldBe(Condition.visible).click();
 
+        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), module);
         work.find("#field_act_url").setValue(url);
         save();
     }

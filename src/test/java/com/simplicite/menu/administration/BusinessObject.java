@@ -59,7 +59,7 @@ public class BusinessObject {
     public static void navigateToEditor() {
         $("button[data-action=\"editTemplate\"]").click();
         SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.appear);
-        actions().moveToElement(element).click(element).perform();
+        actions().pause(Duration.ofSeconds(1)).moveToElement(element).click(element).perform();
     }
 
     /**

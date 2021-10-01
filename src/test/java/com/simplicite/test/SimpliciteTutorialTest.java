@@ -157,7 +157,7 @@ public class SimpliciteTutorialTest {
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     public void enrichModelClient() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(CLIENT, "trn_client", TRAINING, "cli", DOMAIN);
@@ -171,7 +171,7 @@ public class SimpliciteTutorialTest {
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     public void enrichModelOrder() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(ORDER, "trn_order", TRAINING, "ord", DOMAIN);
@@ -209,7 +209,7 @@ public class SimpliciteTutorialTest {
     @Order(8)
     public void createAction(){
         Action.click();
-        Action.createAction(INCREASESTOCK, "javascript:alert(\"To be implemented...\")");
+        Action.createAction(INCREASESTOCK, TRAINING,"javascript:alert(\"To be implemented...\")");
         Action.addFunction(PRODUCT, "TRN_PRD_INCREASE_STOCK_A");
         Function.associateGroup(TRAINING, INCREASESTOCK, SUPERADMIN);
     }
