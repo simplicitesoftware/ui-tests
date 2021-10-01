@@ -13,6 +13,7 @@ import com.simplicite.menu.usersandrights.User;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.FileReader;
@@ -26,6 +27,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.simplicite.utils.DataStore.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MyTestWatcher.class)
 @ExtendWith({ScreenShooterExtension.class})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SimpliciteTutorialTest {
@@ -88,6 +90,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(1)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void createModule() {
         Module.click();
         Module.createModuleAssistant(TRAINING, "trn", SUPERADMIN, DOMAIN, "img/color/console");
@@ -96,6 +99,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(2)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void createBusinessObject() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(SUPPLIER, "trn_supplier", TRAINING, "sup", DOMAIN);
@@ -104,6 +108,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(3)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void editTemplate() {
         BusinessObject.click();
         BusinessObject.find(SUPPLIER);
@@ -114,6 +119,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(4)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void createUser() {
         User.click();
         String password = User.createUser(properties.getProperty("firstusername"));
@@ -132,6 +138,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(4)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void enrichModelSupplier() {
         BusinessObject.click();
         BusinessObject.find(SUPPLIER);
@@ -145,6 +152,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(5)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void enrichModelProduct() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(PRODUCT, "trn_product", TRAINING, "prd", DOMAIN);
@@ -160,6 +168,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(5)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void enrichModelClient() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(CLIENT, "trn_client", TRAINING, "cli", DOMAIN);
@@ -174,6 +183,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(5)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void enrichModelOrder() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(ORDER, "trn_order", TRAINING, "ord", DOMAIN);
@@ -186,6 +196,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(6)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void createLink(){
         Link.addLink(ORDER, CLIENT);
         Link.addLink(ORDER, PRODUCT);
@@ -194,6 +205,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(7)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void createArea(){
         BusinessObject.click();
         BusinessObject.find(ORDER);
@@ -209,6 +221,7 @@ public class SimpliciteTutorialTest {
 
     @Test
     @Order(8)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void createAction(){
         Action.click();
         Action.createAction(INCREASESTOCK, TRAINING,"javascript:alert(\"To be implemented...\")");
