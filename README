@@ -1,1 +1,11 @@
-Ensemble des tests automatiques pour Simplicite avec Selenide
+Automated testing of Simplicité Platform
+========================================
+
+Built with Selenide, leveraging Selenium brower automation: https://selenide.org/
+
+Roadmap
+---------------------------
+
+- [ ] test designer functionnality: reproduce tutorial
+- [ ] test user functionnality: enrich & test demo module
+- [ ] integrate into Simplicité's CI/CD Pipeline

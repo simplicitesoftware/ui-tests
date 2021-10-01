@@ -1,4 +1,9 @@
-/.idea/
-/target/
-/build/
-/src/test/java/com/simplicite/test/test.java
+.idea/
+.settings/
+target/
+build/
+bin/
+.classpath
+.project
+src/test/java/com/simplicite/test/test.java
+
