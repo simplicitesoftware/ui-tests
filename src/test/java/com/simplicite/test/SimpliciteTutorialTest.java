@@ -46,7 +46,8 @@ public class SimpliciteTutorialTest {
         Configuration.browser = properties.getProperty("browser");
         Configuration.headless = properties.getProperty("headless").equals("true");
         Configuration.savePageSource = false;
-        Configuration.pageLoadTimeout = 60000;
+        Configuration.pageLoadTimeout = Integer.parseInt(properties.getProperty("pageLoadTimeout"));
+        Configuration.timeout = Integer.parseInt(properties.getProperty("timeout"));
     }
 
     @BeforeEach
