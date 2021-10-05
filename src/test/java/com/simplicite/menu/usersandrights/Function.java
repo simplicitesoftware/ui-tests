@@ -4,6 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.utils.Component;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.*;
@@ -68,7 +70,7 @@ public class Function {
         actions().moveToElement(dlgmodal.find("button[data-action=\"multiselect\"]")).click().perform();
         SelenideElement saveclose = $("#dlgmodal_create_Grant_link_ajax_Grant")
                 .find("button[data-action=\"saveclose\"]").shouldBe(Condition.visible);
-        actions().moveToElement(saveclose).click().perform();
+        actions().pause(Duration.ofSeconds(1)).moveToElement(saveclose).click().perform();
     }
 
     public void find(String field_fct_function, String field_fct_name) {

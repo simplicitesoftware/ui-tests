@@ -42,10 +42,9 @@ public class Action {
         work.find("[data-action=\"refsel_field_fct_object_id__obj_name\" ]").click();
 
         $("#obj_name").setValue(target).pressEnter();
-        $("[data-field=\"obj_name\"]").shouldHave(Condition.textCaseSensitive(target)).click();
+        $("[data-field=\"obj_name\"]").click();
 
         save();
-        actions().moveToElement(work.find(".btn-success")).click().perform();
     }
     public static void find(String name)
     {

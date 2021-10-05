@@ -114,7 +114,7 @@ public class SimpliciteTutorialTest {
         BusinessObject.click();
         BusinessObject.find(SUPPLIER);
         BusinessObject.navigateToEditor();
-        BusinessObject.addField(SUPPLIERAREA1,"code", 3, true, true);
+        BusinessObject.addField(SUPPLIERAREA1,"code", "trnSupCode", 3, true, true);
         BusinessObject.save();
     }
 
@@ -144,10 +144,10 @@ public class SimpliciteTutorialTest {
         BusinessObject.click();
         BusinessObject.find(SUPPLIER);
         BusinessObject.clickEditor();
-        BusinessObject.addField(SUPPLIERAREA1,"nom", 3, false, false);
-        BusinessObject.addField(SUPPLIERAREA1,"téléphone", 22, false, false);
-        BusinessObject.addField(SUPPLIERAREA1,"logo", 20, false, false);
-        BusinessObject.addField(SUPPLIERAREA1,"site", 10, false, false);
+        BusinessObject.addField(SUPPLIERAREA1,"nom", "trnSupNom", 3, false, false);
+        BusinessObject.addField(SUPPLIERAREA1,"téléphone", "trnSupTelephone", 22, false, false);
+        BusinessObject.addField(SUPPLIERAREA1,"logo", "trnSupLogo", 20, false, false);
+        BusinessObject.addField(SUPPLIERAREA1,"site", "trnSupSite", 10, false, false);
         BusinessObject.save();
     }
 
@@ -158,12 +158,12 @@ public class SimpliciteTutorialTest {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(PRODUCT, "trn_product", TRAINING, "prd", DOMAIN);
         BusinessObject.navigateToEditor();
-        BusinessObject.addField(PRODUCTAREA1,"référence", 3, true, true);
-        BusinessObject.addField(PRODUCTAREA1,"prix", 2, true, false);
-        BusinessObject.addField(PRODUCTAREA1,"stock", 1, true, false);
-        BusinessObject.addField(PRODUCTAREA1,"nom", 3, false, false);
-        BusinessObject.addField(PRODUCTAREA1,"description", 13, false, false);
-        BusinessObject.addField(PRODUCTAREA1,"photo", 20, false, false);
+        BusinessObject.addField(PRODUCTAREA1,"référence", "trnPrdReference", 3, true, true);
+        BusinessObject.addField(PRODUCTAREA1,"prix", "trnPrdPrix", 2, true, false);
+        BusinessObject.addField(PRODUCTAREA1,"stock", "trnPrdStock", 1, true, false);
+        BusinessObject.addField(PRODUCTAREA1,"nom", "trnPrdNom", 3, false, false);
+        BusinessObject.addField(PRODUCTAREA1,"description", "trnPrdDescription", 13, false, false);
+        BusinessObject.addField(PRODUCTAREA1,"photo", "trnPrdPhoto", 20, false, false);
         BusinessObject.save();
     }
 
@@ -174,11 +174,11 @@ public class SimpliciteTutorialTest {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(CLIENT, "trn_client", TRAINING, "cli", DOMAIN);
         BusinessObject.navigateToEditor();
-        BusinessObject.addField(CLIENTAREA1,"nom", 3, true, true);
-        BusinessObject.addField(CLIENTAREA1,"prénom", 3, true, true);
-        BusinessObject.addField(CLIENTAREA1,"mail", 12, false, false);
-        BusinessObject.addField(CLIENTAREA1,"téléphone", 22, false, false);
-        BusinessObject.addField(CLIENTAREA1,"adresse", 25, false, false);
+        BusinessObject.addField(CLIENTAREA1,"nom", "trnCliNom",3, true, true);
+        BusinessObject.addField(CLIENTAREA1,"prénom", "trnCliPrenom", 3, true, true);
+        BusinessObject.addField(CLIENTAREA1,"mail", "trnCliMail", 12, false, false);
+        BusinessObject.addField(CLIENTAREA1,"téléphone", "trnCliTelephone", 22, false, false);
+        BusinessObject.addField(CLIENTAREA1,"adresse", "trnCliAdresse", 25, false, false);
         BusinessObject.save();
     }
 
@@ -189,9 +189,9 @@ public class SimpliciteTutorialTest {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(ORDER, "trn_order", TRAINING, "ord", DOMAIN);
         BusinessObject.navigateToEditor();
-        BusinessObject.addField(ORDERAREA1,"numéro", 3, true, true);
-        BusinessObject.addField(ORDERAREA1,"quantité", 1, true, false);
-        BusinessObject.addField(ORDERAREA1,"date", 4, false, false);
+        BusinessObject.addField(ORDERAREA1,"numéro", "trnOrdNumero", 3, true, true);
+        BusinessObject.addField(ORDERAREA1,"quantité", "trnOrdQuantite", 1, true, false);
+        BusinessObject.addField(ORDERAREA1,"date", "trnOrdDate", 4, false, false);
         BusinessObject.save();
     }
 
@@ -214,7 +214,7 @@ public class SimpliciteTutorialTest {
         BusinessObject.addRow();
         BusinessObject.addArea(ORDERAREA2);
         BusinessObject.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliNom");
-        BusinessObject.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliPrnom");
+        BusinessObject.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliPrenom");
         BusinessObject.addArea(ORDERAREA3);
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdNom");
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdStock");
