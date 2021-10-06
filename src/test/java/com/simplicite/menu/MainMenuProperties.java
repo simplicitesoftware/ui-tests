@@ -54,4 +54,5 @@ public class MainMenuProperties {
         $("button[data-action=\"close\"]").click();
     }
 
+    public static void create(){ work.find("button[data-action=\"create\"]").click(); }
 }
