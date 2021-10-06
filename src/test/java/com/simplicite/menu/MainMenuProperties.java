@@ -2,8 +2,6 @@ package com.simplicite.menu;
 
 import com.codeborne.selenide.SelenideElement;
 
-import java.util.Map;
-
 import static com.codeborne.selenide.Selenide.$;
 
 /**

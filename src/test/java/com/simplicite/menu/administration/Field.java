@@ -1,8 +1,6 @@
 package com.simplicite.menu.administration;
 
-import com.codeborne.selenide.Screenshots;
 import com.codeborne.selenide.SelenideElement;
-import com.simplicite.menu.MainMenuProperties;
 
 import static com.simplicite.menu.MainMenuProperties.work;
 

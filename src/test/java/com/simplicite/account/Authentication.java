@@ -3,8 +3,6 @@ package com.simplicite.account;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
-import java.util.Map;
-
 import static com.codeborne.selenide.Selenide.$;
 
 public class Authentication {

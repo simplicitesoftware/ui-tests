@@ -1,14 +1,10 @@
 package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
-import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.usersandrights.Function;
 import com.simplicite.utils.Component;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.*;
-import static com.simplicite.menu.MainMenuProperties.work;
 
 public class Action {
 

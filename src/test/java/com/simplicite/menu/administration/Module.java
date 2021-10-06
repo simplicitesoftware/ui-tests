@@ -2,7 +2,6 @@ package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.simplicite.menu.MainMenuProperties;
 
 import static com.codeborne.selenide.Selectors.byCssSelector;
 import static com.codeborne.selenide.Selectors.byText;

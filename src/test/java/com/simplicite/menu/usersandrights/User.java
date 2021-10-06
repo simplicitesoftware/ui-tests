@@ -5,9 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
 
-import static com.simplicite.menu.MainMenuProperties.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
+import static com.simplicite.menu.MainMenuProperties.*;
 
 public class User{
 

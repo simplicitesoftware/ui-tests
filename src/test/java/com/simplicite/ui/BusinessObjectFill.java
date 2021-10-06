@@ -1,16 +1,13 @@
 package com.simplicite.ui;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.utils.Component;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
-import static com.simplicite.menu.MainMenuProperties.*;
-import static com.simplicite.menu.MainMenuProperties.work;
+import static com.simplicite.menu.MainMenuProperties.create;
+import static com.simplicite.menu.MainMenuProperties.save;
 
 public class BusinessObjectFill {
 
