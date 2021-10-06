@@ -41,8 +41,12 @@ public class Authentication {
     }
 
     public static void changePassword(String newPassword) {
-        $("#auth-signin-password1").setValue(newPassword);
-        $("#auth-signin-password2").setValue(newPassword);
-        $("#auth-signin-save").click();
+        if ($("#auth-signin-password1").exists())
+        {
+            $("#auth-signin-password1").setValue(newPassword);
+            $("#auth-signin-password2").setValue(newPassword);
+            $("#auth-signin-save").click();
+        }
+
     }
 }

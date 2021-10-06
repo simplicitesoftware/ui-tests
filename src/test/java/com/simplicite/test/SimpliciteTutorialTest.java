@@ -9,6 +9,7 @@ import com.simplicite.menu.administration.BusinessObject;
 import com.simplicite.menu.administration.Link;
 import com.simplicite.menu.administration.Module;
 import com.simplicite.menu.usersandrights.Function;
+import com.simplicite.menu.usersandrights.Group;
 import com.simplicite.menu.usersandrights.User;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
@@ -22,8 +23,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static com.simplicite.utils.DataStore.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -62,7 +62,7 @@ public class SimpliciteTutorialTest {
     public void close() {
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
-        Cache.click('u');
+        Cache.click('c');
     }
 
     @AfterAll
@@ -124,11 +124,12 @@ public class SimpliciteTutorialTest {
     public void createUser() {
         User.click();
         String password = User.createUser(properties.getProperty("firstusername"));
+        User.associateGroup(SUPERADMIN);
 
         properties.setProperty("firstuserpassword", password);
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
-        Cache.click('u');
+        Cache.click('c');
 
         Authentication.connect(properties.getProperty("firstusername"), password);
         Authentication.changePassword(properties.getProperty("firstuserpassword"));
@@ -229,4 +230,5 @@ public class SimpliciteTutorialTest {
         Action.addFunction(PRODUCT, "TRN_PRD_INCREASE_STOCK_A");
         Function.associateGroup(TRAINING, INCREASESTOCK, SUPERADMIN);
     }
+
 }

@@ -4,7 +4,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.actions;
 
 public class Cache {
 
@@ -23,7 +26,9 @@ public class Cache {
 
         else if (type == 'c') {
             $("*[src$=\"cc3.png\"]").click();
-            $(".btn-OK[data-action=\"OK\"]").click();
+            if ($(".btn-OK[data-action=\"OK\"]").exists())
+                $(".btn-OK[data-action=\"OK\"]").click();
         }
+        actions().pause(Duration.ofSeconds(1)).perform();
     }
 }

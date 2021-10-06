@@ -3,6 +3,8 @@ package com.simplicite.menu.usersandrights;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
 import static com.simplicite.menu.MainMenuProperties.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
@@ -31,15 +33,15 @@ public class User{
     }
 
 
-    /*public void associateGroup(Group... groups) {
+    public static void associateGroup(String... groups) {
         work.find("[data-action=\"associate-User-rsp_login_id-Group-rsp_group_id\"]").click();
         for (var group : groups) {
-            $("#grp_name").setValue(group.getName());
+            $("#grp_name").setValue(group);
             $("[data-list=\"list_Group_ref_ajax_Group\"]").find("[data-field=\"grp_name\"]").click();
         }
         $("button[data-action=\"multiselect\"]").click();
         SelenideElement buttonsaveclose = $("#dlgmodal_create_Responsability_link_ajax_Responsability")
                 .find("button[data-action=\"saveclose\"]").shouldBe(Condition.visible);
-        actions().moveToElement(buttonsaveclose).click(buttonsaveclose).perform();
-    }*/
+        actions().pause(Duration.ofSeconds(1)).moveToElement(buttonsaveclose).click(buttonsaveclose).perform();
+    }
 }
