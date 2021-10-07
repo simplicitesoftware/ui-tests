@@ -1,14 +1,9 @@
 package com.simplicite.menu.administration;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 
-import java.util.ArrayList;
-
 import static com.codeborne.selenide.Selenide.$;
-import static com.simplicite.menu.MainMenuProperties.administration;
 import static com.simplicite.menu.MainMenuProperties.work;
 
 public class Link {

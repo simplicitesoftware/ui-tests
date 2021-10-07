@@ -6,4 +6,4 @@ bin/
 .classpath
 .project
 src/test/java/com/simplicite/test/test.java
-
+src/test/resources/config.properties

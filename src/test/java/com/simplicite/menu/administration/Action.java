@@ -1,14 +1,10 @@
 package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
-import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.usersandrights.Function;
 import com.simplicite.utils.Component;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.*;
-import static com.simplicite.menu.MainMenuProperties.work;
 
 public class Action {
 
@@ -18,7 +14,7 @@ public class Action {
         mainmenu.find("[data-obj=\"Action\"]").click();
     }
 
-    public static void createAction(String name, String url){
+    public static void createAction(String name, String module,String url){
         work.find("button[data-action=\"create\"]").click();
         work.find("#field_act_name").setValue(name);
 
@@ -28,6 +24,7 @@ public class Action {
         work.find("#select2-field_act_exec-container").parent().click();
         work.find(".select2-results").find("[id$=\"FRT\"]").shouldBe(Condition.visible).click();
 
+        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), module);
         work.find("#field_act_url").setValue(url);
         save();
     }
@@ -41,10 +38,9 @@ public class Action {
         work.find("[data-action=\"refsel_field_fct_object_id__obj_name\" ]").click();
 
         $("#obj_name").setValue(target).pressEnter();
-        $("[data-field=\"obj_name\"]").shouldHave(Condition.textCaseSensitive(target)).click();
+        $("[data-field=\"obj_name\"]").click();
 
         save();
-        actions().moveToElement(work.find(".btn-success")).click().perform();
     }
     public static void find(String name)
     {

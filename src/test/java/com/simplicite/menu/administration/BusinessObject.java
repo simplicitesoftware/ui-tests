@@ -1,7 +1,6 @@
 package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.utils.Component;
 
@@ -59,7 +58,7 @@ public class BusinessObject {
     public static void navigateToEditor() {
         $("button[data-action=\"editTemplate\"]").click();
         SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.appear);
-        actions().moveToElement(element).click(element).perform();
+        actions().pause(Duration.ofSeconds(1)).moveToElement(element).click(element).perform();
     }
 
     /**
@@ -89,11 +88,12 @@ public class BusinessObject {
      *  23 => Color
      *  25 => Geographical coordinates
      * @param name name
+     * @param label
      * @param type type
      * @param required required
      * @param functionalkey fonctionnalkey
      */
-    public static void addField(String areaname,String name, int type, boolean required, boolean functionalkey) {
+    public static void addField(String areaname, String name, String label, int type, boolean required, boolean functionalkey) {
 
 
         SelenideElement area = work.find("[data-areaname=\"" + areaname +"\"]");
@@ -107,7 +107,7 @@ public class BusinessObject {
 
         SelenideElement modal = $("#dlgmodal");
         modal.find("#label").setValue(name);
-
+        modal.find("#name").setValue(label);
         if (functionalkey)
             modal.find("label[for=\"key\"]").click();
         if (required)

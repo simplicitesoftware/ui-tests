@@ -3,7 +3,6 @@ package com.simplicite.utils;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.conditions.Visible;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;

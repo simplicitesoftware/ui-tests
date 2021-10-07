@@ -3,8 +3,6 @@ package com.simplicite.account;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
-import java.util.Map;
-
 import static com.codeborne.selenide.Selenide.$;
 
 public class Authentication {
@@ -41,8 +39,12 @@ public class Authentication {
     }
 
     public static void changePassword(String newPassword) {
-        $("#auth-signin-password1").setValue(newPassword);
-        $("#auth-signin-password2").setValue(newPassword);
-        $("#auth-signin-save").click();
+        if ($("#auth-signin-password1").exists())
+        {
+            $("#auth-signin-password1").setValue(newPassword);
+            $("#auth-signin-password2").setValue(newPassword);
+            $("#auth-signin-save").click();
+        }
+
     }
 }

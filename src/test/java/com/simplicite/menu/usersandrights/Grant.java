@@ -1,8 +1,6 @@
 package com.simplicite.menu.usersandrights;
 
 import com.codeborne.selenide.SelenideElement;
-import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.administration.Module;
 import com.simplicite.utils.Component;
 
 import static com.simplicite.menu.MainMenuProperties.*;

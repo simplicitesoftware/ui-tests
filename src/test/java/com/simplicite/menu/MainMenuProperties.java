@@ -2,8 +2,6 @@ package com.simplicite.menu;
 
 import com.codeborne.selenide.SelenideElement;
 
-import java.util.Map;
-
 import static com.codeborne.selenide.Selenide.$;
 
 /**
@@ -54,4 +52,5 @@ public class MainMenuProperties {
         $("button[data-action=\"close\"]").click();
     }
 
+    public static void create(){ work.find("button[data-action=\"create\"]").click(); }
 }

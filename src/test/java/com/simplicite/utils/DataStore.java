@@ -1,6 +1,10 @@
 package com.simplicite.utils;
 
+import java.util.Properties;
+
 public class DataStore {
+
+    public static Properties PROPERTIES = new Properties();
 
     public static final String ORDER = "TrnOrder";
     public static final String CLIENT = "TrnClient";
