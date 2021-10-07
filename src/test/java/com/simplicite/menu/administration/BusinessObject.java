@@ -1,16 +1,19 @@
 package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.simplicite.menu.MainMenuProperties;
 import com.simplicite.utils.Component;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Locale;
 
-import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selectors.byName;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.actions;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 import static com.simplicite.menu.MainMenuProperties.*;
 
 public class BusinessObject {
@@ -24,7 +27,7 @@ public class BusinessObject {
     }
 
     public static void next() {
-        work.find("*[data-action=\"validate\"]").click();
+        work.find("button[data-action=\"validate\"]").click();
     }
 
     public static void createObjectAssistant(String obj_name, String obj_table, String mdl_name, String prefix, String dmn_name) {
@@ -59,7 +62,7 @@ public class BusinessObject {
     }
 
     public static void navigateToEditor() {
-        $("button[data-action=\"editTemplate\"]").click();
+        $("button[data-action=\"editTemplate\"]").shouldBe(Condition.exist,Duration.ofSeconds(20)).click();
         SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.appear);
         actions().pause(Duration.ofSeconds(1)).moveToElement(element).click(element).perform();
     }
@@ -92,13 +95,12 @@ public class BusinessObject {
      * 25 => Geographical coordinates
      *
      * @param name          name
-     * @param label
+     * @param label         label
      * @param type          type
      * @param required      required
      * @param functionalkey fonctionnalkey
      */
     public static void addField(String areaname, String name, String label, int type, boolean required, boolean functionalkey) {
-
 
         SelenideElement area = work.find("[data-areaname=\"" + areaname + "\"]");
 
@@ -129,7 +131,6 @@ public class BusinessObject {
         SelenideElement area = work.find(".dock-zone[data-dz=\"1\"]");
         area.find("button").click();
         area.find("[data-menu=\"area\"]").click();
-
     }
 
     public static void save() {
@@ -159,15 +160,16 @@ public class BusinessObject {
         SelenideElement dlgmodal = $("#dlgmodal_saveAll");
         SelenideElement text = dlgmodal.find("textarea").shouldBe(Condition.visible);
         text.clear();
-        text.setValue(html);
-        //actions().moveToElement(text).click(text).pause(Duration.ofSeconds(10)).sendKeys(html).build().perform();
+        actions().moveToElement(text).click(text).sendKeys(html).build().perform();
         SelenideElement element = dlgmodal.find("button[data-action=\"SAVE\"]");
         actions().moveToElement(element).click(element).perform();
     }
 
     public static void modifyField(String field) {
         SelenideElement edit = work.find("[data-field=\"" + field + "\"]").find("[data-action=\"edit\"]");
-        actions().moveToElement(edit).click().perform();
+        edit.hover().click();
+        if ($("#dlgmodal").exists())
+            $("#dlgmodal").find("button[data-action=\"SAVE\"]").click();
     }
 
     public static void editEnum(String... args) {
@@ -177,12 +179,11 @@ public class BusinessObject {
         SelenideElement dlgedit = $("#dlgmodal_editlist");
         int count = 0;
         for (var arg : args) {
-            if (count < 3){
+            if (count < 3) {
                 String str = Character.toString('A' + count);
-                dlgedit.find("[name=\"code\"][value=\""+ str + "\"]").setValue(arg.toUpperCase(Locale.ROOT));
-                dlgedit.find("[name=\"value\"][value=\""+ str + "\"]").setValue(arg);
-            }
-            else{
+                dlgedit.find("[name=\"code\"][value=\"" + str + "\"]").setValue(arg.toUpperCase(Locale.ROOT));
+                dlgedit.find("[name=\"value\"][value=\"" + str + "\"]").setValue(arg);
+            } else {
                 dlgedit.find(".edit-lov > button").click();
                 dlgedit.findAll(byName("code")).last().setValue(arg.toUpperCase(Locale.ROOT));
                 dlgedit.findAll(byName("value")).last().setValue(arg);
@@ -191,5 +192,26 @@ public class BusinessObject {
         }
         SelenideElement save = dlgedit.find("[data-action=\"SAVE\"]");
         actions().moveToElement(save).click().perform();
+    }
+
+    public static void closeEditor() {
+        MainMenuProperties.close();
+    }
+
+    public static void addStateModel(int[][] listaccessorderstate, String group, String[][] trad) {
+        work.find("button[data-action=\"OBJ_ADD_STM\"]").click();
+        next();
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+            if (listaccessorderstate[y][x] == 1)
+                work.find("input[name=\"chk" +  y + "." + x + "\"]").click();
+            }
+        }
+        next();
+        ElementsCollection list = work.find(byText(group)).findAll("input[type=\"checkbox\"]");
+        list.forEach(SelenideElement::click);
+        next();
+        Arrays.stream(trad).forEach(e -> work.find("[name*=\"EN\"][value=\"" + e[0] + "\"]").setValue(e[1]));
+        next();
     }
 }

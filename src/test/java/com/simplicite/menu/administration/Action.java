@@ -38,7 +38,7 @@ public class Action {
         work.find("[data-action=\"refsel_field_fct_object_id__obj_name\" ]").click();
 
         $("#obj_name").setValue(target).pressEnter();
-        $("[data-field=\"obj_name\"]").click();
+        $("[data-field=\"obj_name\"]").shouldHave(Condition.text(target)).click();
 
         save();
     }

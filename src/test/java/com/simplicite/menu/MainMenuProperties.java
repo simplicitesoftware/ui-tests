@@ -48,7 +48,7 @@ public class MainMenuProperties {
                 "> div.dropdown.show > ul > li[data-action=\"delete\"]");
     }
 
-    static void close() {
+    public static void close() {
         $("button[data-action=\"close\"]").click();
     }
 

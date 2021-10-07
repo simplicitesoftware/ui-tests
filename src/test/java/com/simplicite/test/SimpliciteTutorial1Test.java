@@ -21,8 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static com.simplicite.utils.DataStore.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -70,9 +69,10 @@ public class SimpliciteTutorial1Test {
 
     @AfterEach
     public void close() {
+        sleep(1000);
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
-        Cache.click('u');
+        Cache.click('c');
     }
 
     @Test
@@ -192,7 +192,6 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addField(ORDERAREA1, "numéro", "trnOrdNumero", 3, true, true);
         BusinessObject.addField(ORDERAREA1, "quantité", "trnOrdQuantite", 1, true, false);
         BusinessObject.addField(ORDERAREA1, "date", "trnOrdDate", 4, false, false);
-        BusinessObject.setEditorTemplate(ORDERTEMPLATEHTML);
         BusinessObject.save();
     }
 
@@ -236,13 +235,40 @@ public class SimpliciteTutorial1Test {
     @Test
     @Order(9)
     @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void changeTemplateHtml() {
+        BusinessObject.click();
+        BusinessObject.find(ORDER);
+        BusinessObject.clickEditor();
+        BusinessObject.setEditorTemplate(ORDERTEMPLATEHTML);
+        BusinessObject.closeEditor();
+    }
+    @Test
+    @Order(10)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void createDiagram(){
         BusinessObject.click();
         BusinessObject.find(ORDER);
         BusinessObject.clickEditor();
-        /*BusinessObject.addField(ORDERAREA1, "State", FIELDORDERSTATE, 7, true, false);
-        BusinessObject.save();*/
+        BusinessObject.addField(ORDERAREA1, "State", FIELDORDERSTATE, 7, true, false);
         BusinessObject.modifyField(FIELDORDERSTATE);
         BusinessObject.editEnum(LISTORDERSTATE);
+        BusinessObject.save();
+        BusinessObject.closeEditor();
+        BusinessObject.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATE);
+    }
+
+    @Disabled
+    @Test
+    public void createObject(){
+        BusinessObject.click();
+        BusinessObject.createObjectAssistant(ORDERTEST, ORDERTABLETEST, TRAINING, "ord", DOMAIN);
+        BusinessObject.navigateToEditor();
+       BusinessObject.addField(ORDERAREA1TEST, "State", FIELDORDERSTATETEST, 7, true, false);
+        BusinessObject.save();
+        BusinessObject.modifyField(FIELDORDERSTATETEST);
+        BusinessObject.editEnum(LISTORDERSTATE);
+        BusinessObject.save();
+        BusinessObject.closeEditor();
+        BusinessObject.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATETEST);
     }
 }

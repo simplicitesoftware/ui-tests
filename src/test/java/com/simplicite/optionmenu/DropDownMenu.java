@@ -4,13 +4,14 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selectors.byCssSelector;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.actions;
 
 public class DropDownMenu {
 
     private final SelenideElement dropmenubutton;
 
     public DropDownMenu() {
-        dropmenubutton = $("[class=\"btn-header btn-shortcut\"]").parent();
+        dropmenubutton = $(".btn-header.btn-shortcut").parent();
     }
 
     public void click(int type) {

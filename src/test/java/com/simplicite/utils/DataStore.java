@@ -23,14 +23,41 @@ public class DataStore {
     public static final String INCREASESTOCK = "IncreaseStock";
     public static final String FIELDORDERSTATE = "trnOrdState";
 
+    private static final int val = 15;
+    public static final String ORDERTEST = "TrnOrder" + val;
+    public static final String ORDERAREA1TEST = "TrnOrder" + val + "-1";
+    public static final String FIELDORDERSTATETEST = "trnOrdState" + val;
+    public static final String ORDERTABLETEST = "trn_order1" + val;
+    public static final String[][] LISTTRADORDERSTATETEST = {
+            {"TRNORDSTATE"+ val+"-CANCELED-PROCESSING", "Switch to Processing"},
+            {"TRNORDSTATE"+ val+"-CANCELED-VALIDATED", "Back to Validated"},
+            {"TRNORDSTATE"+ val+"-PROCESSING-CANCELED", "Back to Processing"},
+            {"TRNORDSTATE"+ val+"-PROCESSING-VALIDATED", "Validate"},
+            {"TRNORDSTATE"+ val+"-SENT-VALIDATED", "Back to Validated"},
+            {"TRNORDSTATE"+ val+"-VALIDATED-CANCELED", "Cancel"},
+            {"TRNORDSTATE"+ val+"-VALIDATED-PROCESSING", "Back to Processing"},
+            {"TRNORDSTATE"+ val+"-VALIDATED-SENT", "Send"}
+    };
+    public static final int[][] LISTACCESSORDERSTATE = {{0, 1, 1, 0}, {1, 0, 1, 0}, {1, 1, 0, 1}, {0, 0, 1, 0}};
     public static final String[] LISTORDERSTATE = {"Processing", "Canceled", "Validated", "Sent"};
-    public static final String ORDERTEMPLATEHTML = "<div class=\"row\">\n"+
-            "    <div class=\"col-sm-6\">\n"+
-            "      <div class=\"area\" data-area=\"1:=\"></div>\n"+
-            "    </div>\n"+
-            "    <div class=\"col-sm-6\">\n"+
-            "      <div class=\"area\" data-area=\"2\"></div>\n"+
-            "      <div class=\"area\" data-area=\"3\"></div>\n"+
-            "    </div>\n"+
+    public static final String[][] LISTTRADORDERSTATE = {
+            {"TRNORDSTATE-CANCELED-PROCESSING", "Switch to Processing"},
+            {"TRNORDSTATE-CANCELED-VALIDATED", "Back to Validated"},
+            {"TRNORDSTATE-PROCESSING-CANCELED", "Back to Processing"},
+            {"TRNORDSTATE-PROCESSING-VALIDATED", "Validate"},
+            {"TRNORDSTATE-SENT-VALIDATED", "Back to Validated"},
+            {"TRNORDSTATE-VALIDATED-CANCELED", "Cancel"},
+            {"TRNORDSTATE-VALIDATED-PROCESSING", "Back to Processing"},
+            {"TRNORDSTATE-VALIDATED-SENT", "Send"}
+    };
+
+    public static final String ORDERTEMPLATEHTML = "<div class=\"row\">\n" +
+            "    <div class=\"col-sm-6\">\n" +
+            "      <div class=\"area\" data-area=\"1:=\"></div>\n" +
+            "    </div>\n" +
+            "    <div class=\"col-sm-6\">\n" +
+            "      <div class=\"area\" data-area=\"2\"></div>\n" +
+            "      <div class=\"area\" data-area=\"3\"></div>\n" +
+            "    </div>\n" +
             "  </div>";
 }
