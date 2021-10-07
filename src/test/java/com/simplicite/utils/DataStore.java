@@ -21,4 +21,16 @@ public class DataStore {
     public static final String NEW_PASSWORD = "designer1903";
     public static final String SUPERADMIN = "SUPERADMIN";
     public static final String INCREASESTOCK = "IncreaseStock";
+    public static final String FIELDORDERSTATE = "trnOrdState";
+
+    public static final String[] LISTORDERSTATE = {"Processing", "Canceled", "Validated", "Sent"};
+    public static final String ORDERTEMPLATEHTML = "<div class=\"row\">\n"+
+            "    <div class=\"col-sm-6\">\n"+
+            "      <div class=\"area\" data-area=\"1:=\"></div>\n"+
+            "    </div>\n"+
+            "    <div class=\"col-sm-6\">\n"+
+            "      <div class=\"area\" data-area=\"2\"></div>\n"+
+            "      <div class=\"area\" data-area=\"3\"></div>\n"+
+            "    </div>\n"+
+            "  </div>";
 }

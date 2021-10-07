@@ -72,7 +72,7 @@ public class SimpliciteTutorial1Test {
     public void close() {
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
-        Cache.click('c');
+        Cache.click('u');
     }
 
     @Test
@@ -192,6 +192,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addField(ORDERAREA1, "numéro", "trnOrdNumero", 3, true, true);
         BusinessObject.addField(ORDERAREA1, "quantité", "trnOrdQuantite", 1, true, false);
         BusinessObject.addField(ORDERAREA1, "date", "trnOrdDate", 4, false, false);
+        BusinessObject.setEditorTemplate(ORDERTEMPLATEHTML);
         BusinessObject.save();
     }
 
@@ -219,7 +220,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdStock");
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdReference");
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdNom");
-
+        BusinessObject.save();
     }
 
     @Test
@@ -232,5 +233,16 @@ public class SimpliciteTutorial1Test {
         Function.associateGroup(TRAINING, INCREASESTOCK, SUPERADMIN);
     }
 
-
+    @Test
+    @Order(9)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void createDiagram(){
+        BusinessObject.click();
+        BusinessObject.find(ORDER);
+        BusinessObject.clickEditor();
+        /*BusinessObject.addField(ORDERAREA1, "State", FIELDORDERSTATE, 7, true, false);
+        BusinessObject.save();*/
+        BusinessObject.modifyField(FIELDORDERSTATE);
+        BusinessObject.editEnum(LISTORDERSTATE);
+    }
 }
