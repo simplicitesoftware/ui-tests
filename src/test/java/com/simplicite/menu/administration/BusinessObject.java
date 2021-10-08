@@ -103,10 +103,7 @@ public class BusinessObject {
      */
     public static void addField(String areaname, String name, String label, int type, boolean required, boolean functionalkey) {
 
-        SelenideElement area = work.find("[data-areaname=\"" + areaname + "\"]");
-
-        area.find("button").click();
-        area.find("[data-menu=\"field\"]").click();
+        addButton(areaname, "field");
         SelenideElement typed = $("#dlgmodal_field").find("#typed");
         typed.click();
 
@@ -122,6 +119,15 @@ public class BusinessObject {
         modal.find("button[data-action=\"SAVE\"]").click();
     }
 
+    private static void addButton(String areaname, String field) {
+        SelenideElement area = work.find(".dock-zone[data-dz=\"1\"]");
+        SelenideElement element= area.find("button");
+        element.hover();
+        element.click();
+
+        area.find("[data-menu=\"" + field+ "\"]").click();
+    }
+
     public static void addRow() {
         SelenideElement area1 = work.find(".dock-zone[data-dz=\"1\"]");
         area1.find("button").click();
@@ -129,11 +135,7 @@ public class BusinessObject {
     }
 
     public static void addArea(String name) {
-        SelenideElement area = work.find(".dock-zone[data-dz=\"1\"]");
-        SelenideElement element= area.find("button");
-        element.hover();
-        element.click();
-        area.find("[data-menu=\"area\"]").click();
+        addButton(name, "area");
     }
 
     public static void save() {
@@ -211,7 +213,8 @@ public class BusinessObject {
             }
         }
         next();
-        ElementsCollection list = work.find(byText(group)).findAll("input[type=\"checkbox\"]");
+        ElementsCollection list = work.find(byText(group)).parent().findAll("input[type=\"checkbox\"]").filterBy(Condition.visible);
+        System.out.println(list);
         list.forEach(SelenideElement::click);
         next();
         Arrays.stream(trad).forEach(e -> work.find("[name*=\"EN\"][value=\"" + e[0] + "\"]").setValue(e[1]));

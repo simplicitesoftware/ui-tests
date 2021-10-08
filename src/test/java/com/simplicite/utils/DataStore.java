@@ -23,7 +23,7 @@ public class DataStore {
     public static final String INCREASESTOCK = "IncreaseStock";
     public static final String FIELDORDERSTATE = "trnOrdState";
 
-    private static final int val = 15;
+    private static final int val = 6;
     public static final String ORDERTEST = "TrnOrder" + val;
     public static final String ORDERAREA1TEST = "TrnOrder" + val + "-1";
     public static final String FIELDORDERSTATETEST = "trnOrdState" + val;
@@ -51,13 +51,14 @@ public class DataStore {
             {"TRNORDSTATE-VALIDATED-SENT", "Send"}
     };
 
-    public static final String ORDERTEMPLATEHTML = "<div class=\"row\">\n" +
-            "    <div class=\"col-sm-6\">\n" +
-            "      <div class=\"area\" data-area=\"1:=\"></div>\n" +
-            "    </div>\n" +
-            "    <div class=\"col-sm-6\">\n" +
-            "      <div class=\"area\" data-area=\"2\"></div>\n" +
-            "      <div class=\"area\" data-area=\"3\"></div>\n" +
-            "    </div>\n" +
-            "  </div>";
+    public static final String ORDERTEMPLATEHTML = """
+            <div class="row">
+                <div class="col-sm-6">
+                  <div class="area" data-area="1:="></div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="area" data-area="2"></div>
+                  <div class="area" data-area="3"></div>
+                </div>
+              </div>""";
 }
