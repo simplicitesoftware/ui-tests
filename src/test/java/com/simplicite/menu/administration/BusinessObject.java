@@ -123,9 +123,9 @@ public class BusinessObject {
         SelenideElement area = work.find(".dock-zone[data-dz=\"1\"]");
         SelenideElement element= area.find("button");
         element.hover();
-        element.click();
+        element.shouldBe(Condition.visible).click();
 
-        area.find("[data-menu=\"" + field+ "\"]").click();
+        area.find("[data-menu=\"" + field + "\"]").click();
     }
 
     public static void addRow() {
@@ -214,10 +214,15 @@ public class BusinessObject {
         }
         next();
         ElementsCollection list = work.find(byText(group)).parent().findAll("input[type=\"checkbox\"]").filterBy(Condition.visible);
-        System.out.println(list);
         list.forEach(SelenideElement::click);
         next();
         Arrays.stream(trad).forEach(e -> work.find("[name*=\"EN\"][value=\"" + e[0] + "\"]").setValue(e[1]));
         next();
+    }
+
+    public static void accessToOption(){
+        SelenideElement area = work.find("[data-areaname=\"ObjectInternal-Btn\"]");
+        area.find("[data-tab=\"1\"]").click();
+        area.find("#field_obo_historic_2").click();
     }
 }
