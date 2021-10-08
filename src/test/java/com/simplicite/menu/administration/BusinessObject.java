@@ -130,7 +130,9 @@ public class BusinessObject {
 
     public static void addArea(String name) {
         SelenideElement area = work.find(".dock-zone[data-dz=\"1\"]");
-        area.find("button").click();
+        SelenideElement element= area.find("button");
+        element.hover();
+        element.click();
         area.find("[data-menu=\"area\"]").click();
     }
 

@@ -17,7 +17,6 @@ public class MainMenuProperties {
     public static SelenideElement administration = mainmenu.find("*[data-domain=\"DomainAdmin\"]");
     public static SelenideElement domain = mainmenu.find("[data-domain=\"DomainGrant\"]");
 
-
     /**
      * Save the component in the menu of creation
      */
