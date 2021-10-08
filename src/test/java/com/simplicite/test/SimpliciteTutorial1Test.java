@@ -84,7 +84,7 @@ public class SimpliciteTutorial1Test {
         Authentication.changePassword(NEW_PASSWORD);
         $(".logged-scope").click();
         $(".logged-scope").find("[data-home=\"Home\"]").click();
-        $(".scope-icon > img[src*=\"code=VIEW_ADMIN\"]").shouldBe(Condition.exist, Duration.ofSeconds(6));
+        $(".scope-icon > img[src*=\"code=VIEW_ADMIN\"]").shouldBe(Condition.exist, Duration.ofSeconds(20));
         assertTrue(Authentication.authentificationSucced(name));
     }
 
