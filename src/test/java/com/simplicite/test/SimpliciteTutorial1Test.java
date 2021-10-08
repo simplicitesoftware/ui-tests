@@ -46,6 +46,7 @@ public class SimpliciteTutorial1Test {
         Configuration.savePageSource = false;
         Configuration.pageLoadTimeout = Integer.parseInt(PROPERTIES.getProperty("pageLoadTimeout"));
         Configuration.timeout = Integer.parseInt(PROPERTIES.getProperty("timeout"));
+        Configuration.pollingInterval = Integer.parseInt(PROPERTIES.getProperty("pollingInterval"));
     }
 
     @AfterAll
