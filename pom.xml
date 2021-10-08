@@ -53,6 +53,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <runOrder>alphabetical</runOrder>
+                    <!-- Broken on JUnit5 - waiting for resolution https://issues.apache.org/jira/browse/SUREFIRE-1698 -->
+                    <skipAfterFailureCount>1</skipAfterFailureCount>
                 </configuration>
             </plugin>
         </plugins>
