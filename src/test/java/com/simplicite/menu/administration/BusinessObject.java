@@ -122,9 +122,8 @@ public class BusinessObject {
     private static void addButton(String areaname, String field) {
         SelenideElement area = work.find(".dock-zone[data-dz=\"1\"]");
         SelenideElement element= area.find("button");
-        element.hover();
-        element.shouldBe(Condition.visible).click();
 
+        actions().moveToElement(element).pause(Duration.ofMillis(750)).click().build().perform();
         area.find("[data-menu=\"" + field + "\"]").click();
     }
 
