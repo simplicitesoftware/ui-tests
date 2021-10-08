@@ -28,6 +28,7 @@ public class BusinessObject {
 
     public static void next() {
         work.find("button[data-action=\"validate\"]").click();
+        Selenide.sleep(1000);
     }
 
     public static void createObjectAssistant(String obj_name, String obj_table, String mdl_name, String prefix, String dmn_name) {
