@@ -48,7 +48,6 @@ public class BusinessObject {
         work.find("#obd_nohome").selectOptionByValue("true");
         work.find(".text-left").shouldHave(Condition.exactTextCaseSensitive(dmn_name)).click();
         next();
-        Selenide.sleep(50);
         if (work.find("button[data-action=\"validate\"]").exists())
             next();
     }
