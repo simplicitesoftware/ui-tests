@@ -174,8 +174,6 @@ public class BusinessObject {
     public static void modifyField(String field) {
         SelenideElement edit = work.find("[data-field=\"" + field + "\"]").find("[data-action=\"edit\"]");
         edit.hover().click();
-        if ($("#dlgmodal").exists())
-            $("#dlgmodal").find("button[data-action=\"SAVE\"]").click();
     }
 
     public static void editEnum(String... args) {
