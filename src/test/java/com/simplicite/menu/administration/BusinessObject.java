@@ -126,7 +126,7 @@ public class BusinessObject {
         else
             area = work.find("[data-areaname=\"" + areaname + "\"]").should(Condition.exist);
 
-        SelenideElement bouton = area.find("button");
+        SelenideElement bouton = area.find("button").should(Condition.exist);
         SelenideElement element = area.find("[data-menu=\"" + type + "\"]");
         while(!element.isDisplayed())
             actions().moveToElement(bouton).click().build().perform();
