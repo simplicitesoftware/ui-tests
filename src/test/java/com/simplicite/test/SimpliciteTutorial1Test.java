@@ -2,16 +2,18 @@ package com.simplicite.test;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
-import com.simplicite.menu.administration.Action;
-import com.simplicite.menu.administration.BusinessObject;
-import com.simplicite.menu.administration.Link;
+import com.simplicite.menu.MainMenuProperties;
+import com.simplicite.menu.administration.*;
 import com.simplicite.menu.administration.Module;
 import com.simplicite.menu.usersandrights.Function;
 import com.simplicite.menu.usersandrights.User;
 import com.simplicite.optionmenu.Cache;
 import com.simplicite.optionmenu.DropDownMenu;
+import com.simplicite.optionmenu.ModuleActive;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -213,10 +215,10 @@ public class SimpliciteTutorial1Test {
         BusinessObject.find(ORDER);
         BusinessObject.clickEditor();
         BusinessObject.addRow();
-        BusinessObject.addArea(ORDERAREA2);
+        BusinessObject.addArea();
         BusinessObject.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliNom");
         BusinessObject.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliPrenom");
-        BusinessObject.addArea(ORDERAREA3);
+        BusinessObject.addArea();
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdStock");
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdReference");
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdNom");
@@ -230,7 +232,7 @@ public class SimpliciteTutorial1Test {
         Action.click();
         Action.createAction(INCREASESTOCK, TRAINING, "javascript:alert(\"To be implemented...\")");
         Action.addFunction(PRODUCT, "TRN_PRD_INCREASE_STOCK_A");
-        Function.associateGroup(TRAINING, INCREASESTOCK, SUPERADMIN);
+        Function.associateGroup(SUPERADMIN);
     }
 
     @Test
@@ -258,6 +260,33 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATE);
     }
 
+    @Test
+    @Order(10)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void createHistoric(){
+        BusinessObject.click();
+        BusinessObject.find(ORDER);
+        BusinessObject.accessToOption();
+        MainMenuProperties.save();
+
+        SystemProperties.click();
+        SystemProperties.find("LOG_ACTIVITY");
+        assertTrue(SystemProperties.verifyValue());
+
+        ModuleActive.click();
+        ModuleActive.showAll();
+        Function.click();
+        Function.find(REDO);
+        Function.setModuleName(TRAINING);
+        MainMenuProperties.save();
+
+        Function.associateGroup(SUPERADMIN);
+        MainMenuProperties.save();
+
+        ModuleActive.click();
+        ModuleActive.select("Training");
+
+    }
     @Disabled
     @Test
     public void createObject(){

@@ -22,6 +22,7 @@ public class DataStore {
     public static final String SUPERADMIN = "SUPERADMIN";
     public static final String INCREASESTOCK = "IncreaseStock";
     public static final String FIELDORDERSTATE = "trnOrdState";
+    public static final String REDO = "RedoLog-R";
 
     private static final int val = 6;
     public static final String ORDERTEST = "TrnOrder" + val;

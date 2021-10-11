@@ -1,9 +1,11 @@
 package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import com.simplicite.utils.Component;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.*;
 
 public class Action {
@@ -38,7 +40,8 @@ public class Action {
         work.find("[data-action=\"refsel_field_fct_object_id__obj_name\" ]").click();
 
         $("#obj_name").setValue(target).pressEnter();
-        $("[data-field=\"obj_name\"]").shouldHave(Condition.text(target)).click();
+        SelenideElement obj_name = $("[data-field=\"obj_name\"]").shouldHave(Condition.text(target));
+        actions().moveToElement(obj_name).click().perform();
 
         save();
     }

@@ -120,10 +120,15 @@ public class BusinessObject {
     }
 
     private static void addButton(String areaname, String field) {
-        SelenideElement area = work.find(".dock-zone[data-dz=\"1\"]");
+        SelenideElement area;
+        if (areaname == null)
+            area = work.find(".dock-zone[data-dz=\"1\"]");
+        else
+            area = work.find("[data-areaname=\"" + areaname + "\"]");
+
         SelenideElement bouton = area.find("button");
         SelenideElement element = area.find("[data-menu=\"" + field + "\"]");
-        while(element.isEnabled())
+        while(!element.isDisplayed())
             actions().moveToElement(bouton).click().build().perform();
         element.click();
     }
@@ -134,8 +139,8 @@ public class BusinessObject {
         area1.find("[data-menu=\"rowcols row2\"]").click();
     }
 
-    public static void addArea(String name) {
-        addButton(name, "area");
+    public static void addArea() {
+        addButton(null, "area");
     }
 
     public static void save() {

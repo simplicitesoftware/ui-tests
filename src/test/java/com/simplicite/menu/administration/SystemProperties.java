@@ -2,6 +2,10 @@ package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.codeborne.selenide.Selenide.$;
 import static com.simplicite.menu.MainMenuProperties.*;
 
 public class SystemProperties {
@@ -15,5 +19,12 @@ public class SystemProperties {
         if (!administration.isDisplayed())
             administration.click();
         mainmenu.find("*[data-obj=\"SystemParam\"]").click();
+    }
+
+    public static boolean verifyValue() {
+        String txt = $("#field_sys_value_edit").getText();
+        Pattern p = Pattern.compile(".*\"database\": true.*");
+        Matcher m = p.matcher(txt);
+        return m.find();
     }
 }

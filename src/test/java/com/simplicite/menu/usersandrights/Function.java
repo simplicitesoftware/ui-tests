@@ -2,16 +2,27 @@ package com.simplicite.menu.usersandrights;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.selector.ByText;
 import com.simplicite.utils.Component;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.*;
 
 public class Function {
 
+
+    public static void find(String name) {
+        work.find("#fct_name").setValue(name).pressEnter();
+        work.find("[data-field=\"fct_name\"]").find(byText(name)).click();
+    }
+
+    public static void setModuleName(String mdl_name) {
+        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), mdl_name);
+    }
 
     /**
      * READ | CREATE | UPDATE | DELETE | ACTION | VIEW
@@ -43,12 +54,15 @@ public class Function {
         return str + "_" + suffix;
     }
 
-    public void click() {
-        domain.click();
-        mainmenu.find("[data-obj=\"Function\"]").click();
+    public static void click() {
+        SelenideElement sub = mainmenu.find("[data-obj=\"Function\"]");
+        if (!sub.isDisplayed()) {
+            domain.click();
+        }
+        sub.click();
     }
 
-    public void createObject(String mdl_name, String field_fct_name, String field_fct_function) {
+    public static void createObject(String mdl_name, String field_fct_name, String field_fct_function) {
         work.find("#field_fct_name").setValue(field_fct_name);
         work.find("#select2-field_fct_function-container").click();
         work.find("#select2-field_fct_function-results").find("[id$=\"" + field_fct_function + "\"]").click();
@@ -60,17 +74,18 @@ public class Function {
         Grant.createObject(grp_name, mdl_name, fct_name);
     }
 
-    public static void associateGroup(String module, String fct_name, String... groups) {
+    public static void associateGroup( String... groups) {
         work.find(".objlinks").find("[data-action=\"associate-Function-grt_function_id-Group-grt_group_id\"]").click();
         SelenideElement dlgmodal = $("#dlgmodal_selectObj_Group");
         for (String group : groups) {
-            dlgmodal.find("#grp_name").setValue(group);
+            dlgmodal.find("#grp_name").setValue(group).pressEnter();
             dlgmodal.find("[data-field=\"grp_name\"]").shouldHave(Condition.textCaseSensitive(group)).click();
         }
+
         actions().moveToElement(dlgmodal.find("button[data-action=\"multiselect\"]")).click().perform();
         SelenideElement saveclose = $("#dlgmodal_create_Grant_link_ajax_Grant")
                 .find("button[data-action=\"saveclose\"]").shouldBe(Condition.visible);
-        actions().pause(Duration.ofSeconds(1)).moveToElement(saveclose).click().perform();
+        actions().pause(Duration.ofSeconds(1)).moveToElement(saveclose).click().pause(Duration.ofSeconds(1)).perform();
     }
 
     public void find(String field_fct_function, String field_fct_name) {
