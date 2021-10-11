@@ -119,7 +119,7 @@ public class BusinessObject {
         modal.find("button[data-action=\"SAVE\"]").click();
     }
 
-    private static void addButton(String areaname, String field) {
+    private static void addButton(String areaname, String type) {
         SelenideElement area;
         if (areaname == null)
             area = work.find(".dock-zone[data-dz=\"1\"]").should(Condition.exist);
@@ -127,7 +127,7 @@ public class BusinessObject {
             area = work.find("[data-areaname=\"" + areaname + "\"]").should(Condition.exist);
 
         SelenideElement bouton = area.find("button");
-        SelenideElement element = area.find("[data-menu=\"" + field + "\"]");
+        SelenideElement element = area.find("[data-menu=\"" + type + "\"]");
         while(!element.isDisplayed())
             actions().moveToElement(bouton).click().build().perform();
         element.click();
@@ -154,7 +154,7 @@ public class BusinessObject {
     }
 
     public static void addFieldUnusedJoin(String areaname, String join, String field) {
-        addButton(areaname, field);
+        addButton(areaname, "field");
 
         SelenideElement type = $("#dlgmodal_field").find("#" + join);
         type.click();
