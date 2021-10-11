@@ -122,9 +122,9 @@ public class BusinessObject {
     private static void addButton(String areaname, String field) {
         SelenideElement area;
         if (areaname == null)
-            area = work.find(".dock-zone[data-dz=\"1\"]");
+            area = work.find(".dock-zone[data-dz=\"1\"]").should(Condition.exist);
         else
-            area = work.find("[data-areaname=\"" + areaname + "\"]");
+            area = work.find("[data-areaname=\"" + areaname + "\"]").should(Condition.exist);
 
         SelenideElement bouton = area.find("button");
         SelenideElement element = area.find("[data-menu=\"" + field + "\"]");
@@ -154,15 +154,11 @@ public class BusinessObject {
     }
 
     public static void addFieldUnusedJoin(String areaname, String join, String field) {
-        SelenideElement area = work.find("[data-areaname=\"" + areaname + "\"]");
-
-        area.find("button").click();
-        area.find("[data-menu=\"field\"]").click();
+        addButton(areaname, field);
 
         SelenideElement type = $("#dlgmodal_field").find("#" + join);
         type.click();
         type.find("[data-field=\"" + field + "\"]").click();
-
     }
 
     public static void setEditorTemplate(String html) {
