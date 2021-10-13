@@ -145,7 +145,7 @@ public class BusinessObject {
     }
 
     public static void saveEditor() {
-        $("button[data-action=\"save\"]").shouldBe(not(and("Clickable", visible, enabled))).click();
+        $("button[data-action=\"save\"]").shouldBe(and("Clickable", visible, enabled)).click();
         SelenideElement element = $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").shouldBe(Condition.appear);
         actions().moveToElement(element).click(element).perform();
     }
