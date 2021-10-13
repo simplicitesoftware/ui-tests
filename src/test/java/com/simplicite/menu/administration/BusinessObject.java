@@ -15,6 +15,7 @@ import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.simplicite.menu.MainMenuProperties.*;
+import static com.codeborne.selenide.Condition.*;
 
 public class BusinessObject {
 
@@ -143,8 +144,8 @@ public class BusinessObject {
         addButton(null, "area");
     }
 
-    public static void save() {
-        $("button[data-action=\"save\"]").shouldBe(Condition.focused).click();
+    public static void saveEditor() {
+        $("button[data-action=\"save\"]").shouldBe(not(and("Clickable", visible, enabled))).click();
         SelenideElement element = $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").shouldBe(Condition.appear);
         actions().moveToElement(element).click(element).perform();
     }

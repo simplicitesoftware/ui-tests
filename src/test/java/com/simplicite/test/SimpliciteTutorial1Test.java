@@ -2,8 +2,6 @@ package com.simplicite.test;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
 import com.simplicite.menu.MainMenuProperties;
@@ -117,7 +115,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.find(SUPPLIER);
         BusinessObject.navigateToEditor();
         BusinessObject.addField(SUPPLIERAREA1, "code", "trnSupCode", 3, true, true);
-        BusinessObject.save();
+        BusinessObject.saveEditor();
     }
 
     @Test
@@ -151,7 +149,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addField(SUPPLIERAREA1, "téléphone", "trnSupTelephone", 22, false, false);
         BusinessObject.addField(SUPPLIERAREA1, "logo", "trnSupLogo", 20, false, false);
         BusinessObject.addField(SUPPLIERAREA1, "site", "trnSupSite", 10, false, false);
-        BusinessObject.save();
+        BusinessObject.saveEditor();
     }
 
     @Test
@@ -167,7 +165,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addField(PRODUCTAREA1, "nom", "trnPrdNom", 3, false, false);
         BusinessObject.addField(PRODUCTAREA1, "description", "trnPrdDescription", 13, false, false);
         BusinessObject.addField(PRODUCTAREA1, "photo", "trnPrdPhoto", 20, false, false);
-        BusinessObject.save();
+        BusinessObject.saveEditor();
     }
 
     @Test
@@ -182,7 +180,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addField(CLIENTAREA1, "mail", "trnCliMail", 12, false, false);
         BusinessObject.addField(CLIENTAREA1, "téléphone", "trnCliTelephone", 22, false, false);
         BusinessObject.addField(CLIENTAREA1, "adresse", "trnCliAdresse", 25, false, false);
-        BusinessObject.save();
+        BusinessObject.saveEditor();
     }
 
     @Test
@@ -195,7 +193,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addField(ORDERAREA1, "numéro", "trnOrdNumero", 3, true, true);
         BusinessObject.addField(ORDERAREA1, "quantité", "trnOrdQuantite", 1, true, false);
         BusinessObject.addField(ORDERAREA1, "date", "trnOrdDate", 4, false, false);
-        BusinessObject.save();
+        BusinessObject.saveEditor();
     }
 
     @Test
@@ -222,7 +220,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdStock");
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdReference");
         BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdNom");
-        BusinessObject.save();
+        BusinessObject.saveEditor();
     }
 
     @Test
@@ -255,7 +253,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.addField(ORDERAREA1, "State", FIELDORDERSTATE, 7, true, false);
         BusinessObject.modifyField(FIELDORDERSTATE);
         BusinessObject.editEnum(LISTORDERSTATE);
-        BusinessObject.save();
+        BusinessObject.saveEditor();
         BusinessObject.closeEditor();
         BusinessObject.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATE);
     }
@@ -294,10 +292,10 @@ public class SimpliciteTutorial1Test {
         BusinessObject.createObjectAssistant(ORDERTEST, ORDERTABLETEST, TRAINING, "ord", DOMAIN);
         BusinessObject.navigateToEditor();
        BusinessObject.addField(ORDERAREA1TEST, "State", FIELDORDERSTATETEST, 7, true, false);
-        BusinessObject.save();
+        BusinessObject.saveEditor();
         BusinessObject.modifyField(FIELDORDERSTATETEST);
         BusinessObject.editEnum(LISTORDERSTATE);
-        BusinessObject.save();
+        BusinessObject.saveEditor();
         BusinessObject.closeEditor();
         BusinessObject.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATETEST);
     }
