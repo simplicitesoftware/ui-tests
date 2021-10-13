@@ -174,6 +174,7 @@ public class BusinessObject {
     public static void modifyField(String field) {
         SelenideElement edit = work.find("[data-field=\"" + field + "\"]").find("[data-action=\"edit\"]");
         edit.hover().click();
+
     }
 
     public static void editEnum(String... args) {
@@ -196,6 +197,9 @@ public class BusinessObject {
         }
         SelenideElement save = dlgedit.find("[data-action=\"SAVE\"]");
         actions().moveToElement(save).click().perform();
+        //bug UI on dlgmodal didn't disapear
+        if ($("#dlgmodal").exists())
+            $("#dlgmodal").find("button[data-action=\"SAVE\"]").click();
     }
 
     public static void closeEditor() {
