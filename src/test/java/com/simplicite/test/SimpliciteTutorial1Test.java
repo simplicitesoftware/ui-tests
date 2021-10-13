@@ -251,10 +251,14 @@ public class SimpliciteTutorial1Test {
         BusinessObject.find(ORDER);
         BusinessObject.clickEditor();
         BusinessObject.addField(ORDERAREA1, "State", FIELDORDERSTATE, 7, true, false);
+        BusinessObject.saveEditor();
+
         BusinessObject.modifyField(FIELDORDERSTATE);
         BusinessObject.editEnum(LISTORDERSTATE);
+
         BusinessObject.saveEditor();
         BusinessObject.closeEditor();
+
         BusinessObject.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATE);
     }
 
