@@ -144,7 +144,7 @@ public class BusinessObject {
     }
 
     public static void save() {
-        $("button[data-action=\"save\"]").click();
+        $("button[data-action=\"save\"]").shouldBe(Condition.focused).click();
         SelenideElement element = $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").shouldBe(Condition.appear);
         actions().moveToElement(element).click(element).perform();
     }
@@ -198,8 +198,10 @@ public class BusinessObject {
         SelenideElement save = dlgedit.find("[data-action=\"SAVE\"]");
         actions().moveToElement(save).click().perform();
         //bug UI on dlgmodal didn't disapear
-        if ($("#dlgmodal").exists())
-            $("#dlgmodal").find("button[data-action=\"SAVE\"]").click();
+        if ($("#dlgmodal").exists()){
+            save = $("#dlgmodal").find("button[data-action=\"SAVE\"]");
+            actions().moveToElement(save).click().perform();
+        }
     }
 
     public static void closeEditor() {
