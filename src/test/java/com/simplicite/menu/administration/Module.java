@@ -14,7 +14,7 @@ public class Module {
         SelenideElement createassistant = work.find("*[data-action=\"ModuleCreateProcess\"]");
         createassistant.click();
 
-        SelenideElement fieldname = $("#field_mdl_name");
+        SelenideElement fieldname = $("#field_mdl_name").should(Condition.exist);
         fieldname.clear();
         fieldname.sendKeys(mdl_name);
 
