@@ -196,6 +196,7 @@ public class BusinessObject {
             }
             count++;
         }
+        System.out.println(Selenide.screenshot("src/test/resources"));
         SelenideElement save = dlgedit.find("[data-action=\"SAVE\"]");
         actions().moveToElement(save).click().perform();
         //bug UI on dlgmodal didn't disapear
