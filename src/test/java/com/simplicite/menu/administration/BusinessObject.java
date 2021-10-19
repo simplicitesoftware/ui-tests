@@ -182,6 +182,8 @@ public class BusinessObject {
         if (args.length < 3)
             throw new IllegalArgumentException();
         $("#dlgmodal").find("#editlist").click();
+        $("#dlgmodal").shouldNot(Condition.exist);
+
         SelenideElement dlgedit = $("#dlgmodal_editlist");
         int count = 0;
         for (var arg : args) {
