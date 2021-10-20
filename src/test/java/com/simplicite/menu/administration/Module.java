@@ -49,8 +49,7 @@ public class Module {
     }
 
     public static void click() {
-        administration.click();
-        mainmenu.find("*[data-obj=\"Module\"]").click();
+        clickAdmin("Module");
     }
 
     /*public void createObject(String name, String prefix) {

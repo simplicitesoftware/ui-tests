@@ -3,13 +3,12 @@ package com.simplicite.account;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
 
 public class Authentication {
 
-    /**
-     * Elements needed to login
-     **/
 
 
     /**
@@ -39,12 +38,18 @@ public class Authentication {
     }
 
     public static void changePassword(String newPassword) {
-        if ($("#auth-signin-password1").exists())
-        {
+        if ($("#auth-signin-password1").exists()) {
             $("#auth-signin-password1").setValue(newPassword);
             $("#auth-signin-password2").setValue(newPassword);
             $("#auth-signin-save").click();
         }
+
+    }
+
+    public static void changeState(String state, String codeImg) {
+        $(".logged-scope").click();
+        $(".logged-scope").find("[data-home=\""+ state + "\"]").click();
+        $(".scope-icon > img[src*=\""+ codeImg + "\"]").shouldBe(Condition.exist, Duration.ofSeconds(20));
 
     }
 }

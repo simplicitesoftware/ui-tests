@@ -2,7 +2,6 @@ package com.simplicite.menu.usersandrights;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.selector.ByText;
 import com.simplicite.utils.Component;
 
 import java.time.Duration;

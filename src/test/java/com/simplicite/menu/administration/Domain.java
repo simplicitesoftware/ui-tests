@@ -2,15 +2,21 @@ package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.selector.ByText;
+import com.simplicite.utils.Component;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.simplicite.menu.MainMenuProperties.administration;
-import static com.simplicite.menu.MainMenuProperties.work;
+import static com.simplicite.menu.MainMenuProperties.*;
 
 public class Domain{
 
-    public void click() {
-        administration.click();
+    public static void click() {
+        clickAdmin("Domain");
+    }
+
+    public static void setHomePage(String home) {
+        work.find("#field_obd_nohome_no").click();
+        Component.sendFormControl(work.find("#field_obd_view_id__viw_name"), home);
+        save();
     }
 
     public void createObject(String name) {
@@ -20,7 +26,7 @@ public class Domain{
         obdname.sendKeys(name);
     }
 
-    public void find(String name) {
+    public static void find(String name) {
         work.find("#obd_name").setValue(name).pressEnter();
         work.find("[data-field=\"obd_name\"]").find(new ByText(name)).click();
     }
