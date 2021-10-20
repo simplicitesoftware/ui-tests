@@ -2,6 +2,7 @@ package com.simplicite.menu.templateeditor;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import java.util.Arrays;
@@ -80,9 +81,8 @@ public class TemplateEditorBO extends TemplateEditor{
     public static void editEnum(String... args) {
         if (args.length < 3)
             throw new IllegalArgumentException();
+        Selenide.sleep(1000);
         $("#dlgmodal").find("#editlist").click();
-
-        $("#dlgmodal").shouldBe(hidden);
 
         SelenideElement dlgedit = $("#dlgmodal_editlist");
         int count = 0;
