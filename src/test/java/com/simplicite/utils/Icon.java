@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.simplicite.menu.MainMenuProperties.work;
 
 public enum Icon {
 
@@ -32,14 +33,13 @@ public enum Icon {
      * Add an icon to a component with the data map
      */
     public void addIcon() {
-        SelenideElement search = $("#work").find("*[data-action=\"dmsel_field_viw_icon\"][data-toggle=\"tooltip\"]");
+        SelenideElement search = work.find("[data-action*=\"dmsel_field_\"][data-toggle=\"tooltip\"]");
         search.click();
         SelenideElement selectdatamap = $("#dlgmodal_selectDatamap");
 
-        SelenideElement serachtxt = selectdatamap.find("input");
-        serachtxt.sendKeys(name + Keys.ENTER);
+        selectdatamap.find("input").sendKeys(name + Keys.ENTER);
 
-        $("#iptab0").find("*[data-tab=\"" + type + "\"]").shouldBe(Condition.visible, Duration.ofSeconds(6)).click();
+        $("#iptab0").find("[data-tab=\"" + type + "\"]").shouldBe(Condition.visible, Duration.ofSeconds(30)).click();
         SelenideElement subtable = selectdatamap.find("#iptab0_" + type);
         ElementsCollection test = subtable.findAll("img");
         test.find(Condition.visible).click();

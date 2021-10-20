@@ -23,6 +23,8 @@ public class DataStore {
     public static final String INCREASESTOCK = "IncreaseStock";
     public static final String FIELDORDERSTATE = "trnOrdState";
     public static final String REDO = "RedoLog-R";
+    public static final String HOME = "TrnHome";
+    public static final String PIVOTTABLE = "TrnTcOrders";
 
     private static final int val = 6;
     public static final String ORDERTEST = "TrnOrder" + val;
@@ -39,6 +41,12 @@ public class DataStore {
             {"TRNORDSTATE"+ val+"-VALIDATED-PROCESSING", "Back to Processing"},
             {"TRNORDSTATE"+ val+"-VALIDATED-SENT", "Send"}
     };
+    public static final String PROCESSING = "PROCESSING";
+    public static final String CANCELED = "CANCELED";
+    public static final String VALIDATED = "VALIDATED";
+    public static final String SENT = "SENT";
+    public static final String THEME = "TrnTheme";
+
     public static final int[][] LISTACCESSORDERSTATE = {{0, 1, 1, 0}, {1, 0, 1, 0}, {1, 1, 0, 1}, {0, 0, 1, 0}};
     public static final String[] LISTORDERSTATE = {"Processing", "Canceled", "Validated", "Sent"};
     public static final String[][] LISTTRADORDERSTATE = {

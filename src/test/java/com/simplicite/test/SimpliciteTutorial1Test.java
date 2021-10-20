@@ -1,12 +1,17 @@
 package com.simplicite.test;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
 import com.simplicite.menu.MainMenuProperties;
-import com.simplicite.menu.administration.*;
 import com.simplicite.menu.administration.Module;
+import com.simplicite.menu.administration.*;
+import com.simplicite.menu.domaininterface.FieldStyle;
+import com.simplicite.menu.domaininterface.PivotTable;
+import com.simplicite.menu.domaininterface.Theme;
+import com.simplicite.menu.domaininterface.Views;
+import com.simplicite.menu.templateeditor.TemplateEditorBO;
+import com.simplicite.menu.templateeditor.TemplateEditorView;
 import com.simplicite.menu.usersandrights.Function;
 import com.simplicite.menu.usersandrights.User;
 import com.simplicite.optionmenu.Cache;
@@ -19,7 +24,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.simplicite.utils.DataStore.*;
@@ -83,9 +87,7 @@ public class SimpliciteTutorial1Test {
         PROPERTIES.setProperty("password", NEW_PASSWORD);
 
         Authentication.changePassword(NEW_PASSWORD);
-        $(".logged-scope").click();
-        $(".logged-scope").find("[data-home=\"Home\"]").click();
-        $(".scope-icon > img[src*=\"code=VIEW_ADMIN\"]").shouldBe(Condition.exist, Duration.ofSeconds(20));
+
         assertTrue(Authentication.authentificationSucced(name));
     }
 
@@ -113,15 +115,17 @@ public class SimpliciteTutorial1Test {
     public void editTemplate() {
         BusinessObject.click();
         BusinessObject.find(SUPPLIER);
-        BusinessObject.navigateToEditor();
-        BusinessObject.addField(SUPPLIERAREA1, "code", "trnSupCode", 3, true, true);
-        BusinessObject.saveEditor();
+        TemplateEditorBO.navigateToEditor();
+        TemplateEditorBO.addField(SUPPLIERAREA1, "code", "trnSupCode", 3, true, true);
+        TemplateEditorBO.saveEditor();
     }
 
     @Test
     @Order(4)
     @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void createUser() {
+
+        Authentication.changeState("Home", "VIEW_ADMIN");
         User.click();
         String password = User.createUser(PROPERTIES.getProperty("firstusername"));
         User.associateGroup(SUPERADMIN);
@@ -136,6 +140,8 @@ public class SimpliciteTutorial1Test {
         assertTrue(Authentication.authentificationSucced("usertest"));
         Authentication.deconnection();
         Authentication.connect(PROPERTIES.getProperty("name"), PROPERTIES.getProperty("password"));
+
+        Authentication.changeState("ViewDesign", "design");
     }
 
     @Test
@@ -144,12 +150,12 @@ public class SimpliciteTutorial1Test {
     public void enrichModelSupplier() {
         BusinessObject.click();
         BusinessObject.find(SUPPLIER);
-        BusinessObject.clickEditor();
-        BusinessObject.addField(SUPPLIERAREA1, "nom", "trnSupNom", 3, false, false);
-        BusinessObject.addField(SUPPLIERAREA1, "téléphone", "trnSupTelephone", 22, false, false);
-        BusinessObject.addField(SUPPLIERAREA1, "logo", "trnSupLogo", 20, false, false);
-        BusinessObject.addField(SUPPLIERAREA1, "site", "trnSupSite", 10, false, false);
-        BusinessObject.saveEditor();
+        TemplateEditorBO.clickEditor();
+        TemplateEditorBO.addField(SUPPLIERAREA1, "nom", "trnSupNom", 3, false, false);
+        TemplateEditorBO.addField(SUPPLIERAREA1, "téléphone", "trnSupTelephone", 22, false, false);
+        TemplateEditorBO.addField(SUPPLIERAREA1, "logo", "trnSupLogo", 20, false, false);
+        TemplateEditorBO.addField(SUPPLIERAREA1, "site", "trnSupSite", 10, false, false);
+        TemplateEditorBO.saveEditor();
     }
 
     @Test
@@ -158,14 +164,14 @@ public class SimpliciteTutorial1Test {
     public void enrichModelProduct() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(PRODUCT, "trn_product", TRAINING, "prd", DOMAIN);
-        BusinessObject.navigateToEditor();
-        BusinessObject.addField(PRODUCTAREA1, "référence", "trnPrdReference", 3, true, true);
-        BusinessObject.addField(PRODUCTAREA1, "prix", "trnPrdPrix", 2, true, false);
-        BusinessObject.addField(PRODUCTAREA1, "stock", "trnPrdStock", 1, true, false);
-        BusinessObject.addField(PRODUCTAREA1, "nom", "trnPrdNom", 3, false, false);
-        BusinessObject.addField(PRODUCTAREA1, "description", "trnPrdDescription", 13, false, false);
-        BusinessObject.addField(PRODUCTAREA1, "photo", "trnPrdPhoto", 20, false, false);
-        BusinessObject.saveEditor();
+        TemplateEditorBO.navigateToEditor();
+        TemplateEditorBO.addField(PRODUCTAREA1, "référence", "trnPrdReference", 3, true, true);
+        TemplateEditorBO.addField(PRODUCTAREA1, "prix", "trnPrdPrix", 2, true, false);
+        TemplateEditorBO.addField(PRODUCTAREA1, "stock", "trnPrdStock", 1, true, false);
+        TemplateEditorBO.addField(PRODUCTAREA1, "nom", "trnPrdNom", 3, false, false);
+        TemplateEditorBO.addField(PRODUCTAREA1, "description", "trnPrdDescription", 13, false, false);
+        TemplateEditorBO.addField(PRODUCTAREA1, "photo", "trnPrdPhoto", 20, false, false);
+        TemplateEditorBO.saveEditor();
     }
 
     @Test
@@ -174,13 +180,13 @@ public class SimpliciteTutorial1Test {
     public void enrichModelClient() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(CLIENT, "trn_client", TRAINING, "cli", DOMAIN);
-        BusinessObject.navigateToEditor();
-        BusinessObject.addField(CLIENTAREA1, "nom", "trnCliNom", 3, true, true);
-        BusinessObject.addField(CLIENTAREA1, "prénom", "trnCliPrenom", 3, true, true);
-        BusinessObject.addField(CLIENTAREA1, "mail", "trnCliMail", 12, false, false);
-        BusinessObject.addField(CLIENTAREA1, "téléphone", "trnCliTelephone", 22, false, false);
-        BusinessObject.addField(CLIENTAREA1, "adresse", "trnCliAdresse", 25, false, false);
-        BusinessObject.saveEditor();
+        TemplateEditorBO.navigateToEditor();
+        TemplateEditorBO.addField(CLIENTAREA1, "nom", "trnCliNom", 3, true, true);
+        TemplateEditorBO.addField(CLIENTAREA1, "prénom", "trnCliPrenom", 3, true, true);
+        TemplateEditorBO.addField(CLIENTAREA1, "mail", "trnCliMail", 12, false, false);
+        TemplateEditorBO.addField(CLIENTAREA1, "téléphone", "trnCliTelephone", 22, false, false);
+        TemplateEditorBO.addField(CLIENTAREA1, "adresse", "trnCliAdresse", 25, false, false);
+        TemplateEditorBO.saveEditor();
     }
 
     @Test
@@ -189,11 +195,11 @@ public class SimpliciteTutorial1Test {
     public void enrichModelOrder() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(ORDER, "trn_order", TRAINING, "ord", DOMAIN);
-        BusinessObject.navigateToEditor();
-        BusinessObject.addField(ORDERAREA1, "numéro", "trnOrdNumero", 3, true, true);
-        BusinessObject.addField(ORDERAREA1, "quantité", "trnOrdQuantite", 1, true, false);
-        BusinessObject.addField(ORDERAREA1, "date", "trnOrdDate", 4, false, false);
-        BusinessObject.saveEditor();
+        TemplateEditorBO.navigateToEditor();
+        TemplateEditorBO.addField(ORDERAREA1, "numéro", "trnOrdNumero", 3, true, true);
+        TemplateEditorBO.addField(ORDERAREA1, "quantité", "trnOrdQuantite", 1, true, false);
+        TemplateEditorBO.addField(ORDERAREA1, "date", "trnOrdDate", 4, false, false);
+        TemplateEditorBO.saveEditor();
     }
 
     @Test
@@ -211,16 +217,16 @@ public class SimpliciteTutorial1Test {
     public void createArea() {
         BusinessObject.click();
         BusinessObject.find(ORDER);
-        BusinessObject.clickEditor();
-        BusinessObject.addRow();
-        BusinessObject.addArea();
-        BusinessObject.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliNom");
-        BusinessObject.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliPrenom");
-        BusinessObject.addArea();
-        BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdStock");
-        BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdReference");
-        BusinessObject.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdNom");
-        BusinessObject.saveEditor();
+        TemplateEditorBO.clickEditor();
+        TemplateEditorBO.addRow();
+        TemplateEditorBO.addArea();
+        TemplateEditorBO.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliNom");
+        TemplateEditorBO.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliPrenom");
+        TemplateEditorBO.addArea();
+        TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdNom");
+        TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdReference");
+        TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdStock");
+        TemplateEditorBO.saveEditor();
     }
 
     @Test
@@ -239,42 +245,44 @@ public class SimpliciteTutorial1Test {
     public void changeTemplateHtml() {
         BusinessObject.click();
         BusinessObject.find(ORDER);
-        BusinessObject.clickEditor();
-        BusinessObject.setEditorTemplate(ORDERTEMPLATEHTML);
-        BusinessObject.closeEditor();
-    }
-    @Test
-    @Order(10)
-    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
-    public void createDiagram(){
-        BusinessObject.click();
-        BusinessObject.find(ORDER);
-        BusinessObject.clickEditor();
-        BusinessObject.addField(ORDERAREA1, "State", FIELDORDERSTATE, 7, true, false);
-        BusinessObject.saveEditor();
-
-        BusinessObject.modifyField(FIELDORDERSTATE);
-        BusinessObject.editEnum(LISTORDERSTATE);
-
-        BusinessObject.saveEditor();
-        BusinessObject.closeEditor();
-
-        BusinessObject.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATE);
+        TemplateEditorBO.clickEditor();
+        TemplateEditorBO.setEditorTemplate(ORDERTEMPLATEHTML);
+        TemplateEditorBO.closeEditor();
     }
 
     @Test
     @Order(10)
     @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
-    public void createHistoric(){
+    public void createDiagram() {
         BusinessObject.click();
         BusinessObject.find(ORDER);
-        BusinessObject.accessToOption();
+        TemplateEditorBO.clickEditor();
+        TemplateEditorBO.addField(ORDERAREA1, "State", FIELDORDERSTATE, 7, true, false);
+        TemplateEditorBO.saveEditor();
+
+        TemplateEditorBO.modifyField(FIELDORDERSTATE);
+        TemplateEditorBO.editEnum(LISTORDERSTATE);
+
+        TemplateEditorBO.saveEditor();
+        TemplateEditorBO.closeEditor();
+
+        TemplateEditorBO.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATE);
+    }
+
+    @Test
+    @Order(11)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void createHistoric() {
+        BusinessObject.click();
+        BusinessObject.find(ORDER);
+        TemplateEditorBO.accessToOption();
         MainMenuProperties.save();
 
         SystemProperties.click();
         SystemProperties.find("LOG_ACTIVITY");
         assertTrue(SystemProperties.verifyValue());
 
+        Authentication.changeState("Home", "VIEW_ADMIN");
         ModuleActive.click();
         ModuleActive.showAll();
         Function.click();
@@ -287,20 +295,85 @@ public class SimpliciteTutorial1Test {
 
         ModuleActive.click();
         ModuleActive.select("Training");
+        Authentication.changeState("ViewDesign", "design");
+    }
 
+    @Test
+    @Order(12)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void createPivotTable() {
+        BusinessObject.click();
+        BusinessObject.find(ORDER);
+        TemplateEditorBO.clickEditor();
+        TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdSupId");
+        TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdSupId__trnSupNom");
+        TemplateEditorBO.saveEditor();
+
+        PivotTable.click();
+        PivotTable.createPivotTable(PIVOTTABLE, ORDER, TRAINING);
+        PivotTable.createPivotAxis(ORDER, "trnSupNom", 'C', 10);
+        PivotTable.createPivotAxis(ORDER, "trnPrdNom", 'C', 20);
+        PivotTable.createPivotAxis(ORDER, FIELDORDERSTATE, 'L', 30);
+    }
+
+    @Test
+    @Order(13)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void createView() {
+        Views.click();
+        Views.createView(HOME, TRAINING, 10);
+        TemplateEditorView.navigateToEditor();
+        TemplateEditorView.modifyArea("1:=");
+        TemplateEditorView.setCrossTable(PIVOTTABLE, ORDER);
+
+        TemplateEditorView.addField();
+        TemplateEditorView.setProcessSearch(HOME, ORDER);
+        TemplateEditorView.modifyArea("2");
+        TemplateEditorView.setProcessSearchFilter(FIELDORDERSTATE, "PROCESSING");
+
+        TemplateEditorView.saveEditor();
+
+        Domain.click();
+        Domain.find(DOMAIN);
+        Domain.setHomePage(HOME);
+    }
+
+    @Test
+    @Order(14)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void createTheme() {
+        Theme.click();
+        Theme.createTheme(THEME);
+
+        Views.click();
+        Views.find(HOME);
+        Views.setTheme(THEME);
+
+        FieldStyle.click();
+        FieldStyle.createFieldStyle(ORDER, FIELDORDERSTATE, PROCESSING, "orangbg");
+        FieldStyle.createFieldStyle(ORDER, FIELDORDERSTATE, CANCELED, "greybg");
+        FieldStyle.createFieldStyle(ORDER, FIELDORDERSTATE, VALIDATED, "greenbg");
+        FieldStyle.createFieldStyle(ORDER, FIELDORDERSTATE, SENT, "bluebg");
+
+        ListOfValue.click();
+        ListOfValue.find(FIELDORDERSTATE);
+        ListOfValue.modifyListCodeIcon(PROCESSING, "icon/color/btn_orange");
+        ListOfValue.modifyListCodeIcon(CANCELED, "icon/color/btn_grey");
+        ListOfValue.modifyListCodeIcon(VALIDATED, "icon/color/btn_green");
+        ListOfValue.modifyListCodeIcon(SENT, "icon/color/btn_blue");
     }
     @Disabled
     @Test
-    public void createObject(){
+    public void createObject() {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(ORDERTEST, ORDERTABLETEST, TRAINING, "ord", DOMAIN);
-        BusinessObject.navigateToEditor();
-       BusinessObject.addField(ORDERAREA1TEST, "State", FIELDORDERSTATETEST, 7, true, false);
-        BusinessObject.saveEditor();
-        BusinessObject.modifyField(FIELDORDERSTATETEST);
-        BusinessObject.editEnum(LISTORDERSTATE);
-        BusinessObject.saveEditor();
-        BusinessObject.closeEditor();
-        BusinessObject.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATETEST);
+        TemplateEditorBO.navigateToEditor();
+        TemplateEditorBO.addField(ORDERAREA1TEST, "State", FIELDORDERSTATETEST, 7, true, false);
+        TemplateEditorBO.saveEditor();
+        TemplateEditorBO.modifyField(FIELDORDERSTATETEST);
+        TemplateEditorBO.editEnum(LISTORDERSTATE);
+        TemplateEditorBO.saveEditor();
+        TemplateEditorBO.closeEditor();
+        TemplateEditorBO.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATETEST);
     }
 }

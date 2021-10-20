@@ -1,5 +1,6 @@
 package com.simplicite.menu;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -16,6 +17,7 @@ public class MainMenuProperties {
     public static SelenideElement work = $("#work");
     public static SelenideElement administration = mainmenu.find("*[data-domain=\"DomainAdmin\"]");
     public static SelenideElement domain = mainmenu.find("[data-domain=\"DomainGrant\"]");
+    public final static SelenideElement domaininterface = mainmenu.find("[data-domain=\"DomainInterface\"]");
 
     /**
      * Save the component in the menu of creation
@@ -27,15 +29,17 @@ public class MainMenuProperties {
     /**
      * Save an close the component in the menu of creation
      */
-    void saveAndClose() {
+    public static void saveAndClose() {
         $("button[data-action=\"saveclose\"]").click();
     }
+
     void naviguateToCreate() {
         $("button[data-action=\"create\"]").click();
     }
 
     public static void next() {
-        work.find("*[data-action=\"validate\"]").click();
+        work.find("button[data-action=\"validate\"]").click();
+        Selenide.sleep(1000);
     }
 
     /**
@@ -51,5 +55,23 @@ public class MainMenuProperties {
         $("button[data-action=\"close\"]").click();
     }
 
-    public static void create(){ work.find("button[data-action=\"create\"]").click(); }
+    public static void create() {
+        work.find("button[data-action=\"create\"]").click();
+    }
+
+    public static void clickInterface(String menu) {
+        domaininterface.scrollIntoView(false);
+        SelenideElement element = mainmenu.find("[data-obj=\"" + menu + "\"]");
+        if (!element.isDisplayed())
+            domaininterface.click();
+        element.click();
+    }
+
+    public static void clickAdmin(String menu) {
+        administration.scrollIntoView(false);
+        SelenideElement element = mainmenu.find("[data-obj=\"" + menu + "\"]");
+        if (!element.isDisplayed())
+            administration.click();
+        element.click();
+    }
 }

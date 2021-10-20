@@ -57,7 +57,7 @@ public class SimpliciteTutorial2Test {
         click(DOMAIN, CLIENT);
         createClient("", "0000000000", "simplicite@demo.fr", "Robot", "Cop");
         click(DOMAIN, ORDER);
-        createOrder("1548532", "Robot", "21/03/4200", "1", "15202553");
+        createOrder("1548532", "Cop", "21/03/4200", "1", "15202553");
     }
 
     @Test

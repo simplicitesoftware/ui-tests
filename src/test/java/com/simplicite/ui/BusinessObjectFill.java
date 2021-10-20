@@ -49,12 +49,12 @@ public class BusinessObjectFill {
         save();
     }
 
-    public static void createOrder(String trnprdref, String trncliprenom, String date, String quantite, String numero){
+    public static void createOrder(String trnprdref, String trncliNom, String date, String quantite, String numero){
         create();
         $("#field_trnOrdPrdId__trnPrdNom").click();
         find("trnPrdReference", trnprdref);
-        $("#field_trnOrdCliId__trnCliPrenom").click();
-        find("trnCliPrenom", trncliprenom);
+        $("#field_trnOrdCliId__trnCliNom").click();
+        find("trnCliNom", trncliNom);
 
         $("#field_trnOrdDate").setValue(date);
         $("#field_trnOrdQuantite").setValue(quantite);

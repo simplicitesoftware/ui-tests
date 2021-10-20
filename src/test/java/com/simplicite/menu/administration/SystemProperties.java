@@ -16,9 +16,7 @@ public class SystemProperties {
     }
 
     public static void click() {
-        if (!administration.isDisplayed())
-            administration.click();
-        mainmenu.find("*[data-obj=\"SystemParam\"]").click();
+        clickAdmin("SystemParam");
     }
 
     public static boolean verifyValue() {
