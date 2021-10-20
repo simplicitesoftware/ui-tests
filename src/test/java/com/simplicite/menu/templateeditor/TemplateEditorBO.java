@@ -81,7 +81,6 @@ public class TemplateEditorBO extends TemplateEditor{
     public static void editEnum(String... args) {
         if (args.length < 3)
             throw new IllegalArgumentException();
-        Selenide.sleep(1000);
         $("#dlgmodal").find("#editlist").click();
 
         SelenideElement dlgedit = $("#dlgmodal_editlist");

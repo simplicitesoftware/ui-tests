@@ -2,6 +2,7 @@ package com.simplicite.menu.templateeditor;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 
@@ -64,11 +65,13 @@ public class TemplateEditor {
     public static void modifyArea(String area) {
         SelenideElement edit = work.find(".area[data-area=\"" + area + "\"]").find("[data-action=\"edit\"]");
         edit.hover().click();
+        Selenide.sleep(1000);
     }
 
     public static void modifyField(String field) {
         SelenideElement edit = work.find("[data-field=\"" + field + "\"]").find("[data-action=\"edit\"]");
         edit.hover().click();
+        Selenide.sleep(1000);
     }
 
     public static void closeEditor() {
