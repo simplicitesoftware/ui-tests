@@ -36,7 +36,7 @@ public class TemplateEditor {
 
         SelenideElement element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         while(!element.isDisplayed()){
-            bouton.shouldBe(visible).hover().click();
+            bouton.hover().click();
         }
         element.click();
     }
