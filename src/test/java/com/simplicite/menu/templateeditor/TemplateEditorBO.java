@@ -81,7 +81,9 @@ public class TemplateEditorBO extends TemplateEditor{
     public static void editEnum(String... args) {
         if (args.length < 3)
             throw new IllegalArgumentException();
+
         $("#dlgmodal").find("#editlist").click();
+        $("#dlgmodal").shouldNot(exist);
 
         SelenideElement dlgedit = $("#dlgmodal_editlist");
         int count = 0;

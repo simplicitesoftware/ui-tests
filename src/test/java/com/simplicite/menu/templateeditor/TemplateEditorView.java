@@ -17,6 +17,11 @@ public class TemplateEditorView extends TemplateEditor {
         actions().moveToElement(element).pause(1).click(element).perform();
     }
 
+    public static void saveDlgmodal(){
+        SelenideElement dlgmodal = $("#dlgmodal");
+        dlgmodal.find("[data-action=\"SAVE\"]").click();
+        dlgmodal.shouldNot(exist);
+    }
     /**
      * @param type L -> Login
      *             D -> Date
@@ -42,7 +47,8 @@ public class TemplateEditorView extends TemplateEditor {
         SelenideElement dlgmodal = $("#dlgmodal");
         dlgmodal.find("#sname").setValue(name);
         dlgmodal.find("#sobj").setValue(object);
-        dlgmodal.find("[data-action=\"SAVE\"]").click();
+        
+        saveDlgmodal();
     }
 
     public static void setCrossTable(String name, String object){
@@ -52,7 +58,7 @@ public class TemplateEditorView extends TemplateEditor {
         dlgmodal.find("#ctobj").setValue(object);
 
         dlgmodal.find("[for=\"ztable\"]").parent().find(".slider").click();
-        dlgmodal.find("[data-action=\"SAVE\"]").click();
+        saveDlgmodal();
     }
 
     public static void addField() {
@@ -66,6 +72,6 @@ public class TemplateEditorView extends TemplateEditor {
         dlgmodal.find(".sfield").selectOptionByValue(field);
         dlgmodal.find(".sval").setValue(value);
 
-        dlgmodal.find("[data-action=\"SAVE\"]").click();
+        saveDlgmodal();
     }
 }

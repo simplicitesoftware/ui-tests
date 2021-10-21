@@ -71,7 +71,7 @@ public class TemplateEditor {
     public static void modifyField(String field) {
         SelenideElement edit = work.find("[data-field=\"" + field + "\"]").find("[data-action=\"edit\"]");
         edit.hover().click();
-        Selenide.sleep(1000);
+        //Selenide.sleep(1000);
     }
 
     public static void closeEditor() {

@@ -23,9 +23,11 @@ public class Link {
         work.find("#field_obf_field_id__fld_required").click();
         MainMenuProperties.next();
         SelenideElement container = $(".container-table");
+
         for (var a: fieldstolink) {
             Field.find(a);
         }
+
         MainMenuProperties.next();
         MainMenuProperties.next();
     }
