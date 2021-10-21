@@ -3,6 +3,7 @@ package com.simplicite.test;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
+import com.simplicite.ui.Diagram;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,6 +38,7 @@ public class SimpliciteTutorial2Test {
         Configuration.pageLoadTimeout = Integer.parseInt(PROPERTIES.getProperty("pageLoadTimeout"));
         Configuration.timeout = Integer.parseInt(PROPERTIES.getProperty("timeout"));
     }
+
     @BeforeEach
     public void setUp() {
         open(PROPERTIES.getProperty("url"));
@@ -71,7 +73,17 @@ public class SimpliciteTutorial2Test {
         switchTo().alert().accept();
     }
 
-
+    @Test
+    @Order(1)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void verifyDiagram() {
+        click(DOMAIN, ORDER);
+        search("trnPrdReference", "15202553");
+        Diagram.verifyState(PROCESSING);
+        performAction(INCREASESTOCK);
+        assertEquals(switchTo().alert().getText(), "To be implemented...");
+        switchTo().alert().accept();
+    }
 
 
 }

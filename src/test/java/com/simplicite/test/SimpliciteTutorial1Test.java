@@ -44,7 +44,8 @@ public class SimpliciteTutorial1Test {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Configuration.browserSize = PROPERTIES.getProperty("browsersize");
+        //Configuration.browserSize = PROPERTIES.getProperty("browsersize");
+        Configuration.startMaximized = true;
         Configuration.browser = PROPERTIES.getProperty("browser");
         Configuration.headless = PROPERTIES.getProperty("headless").equals("true");
         Configuration.savePageSource = false;

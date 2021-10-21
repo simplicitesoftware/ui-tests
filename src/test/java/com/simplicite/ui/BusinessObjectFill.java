@@ -13,9 +13,12 @@ public class BusinessObjectFill {
 
     public static void click(String domaine, String name) {
         var domainelement = $("[data-domain=\"" + domaine + "\"]");
-        if (!domainelement.isEnabled())
+
+        domainelement.scrollIntoView(false);
+        SelenideElement element = $("[data-obj=\"" + name + "\"]");
+        if (!element.isDisplayed())
             domainelement.click();
-        $("[data-obj=\"" + name + "\"]").click();
+        element.click();
     }
 
     public static void createSupplier(String site, String logo, String telephone, String nom, String code){
