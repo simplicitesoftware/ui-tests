@@ -77,7 +77,7 @@ public class TemplateEditor {
         edit.hover().click();
         $("#dlgmodal").shouldBe(cssClass("show"));
 
-        //Selenide.sleep(1000);
+        Selenide.sleep(1000);
     }
 
     public static void closeEditor() {
