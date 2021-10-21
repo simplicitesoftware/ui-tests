@@ -75,6 +75,8 @@ public class TemplateEditor {
     public static void modifyField(String field) {
         SelenideElement edit = work.find("[data-field=\"" + field + "\"]").find("[data-action=\"edit\"]");
         edit.hover().click();
+        $("#dlgmodal").shouldBe(cssClass("show"));
+
         //Selenide.sleep(1000);
     }
 
