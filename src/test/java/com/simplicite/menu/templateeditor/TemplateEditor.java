@@ -31,10 +31,12 @@ public class TemplateEditor {
             area = work.find("[data-areaname=\"" + areaname + "\"]").should(Condition.exist);
 
         SelenideElement bouton = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
+
         bouton.scrollIntoView(false);
+
         SelenideElement element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         while(!element.isDisplayed()){
-            bouton.hover().click();
+            bouton.shouldBe(visible).hover().click();
         }
         element.click();
     }
