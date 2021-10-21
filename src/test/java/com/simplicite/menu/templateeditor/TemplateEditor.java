@@ -9,6 +9,8 @@ import com.simplicite.menu.MainMenuProperties;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.work;
@@ -65,7 +67,7 @@ public class TemplateEditor {
     public static void modifyArea(String area) {
         SelenideElement edit = work.find(".area[data-area=\"" + area + "\"]").find("[data-action=\"edit\"]");
         edit.hover().click();
-        Selenide.sleep(1000);
+        $("#dlgmodal").shouldBe(cssClass("show"));
     }
 
     public static void modifyField(String field) {
