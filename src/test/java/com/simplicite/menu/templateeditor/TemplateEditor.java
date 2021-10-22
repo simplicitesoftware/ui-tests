@@ -32,7 +32,7 @@ public class TemplateEditor {
 
         SelenideElement bouton = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
 
-        Selenide.executeJavaScript("arguments[0].scrollIntoView({behavior: \"instant\", block: \"center\", inline: \"nearest\"})", area);
+        area.scrollIntoView("{behavior: \"instant\", block: \"center\", inline: \"nearest\"}");
 
         SelenideElement element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         while(!element.isDisplayed()){
