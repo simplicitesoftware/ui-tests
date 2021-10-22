@@ -1,6 +1,7 @@
 package com.simplicite.menu.templateeditor;
 
 import com.codeborne.selenide.SelenideElement;
+import com.simplicite.utils.Component;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.enabled;
@@ -17,11 +18,7 @@ public class TemplateEditorView extends TemplateEditor {
         actions().moveToElement(element).pause(1).click(element).perform();
     }
 
-    public static void saveDlgmodal(){
-        SelenideElement dlgmodal = $("#dlgmodal");
-        dlgmodal.find("[data-action=\"SAVE\"]").click();
-        dlgmodal.shouldNot(exist);
-    }
+
     /**
      * @param type L -> Login
      *             D -> Date

@@ -5,6 +5,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
+import com.simplicite.utils.Component;
 
 import java.time.Duration;
 
@@ -84,4 +85,7 @@ public class TemplateEditor {
         MainMenuProperties.close();
     }
 
+    public static void saveDlgmodal(){
+        Component.clickOnButtonEndDlgmodal("[data-action=\"SAVE\"]");
+    }
 }
