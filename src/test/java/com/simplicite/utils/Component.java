@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.actions;
 public class Component {
     public static void sendFormControl(SelenideElement selenideElement, String name) {
 
-        actions().moveToElement(selenideElement).click().keyDown(Keys.CONTROL).sendKeys("a")
+        actions().moveToElement(selenideElement).click().sendKeys(Keys.ENTER).keyDown(Keys.CONTROL).sendKeys("a")
                 .keyUp(Keys.CONTROL).sendKeys(Keys.DELETE).sendKeys(name).pause(Duration.ofSeconds(1)).sendKeys(Keys.ENTER).perform();
     }
 

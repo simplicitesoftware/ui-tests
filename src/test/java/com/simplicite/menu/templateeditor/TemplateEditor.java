@@ -32,11 +32,11 @@ public class TemplateEditor {
 
         SelenideElement bouton = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
 
-        area.scrollIntoView("{behavior: \"instant\", block: \"center\", inline: \"nearest\"}");
+        area.scrollIntoView(true);
 
         SelenideElement element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         while(!element.isDisplayed()){
-            bouton.hover().click();
+            actions().moveToElement(bouton).click().perform();
         }
         element.click();
     }

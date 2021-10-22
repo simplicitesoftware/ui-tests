@@ -77,9 +77,7 @@ public class Module {
                 "> div.dropdown.show > ul > li[data-action=\"ModuleDelete\"]").click();
 
         //Bad access with the css selector need to click two times
-
-        $("button[data-action=\"YES\"]").click();
-        $("button[data-action=\"YES\"]").click();
+        Component.clickOnButtonEndDlgmodal("button[data-action=\"YES\"]");
 
         work.find("button.btn-primary").shouldBe(Condition.visible).click();
     }

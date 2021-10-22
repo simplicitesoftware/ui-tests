@@ -25,8 +25,10 @@ public class User{
         String[] split = alert.split(": ");
         String password = split[1];
         work.find("button[data-action=\"UserStatusActivate\"]").click();
-        $("button[data-action=\"YES\"]").click();
-        $("button[data-action=\"YES\"]").click();
+
+
+        Component.clickOnButtonEndDlgmodal("button[data-action=\"YES\"]");
+
         return password;
     }
 
