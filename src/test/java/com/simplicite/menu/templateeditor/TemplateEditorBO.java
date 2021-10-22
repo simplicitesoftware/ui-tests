@@ -118,8 +118,8 @@ public class TemplateEditorBO extends TemplateEditor{
             }
         }
         next();
-        ElementsCollection list = work.find(byText(group)).parent().findAll("input[type=\"checkbox\"]");
-        list.forEach(e -> e.click());
+        ElementsCollection list = work.find(byText(group)).parent().findAll("input[type=\"checkbox\"]").filterBy(visible);
+        list.forEach(SelenideElement::click);
         next();
         Arrays.stream(trad).forEach(e -> work.find("[name*=\"EN\"][value=\"" + e[0] + "\"]").setValue(e[1]));
         next();
