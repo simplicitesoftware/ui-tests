@@ -1,6 +1,7 @@
 package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
+import com.simplicite.utils.Component;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +17,7 @@ public class SystemProperties {
     }
 
     public static void click() {
-        clickAdmin("SystemParam");
+        Component.clickMenu(administration,"SystemParam");
     }
 
     public static boolean verifyValue() {

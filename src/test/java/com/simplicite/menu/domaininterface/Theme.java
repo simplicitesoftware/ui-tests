@@ -1,13 +1,14 @@
 package com.simplicite.menu.domaininterface;
 
 import com.codeborne.selenide.Condition;
+import com.simplicite.utils.Component;
 
 import static com.simplicite.menu.MainMenuProperties.*;
 
 public class Theme {
 
     public static void click() {
-        clickInterface("Theme");
+        Component.clickMenu(domaininterface,"Theme");
     }
 
     public static void createTheme(String name){

@@ -10,7 +10,7 @@ import static com.simplicite.menu.MainMenuProperties.*;
 public class Domain{
 
     public static void click() {
-        clickAdmin("Domain");
+        Component.clickMenu(administration,"Domain");
     }
 
     public static void setHomePage(String home) {

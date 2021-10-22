@@ -11,7 +11,7 @@ import static com.simplicite.menu.MainMenuProperties.*;
 public class Action {
 
     public static void click() {
-        clickAdmin("Action");
+        Component.clickMenu(administration,"Action");
     }
 
     public static void createAction(String name, String module,String url){

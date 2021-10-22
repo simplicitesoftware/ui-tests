@@ -54,11 +54,7 @@ public class Function {
     }
 
     public static void click() {
-        SelenideElement sub = mainmenu.find("[data-obj=\"Function\"]");
-        if (!sub.isDisplayed()) {
-            domain.click();
-        }
-        sub.click();
+        Component.clickMenu(domain,"Function");
     }
 
     public static void createObject(String mdl_name, String field_fct_name, String field_fct_function) {

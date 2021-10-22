@@ -2,6 +2,7 @@ package com.simplicite.menu.administration;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.simplicite.utils.Component;
 
 import static com.codeborne.selenide.Selectors.byCssSelector;
 import static com.codeborne.selenide.Selectors.byText;
@@ -49,7 +50,7 @@ public class Module {
     }
 
     public static void click() {
-        clickAdmin("Module");
+        Component.clickMenu(administration,"Module");
     }
 
     /*public void createObject(String name, String prefix) {

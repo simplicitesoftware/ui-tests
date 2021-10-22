@@ -11,7 +11,8 @@ public class Diagram {
     }
 
     public static void switchProcessingState(String state) {
-        Component.clickOnDlgmodal("button[data-state=\"" + state + "\"]");
+        $("button[data-state=\"" + state + "\"]").click();
+        Component.clickOnButtonEndDlgmodal("button[data-action=\"YES\"]");
         verifyState(state);
     }
 }

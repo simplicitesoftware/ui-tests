@@ -11,7 +11,7 @@ import static com.simplicite.menu.MainMenuProperties.*;
 public class PivotTable {
 
     public static void click() {
-        clickInterface("Crosstab");
+        Component.clickMenu(domaininterface,"Crosstab");
     }
 
     public static void createPivotTable(String name, String code, String module){

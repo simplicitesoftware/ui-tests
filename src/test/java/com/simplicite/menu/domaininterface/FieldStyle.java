@@ -11,7 +11,7 @@ import static com.simplicite.menu.MainMenuProperties.*;
 public class FieldStyle {
 
     public static void click() {
-        clickInterface("FieldStyle");
+        Component.clickMenu(domaininterface,"FieldStyle");
     }
 
     public static void find(String name) {

@@ -12,7 +12,7 @@ public class BusinessObject {
     public SelenideElement objectbutton = mainmenu.find("[data-obj=\"ObjectInternal\"]");
 
     public static void click() {
-        clickAdmin("ObjectInternal");
+        Component.clickMenu(administration,"ObjectInternal");
     }
 
     public static void createObjectAssistant(String obj_name, String obj_table, String mdl_name, String prefix, String dmn_name) {

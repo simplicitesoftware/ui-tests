@@ -1,25 +1,15 @@
 package com.simplicite.ui;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.actions;
+import static com.codeborne.selenide.Selenide.*;
 import static com.simplicite.menu.MainMenuProperties.create;
 import static com.simplicite.menu.MainMenuProperties.save;
 
 public class BusinessObjectFill {
-
-    public static void click(String domaine, String name) {
-        var domainelement = $("[data-domain=\"" + domaine + "\"]");
-
-        domainelement.scrollIntoView(false);
-        SelenideElement element = $("[data-obj=\"" + name + "\"]");
-        if (!element.isDisplayed())
-            domainelement.click();
-        element.click();
-    }
 
     public static void createSupplier(String site, String logo, String telephone, String nom, String code){
         create();
@@ -70,9 +60,7 @@ public class BusinessObjectFill {
         $("[data-field=\"" + id+ "\"]").click();
     }
 
-    public static void search(String id, String idtext) {
-        $("[data-field=\"" + id+ "\"]").click();
-    }
+
 
     public static void performAction(String name) {
         $("[data-action=\"" + name + "\"]").click();

@@ -9,7 +9,7 @@ import static com.simplicite.menu.MainMenuProperties.*;
 public class ListOfValue {
 
     public static void click() {
-        clickAdmin("FieldList");
+        Component.clickMenu(administration,"FieldList");
     }
 
     public static void find(String name) {

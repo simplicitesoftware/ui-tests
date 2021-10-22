@@ -4,6 +4,8 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
 import com.simplicite.ui.Diagram;
+import com.simplicite.ui.Navigation;
+import com.simplicite.utils.Component;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +15,7 @@ import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.simplicite.ui.BusinessObjectFill.*;
+import static com.simplicite.ui.Navigation.*;
 import static com.simplicite.utils.DataStore.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -52,13 +55,13 @@ public class SimpliciteTutorial2Test {
     @Order(0)
     @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void enrichUI() {
-        click(DOMAIN, SUPPLIER);
+        Component.clickMenu(DOMAIN, SUPPLIER);
         createSupplier("https://simplicite.fr/", "test", "0000000000", "simplicite", "simpliciteeu");
-        click(DOMAIN, PRODUCT);
+        Component.clickMenu(DOMAIN, PRODUCT);
         createProduct("simple test", "demoui", "1", "50000", "1548532", "simpliciteeu");
-        click(DOMAIN, CLIENT);
+        Component.clickMenu(DOMAIN, CLIENT);
         createClient("", "0000000000", "simplicite@demo.fr", "Robot", "Cop");
-        click(DOMAIN, ORDER);
+        Component.clickMenu(DOMAIN, ORDER);
         createOrder("1548532", "Cop", "21/03/4200", "1", "15202553");
     }
 
@@ -66,8 +69,8 @@ public class SimpliciteTutorial2Test {
     @Order(1)
     @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void activateAction() {
-        click(DOMAIN, PRODUCT);
-        search("trnPrdReference", "15202553");
+        Component.clickMenu(DOMAIN, PRODUCT);
+        search("trnPrdReference", "1548532");
         performAction(INCREASESTOCK);
         assertEquals(switchTo().alert().getText(), "To be implemented...");
         switchTo().alert().accept();
@@ -77,13 +80,19 @@ public class SimpliciteTutorial2Test {
     @Order(1)
     @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void verifyDiagram() {
-        click(DOMAIN, ORDER);
-        search("trnPrdReference", "15202553");
+        Navigation.clickState(DOMAIN, ORDER, "");
+        search("trnOrdNumero", "15202553");
         Diagram.verifyState(PROCESSING);
-        performAction(INCREASESTOCK);
-        assertEquals(switchTo().alert().getText(), "To be implemented...");
-        switchTo().alert().accept();
+        Diagram.switchProcessingState(CANCELED);
+        Diagram.switchProcessingState(PROCESSING);
+        Diagram.switchProcessingState(VALIDATED);
+        Diagram.switchProcessingState(CANCELED);
+        Diagram.switchProcessingState(VALIDATED);
+        Diagram.switchProcessingState(SENT);
+        Diagram.switchProcessingState(VALIDATED);
     }
+
+
 
 
 }

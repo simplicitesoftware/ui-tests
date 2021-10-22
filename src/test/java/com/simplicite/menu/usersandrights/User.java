@@ -2,6 +2,7 @@ package com.simplicite.menu.usersandrights;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.simplicite.utils.Component;
 
 import java.time.Duration;
 
@@ -12,15 +13,12 @@ import static com.simplicite.menu.MainMenuProperties.*;
 public class User{
 
     public static void click() {
-        domain.click();
+        Component.clickMenu(domain,"User");
+        $("[data-obj=\"User\"][data-state=\"\"]").click();
     }
 
     public static String createUser(String name) {
-        SelenideElement user = mainmenu.find("[data-obj=\"User\"]");
-        user.click();
-        mainmenu.find("[data-obj=\"User\"][data-state=\"\"]").click();
         work.find("button[data-action=\"create\"]").click();
-
         work.find("#field_usr_login").setValue(name);
         save();
         String alert = work.find("span.msg-label").text();

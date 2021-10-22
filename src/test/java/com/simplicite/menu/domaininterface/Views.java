@@ -12,7 +12,7 @@ import static com.simplicite.menu.MainMenuProperties.*;
 public class Views {
 
     public static void click() {
-        clickInterface("View");
+        Component.clickMenu(domaininterface,"View");
     }
 
     public static void createView(String name, String modulename, int order){
