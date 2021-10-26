@@ -4,7 +4,9 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
 import com.simplicite.ui.Diagram;
+import com.simplicite.ui.Historic;
 import com.simplicite.ui.Navigation;
+import com.simplicite.ui.PivotTable;
 import com.simplicite.utils.Component;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIf;
@@ -15,7 +17,7 @@ import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.simplicite.ui.BusinessObjectFill.*;
-import static com.simplicite.ui.Navigation.*;
+import static com.simplicite.ui.Navigation.search;
 import static com.simplicite.utils.DataStore.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -77,7 +79,7 @@ public class SimpliciteTutorial2Test {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
     public void verifyDiagram() {
         Navigation.clickState(DOMAIN, ORDER, "");
@@ -92,7 +94,21 @@ public class SimpliciteTutorial2Test {
         Diagram.switchProcessingState(VALIDATED);
     }
 
+    @Test
+    @Order(3)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void verifyHistoric() {
+        Navigation.clickState(DOMAIN, ORDER, "");
+        search("trnOrdNumero", "15202553");
+        Historic.verifyHistoric("usertest","15202553", "field_trnOrdQuantite", "6");
 
+    }
 
-
+    @Test
+    @Order(4)
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void verifyPivotTable() {
+        Navigation.clickState(DOMAIN, ORDER, "");
+        PivotTable.verifyPivotTable(PIVOTTABLE);
+    }
 }
