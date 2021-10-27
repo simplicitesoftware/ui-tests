@@ -363,18 +363,4 @@ public class SimpliciteTutorial1Test {
         ListOfValue.modifyListCodeIcon(VALIDATED, "icon/color/btn_green");
         ListOfValue.modifyListCodeIcon(SENT, "icon/color/btn_blue");
     }
-    @Disabled
-    @Test
-    public void createObject() {
-        BusinessObject.click();
-        BusinessObject.createObjectAssistant(ORDERTEST, ORDERTABLETEST, TRAINING, "ord", DOMAIN);
-        TemplateEditorBO.navigateToEditor();
-        TemplateEditorBO.addField(ORDERAREA1TEST, "State", FIELDORDERSTATETEST, 7, true, false);
-        TemplateEditorBO.saveEditor();
-        TemplateEditorBO.modifyField(FIELDORDERSTATETEST);
-        TemplateEditorBO.editEnum(LISTORDERSTATE);
-        TemplateEditorBO.saveEditor();
-        TemplateEditorBO.closeEditor();
-        TemplateEditorBO.addStateModel(LISTACCESSORDERSTATE, SUPERADMIN, LISTTRADORDERSTATETEST);
-    }
 }
