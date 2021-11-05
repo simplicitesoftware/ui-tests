@@ -52,6 +52,7 @@ public class SimpliciteTutorial1Test {
         Configuration.pageLoadTimeout = Integer.parseInt(PROPERTIES.getProperty("pageLoadTimeout"));
         Configuration.timeout = Integer.parseInt(PROPERTIES.getProperty("timeout"));
         Configuration.pollingInterval = Integer.parseInt(PROPERTIES.getProperty("pollingInterval"));
+        initUser();
     }
 
     @AfterAll
@@ -68,28 +69,30 @@ public class SimpliciteTutorial1Test {
     @BeforeEach
     public void setUp() {
         open(PROPERTIES.getProperty("url"));
-        if ($("#auth-main").exists()) {
-            Authentication.connect(PROPERTIES.getProperty("name"), PROPERTIES.getProperty("password"));
+        int count = 0;
+        while (Authentication.isAuthentificationPage() && count < 5 && !$(".auth-signin-error").exists()) {
+            Authentication.connect(USERNAME, NEW_PASSWORD);
+            count++;
         }
+        assertTrue(count < 5);
     }
 
     @AfterEach
     public void close() {
-        sleep(1000);
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
         Cache.click('c');
+        closeWebDriver();
     }
 
     @Test
     @Order(0)
-    public void newSession() {
-        String name = PROPERTIES.getProperty("name");
-        PROPERTIES.setProperty("password", NEW_PASSWORD);
-
+    @EnabledIf("com.simplicite.test.MyTestWatcher#isFailedtest")
+    public void newAuthentification() {
+        assertTrue(Authentication.isAuthentificationPage());
+        Authentication.connect(USERNAME, OLD_PASSWORD);
         Authentication.changePassword(NEW_PASSWORD);
-
-        assertTrue(Authentication.authentificationSucced(name));
+        assertTrue(Authentication.authentificationSucced(USERNAME));
     }
 
     @Test

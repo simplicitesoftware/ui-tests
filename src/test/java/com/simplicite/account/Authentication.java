@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.actions;
 
 public class Authentication {
 
@@ -15,12 +16,16 @@ public class Authentication {
      * Connect the user
      **/
     public static void connect(String usr, String password) {
+        System.out.println(password);
         $("#auth-signin-username").setValue(usr);
         $("#auth-signin-password").setValue(password);
         $("#auth-signin-submit").click();
     }
 
-
+    public static void setValue(SelenideElement element,String value){
+        element.clear();
+        actions().moveToElement(element).click().sendKeys(value).perform();
+    }
     /**
      * Test if the authentification succed if a pop-up error appear return false
      */
@@ -51,5 +56,9 @@ public class Authentication {
         $(".logged-scope").find("[data-home=\""+ state + "\"]").click();
         $(".scope-icon > img[src*=\""+ codeImg + "\"]").shouldBe(Condition.exist, Duration.ofSeconds(20));
 
+    }
+
+    public static boolean isAuthentificationPage() {
+        return $("#auth-main").exists();
     }
 }

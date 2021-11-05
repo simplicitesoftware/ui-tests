@@ -18,28 +18,29 @@ public class DataStore {
     public static final String ORDERAREA1 = "TrnOrder-1";
     public static final String ORDERAREA2 = "TrnOrder-2";
     public static final String ORDERAREA3 = "TrnOrder-3";
-    public static final String NEW_PASSWORD = "designer1903";
+    public static String NEW_PASSWORD;
+    public static boolean FIRST_AUTH = true;
     public static final String SUPERADMIN = "SUPERADMIN";
     public static final String INCREASESTOCK = "IncreaseStock";
     public static final String FIELDORDERSTATE = "trnOrdState";
     public static final String REDO = "RedoLog-R";
     public static final String HOME = "TrnHome";
     public static final String PIVOTTABLE = "TrnTcOrders";
-
+    public static final String OLD_PASSWORD = "simplicite";
     private static final int val = 18;
     public static final String ORDERTEST = "TrnOrder" + val;
     public static final String ORDERAREA1TEST = "TrnOrder" + val + "-1";
     public static final String FIELDORDERSTATETEST = "trnOrdState" + val;
     public static final String ORDERTABLETEST = "trn_order" + val;
     public static final String[][] LISTTRADORDERSTATETEST = {
-            {"TRNORDSTATE"+ val+"-CANCELED-PROCESSING", "Switch to Processing"},
-            {"TRNORDSTATE"+ val+"-CANCELED-VALIDATED", "Back to Validated"},
-            {"TRNORDSTATE"+ val+"-PROCESSING-CANCELED", "Cancel"},
-            {"TRNORDSTATE"+ val+"-PROCESSING-VALIDATED", "Validate"},
-            {"TRNORDSTATE"+ val+"-SENT-VALIDATED", "Back to Validated"},
-            {"TRNORDSTATE"+ val+"-VALIDATED-CANCELED", "Cancel"},
-            {"TRNORDSTATE"+ val+"-VALIDATED-PROCESSING", "Back to Processing"},
-            {"TRNORDSTATE"+ val+"-VALIDATED-SENT", "Send"}
+            {"TRNORDSTATE" + val + "-CANCELED-PROCESSING", "Switch to Processing"},
+            {"TRNORDSTATE" + val + "-CANCELED-VALIDATED", "Back to Validated"},
+            {"TRNORDSTATE" + val + "-PROCESSING-CANCELED", "Cancel"},
+            {"TRNORDSTATE" + val + "-PROCESSING-VALIDATED", "Validate"},
+            {"TRNORDSTATE" + val + "-SENT-VALIDATED", "Back to Validated"},
+            {"TRNORDSTATE" + val + "-VALIDATED-CANCELED", "Cancel"},
+            {"TRNORDSTATE" + val + "-VALIDATED-PROCESSING", "Back to Processing"},
+            {"TRNORDSTATE" + val + "-VALIDATED-SENT", "Send"}
     };
     public static final String PROCESSING = "PROCESSING";
     public static final String CANCELED = "CANCELED";
@@ -70,4 +71,11 @@ public class DataStore {
                   <div class="area" data-area="3"></div>
                 </div>
               </div>""";
+
+    public static String USERNAME;
+
+    public static void initUser() {
+        NEW_PASSWORD = PROPERTIES.getProperty("password");
+        USERNAME = PROPERTIES.getProperty("name");
+    }
 }
