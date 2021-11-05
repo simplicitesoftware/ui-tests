@@ -1,5 +1,6 @@
 package com.simplicite.optionmenu;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -29,6 +30,6 @@ public class Cache {
             if ($(".btn-OK[data-action=\"OK\"]").exists())
                 $(".btn-OK[data-action=\"OK\"]").click();
         }
-        actions().pause(Duration.ofSeconds(1)).perform();
+        $("#auth-main").should(Condition.exist, Duration.ofSeconds(60));
     }
 }

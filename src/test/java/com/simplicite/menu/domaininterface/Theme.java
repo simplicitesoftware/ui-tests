@@ -17,7 +17,6 @@ public class Theme {
 
         work.find("#select2-field_thm_base-container").parent().click();
         work.find("#select2-field_thm_base-results").find("[data-select2-id$=\"light\"]").shouldBe(Condition.visible).click();
-
         save();
     }
 }
