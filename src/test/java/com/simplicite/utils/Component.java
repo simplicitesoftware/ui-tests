@@ -14,7 +14,7 @@ public class Component {
     public static void sendFormControl(SelenideElement selenideElement, String name) {
 
         actions().moveToElement(selenideElement).click().sendKeys(Keys.ENTER).keyDown(Keys.CONTROL).sendKeys("a")
-                .sendKeys(Keys.DELETE).sendKeys(name).pause(Duration.ofSeconds(1)).sendKeys(Keys.ENTER).perform();
+                .keyUp(Keys.CONTROL).sendKeys(Keys.DELETE).sendKeys(name).pause(Duration.ofSeconds(1)).sendKeys(Keys.ENTER).perform();
     }
 
     public static void clickOnButtonEndDlgmodal(String component){

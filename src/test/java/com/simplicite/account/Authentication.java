@@ -16,16 +16,11 @@ public class Authentication {
      * Connect the user
      **/
     public static void connect(String usr, String password) {
-        System.out.println(password);
         $("#auth-signin-username").setValue(usr);
         $("#auth-signin-password").setValue(password);
         $("#auth-signin-submit").click();
     }
 
-    public static void setValue(SelenideElement element,String value){
-        element.clear();
-        actions().moveToElement(element).click().sendKeys(value).perform();
-    }
     /**
      * Test if the authentification succed if a pop-up error appear return false
      */
