@@ -10,6 +10,7 @@ import com.simplicite.menu.domaininterface.FieldStyle;
 import com.simplicite.menu.domaininterface.PivotTable;
 import com.simplicite.menu.domaininterface.Theme;
 import com.simplicite.menu.domaininterface.Views;
+import com.simplicite.menu.templateeditor.TemplateEditor;
 import com.simplicite.menu.templateeditor.TemplateEditorBO;
 import com.simplicite.menu.templateeditor.TemplateEditorView;
 import com.simplicite.menu.usersandrights.Function;
@@ -53,6 +54,7 @@ public class SimpliciteTutorial1Test {
         Configuration.timeout = Integer.parseInt(PROPERTIES.getProperty("timeout"));
         Configuration.pollingInterval = Integer.parseInt(PROPERTIES.getProperty("pollingInterval"));
         initUser();
+
     }
 
     @AfterAll
@@ -69,6 +71,7 @@ public class SimpliciteTutorial1Test {
     @BeforeEach
     public void setUp() {
         open(PROPERTIES.getProperty("url"));
+
         int count = 0;
         while (Authentication.isAuthentificationPage() && count < 5 && !$(".auth-signin-error").exists()) {
             Authentication.connect(USERNAME, NEW_PASSWORD);
@@ -169,6 +172,8 @@ public class SimpliciteTutorial1Test {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(PRODUCT, "trn_product", TRAINING, "prd", DOMAIN);
         TemplateEditorBO.navigateToEditor();
+        //BusinessObject.find(PRODUCT);
+        //TemplateEditorBO.clickEditor();
         TemplateEditorBO.addField(PRODUCTAREA1, "référence", "trnPrdReference", 3, true, true);
         TemplateEditorBO.addField(PRODUCTAREA1, "prix", "trnPrdPrix", 2, true, false);
         TemplateEditorBO.addField(PRODUCTAREA1, "stock", "trnPrdStock", 1, true, false);

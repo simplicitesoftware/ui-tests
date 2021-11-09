@@ -21,7 +21,6 @@ public class Component {
         SelenideElement dlgmodal = $("#dlgmodal").shouldHave(cssClass("show"));
         Selenide.sleep(1000);
         dlgmodal.find(component).click();
-        dlgmodal.shouldNot(exist);
     }
 
     public static void clickMenu(String domain, String name) {

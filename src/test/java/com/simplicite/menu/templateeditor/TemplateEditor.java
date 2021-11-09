@@ -15,13 +15,14 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.work;
+import static java.time.Duration.ofSeconds;
 
 public class TemplateEditor {
 
     public static void navigateToEditor() {
-        $("button[data-action*=\"editTemplate\"]").shouldBe(Condition.exist, Duration.ofSeconds(20)).click();
+        $("button[data-action*=\"editTemplate\"]").shouldBe(Condition.exist, ofSeconds(20)).click();
         SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.appear);
-        actions().pause(Duration.ofSeconds(1)).moveToElement(element).click(element).perform();
+        actions().pause(ofSeconds(1)).moveToElement(element).click(element).perform();
     }
 
     public static void addButton(String areaname, String type) {
@@ -38,6 +39,7 @@ public class TemplateEditor {
         SelenideElement element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         while(!element.isDisplayed()){
             actions().moveToElement(bouton).click().perform();
+            element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         }
         element.click();
     }
@@ -50,6 +52,7 @@ public class TemplateEditor {
 
     public static void addArea() {
         addButton(null, "area");
+
     }
 
     public static void clickEditor() {

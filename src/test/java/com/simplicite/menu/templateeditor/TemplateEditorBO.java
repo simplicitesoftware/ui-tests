@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.simplicite.utils.Component;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -60,6 +61,9 @@ public class TemplateEditorBO extends TemplateEditor{
 
         typed.find("[data-field-type=\"" + type + "\"]").click();
 
+        //event opening dlgmodal
+        Selenide.sleep(2000);
+
         SelenideElement modal = $("#dlgmodal");
         modal.find("#label").setValue(name);
         modal.find("#name").setValue(label);
@@ -67,7 +71,7 @@ public class TemplateEditorBO extends TemplateEditor{
             modal.find("label[for=\"key\"]").click();
         if (required)
             modal.find("label[for=\"req\"]").click();
-        modal.find("button[data-action=\"SAVE\"]").click();
+        Component.clickOnButtonEndDlgmodal("button[data-action=\"SAVE\"]");
     }
 
     public static void addFieldUnusedJoin(String areaname, String join, String field) {
