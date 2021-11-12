@@ -77,7 +77,7 @@ public class SimpliciteTutorial1Test {
             Authentication.connect(USERNAME, NEW_PASSWORD);
             count++;
         }
-        assertTrue(count < 5 && Authentication.authentificationSucced(USERNAME));
+        assertTrue(count < 5);
     }
 
     @AfterEach
