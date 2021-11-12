@@ -82,8 +82,7 @@ public class SimpliciteTutorial1Test {
 
     @AfterEach
     public void close() {
-        DropDownMenu drop = new DropDownMenu();
-        drop.click(4);
+        DropDownMenu.click(4);
         Cache.click('c');
     }
 
@@ -137,8 +136,8 @@ public class SimpliciteTutorial1Test {
         User.associateGroup(SUPERADMIN);
 
         PROPERTIES.setProperty("firstuserpassword", password);
-        DropDownMenu drop = new DropDownMenu();
-        drop.click(4);
+
+        DropDownMenu.click(4);
         Cache.click('c');
 
         Authentication.connect(PROPERTIES.getProperty("firstusername"), password);
