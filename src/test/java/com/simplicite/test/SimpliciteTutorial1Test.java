@@ -85,7 +85,6 @@ public class SimpliciteTutorial1Test {
         DropDownMenu drop = new DropDownMenu();
         drop.click(4);
         Cache.click('c');
-        closeWebDriver();
     }
 
     @Test
@@ -172,8 +171,6 @@ public class SimpliciteTutorial1Test {
         BusinessObject.click();
         BusinessObject.createObjectAssistant(PRODUCT, "trn_product", TRAINING, "prd", DOMAIN);
         TemplateEditorBO.navigateToEditor();
-        //BusinessObject.find(PRODUCT);
-        //TemplateEditorBO.clickEditor();
         TemplateEditorBO.addField(PRODUCTAREA1, "référence", "trnPrdReference", 3, true, true);
         TemplateEditorBO.addField(PRODUCTAREA1, "prix", "trnPrdPrix", 2, true, false);
         TemplateEditorBO.addField(PRODUCTAREA1, "stock", "trnPrdStock", 1, true, false);
@@ -232,8 +229,8 @@ public class SimpliciteTutorial1Test {
         TemplateEditorBO.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliNom");
         TemplateEditorBO.addFieldUnusedJoin(ORDERAREA2, "unusedjoin0", "trnCliPrenom");
         TemplateEditorBO.addArea();
-        TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdNom");
         TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdReference");
+        TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdNom");
         TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdStock");
         TemplateEditorBO.saveEditor();
     }

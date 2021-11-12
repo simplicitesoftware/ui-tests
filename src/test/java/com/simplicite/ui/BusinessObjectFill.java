@@ -43,7 +43,7 @@ public class BusinessObjectFill {
 
     public static void createOrder(String trnprdref, String trncliNom, String date, String quantite, String numero){
         create();
-        $("#field_trnOrdPrdId__trnPrdNom").click();
+        $("#field_trnOrdPrdId__trnPrdReference").click();
         find("trnPrdReference", trnprdref);
         $("#field_trnOrdCliId__trnCliNom").click();
         find("trnCliNom", trncliNom);
