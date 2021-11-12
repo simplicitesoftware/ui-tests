@@ -11,10 +11,9 @@ import static com.codeborne.selenide.Selenide.actions;
 
 public class DropDownMenu {
 
-    private static final SelenideElement dropmenubutton = $(".btn-header.btn-shortcut").parent();
 
     public static void click(int type) {
-
+        SelenideElement dropmenubutton = $(".btn-header.btn-shortcut").parent();
         actions().pause(Duration.ofSeconds(1)).moveToElement(dropmenubutton).click().perform();
         switch (type) {
                 case 0 -> dropmenubutton.find(byCssSelector("[data-shortcut=\"SocialPosts\"]")).click();
