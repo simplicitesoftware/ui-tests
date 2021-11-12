@@ -2,6 +2,7 @@ package com.simplicite.optionmenu;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
 import java.util.Objects;
 
 import static com.codeborne.selenide.Selectors.byCssSelector;
@@ -14,7 +15,7 @@ public class DropDownMenu {
 
     public static void click(int type) {
 
-        actions().moveToElement(dropmenubutton).click().perform();
+        actions().pause(Duration.ofSeconds(1)).moveToElement(dropmenubutton).click().perform();
         switch (type) {
                 case 0 -> dropmenubutton.find(byCssSelector("[data-shortcut=\"SocialPosts\"]")).click();
                 case 1 -> dropmenubutton.find(byCssSelector("*[data-shortcut=\"Feedback\"]")).click();
