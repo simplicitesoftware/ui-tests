@@ -30,6 +30,6 @@ public class Cache {
             if ($(".btn-OK[data-action=\"OK\"]").exists())
                 $(".btn-OK[data-action=\"OK\"]").click();
         }
-        $("#auth-main").should(Condition.exist, Duration.ofSeconds(60));
+        //$("#auth-main").should(Condition.exist, Duration.ofSeconds(60));
     }
 }
