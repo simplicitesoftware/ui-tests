@@ -40,6 +40,7 @@ public class TemplateEditor {
         while(!element.isDisplayed()){
             actions().moveToElement(bouton).click().perform();
             element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
+            Selenide.sleep(500);
         }
         element.click();
     }
