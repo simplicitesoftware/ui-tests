@@ -72,12 +72,9 @@ public class SimpliciteTutorial1Test {
     public void setUp() {
         open(PROPERTIES.getProperty("url"));
 
-        int count = 0;
-        while (Authentication.isAuthentificationPage() && count < 5 && !$(".auth-signin-error").exists()) {
+        if (Authentication.isAuthentificationPage()) {
             Authentication.connect(USERNAME, NEW_PASSWORD);
-            count++;
         }
-        assertTrue(count < 5);
     }
 
     @AfterEach
