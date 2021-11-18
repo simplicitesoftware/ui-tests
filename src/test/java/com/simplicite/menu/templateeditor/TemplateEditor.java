@@ -39,6 +39,7 @@ public class TemplateEditor {
             actions().moveToElement(button).click().perform();
             Selenide.sleep(500);
             element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
+            button = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         }
         element.click();
     }
