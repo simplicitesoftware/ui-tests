@@ -24,7 +24,6 @@ public class TemplateEditor {
     }
 
     public static void addButton(String areaname, String type) {
-        String pngFileName = screenshot("my_file_name");
         SelenideElement area;
         if (areaname == null)
             area = work.find(".dock-zone[data-dz=\"1\"]").should(Condition.exist);

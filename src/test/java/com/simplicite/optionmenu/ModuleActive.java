@@ -17,7 +17,7 @@ public class ModuleActive {
     public static void showAll(){
         SelenideElement dlgmodal = $("#dlgmodal_modules");
         SelenideElement button = dlgmodal.find("button[data-action=\"SHOWALL\"]");
-        actions().pause(Duration.ofSeconds(1)).moveToElement(button).click(button).pause(Duration.ofSeconds(1)).build().perform();
+        actions().pause(Duration.ofSeconds(2)).moveToElement(button).click(button).pause(Duration.ofSeconds(2)).build().perform();
     }
 
     public static void select(String module){
