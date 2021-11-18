@@ -1,9 +1,6 @@
 package com.simplicite.menu.templateeditor;
 
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
 import com.simplicite.menu.MainMenuProperties;
 import com.simplicite.utils.Component;
 
@@ -31,12 +28,14 @@ public class TemplateEditor {
 
         SelenideElement bouton = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
 
-        area.scrollIntoView(false);
 
         SelenideElement element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
+        int count = area.findAll(".field").size();
+        if (count > 0)
+            area.findAll(".field").last().scrollIntoView(true);
+
         while(!element.isDisplayed()){
             actions().moveToElement(bouton).click().perform();
-            element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
             Selenide.sleep(500);
         }
         element.click();
