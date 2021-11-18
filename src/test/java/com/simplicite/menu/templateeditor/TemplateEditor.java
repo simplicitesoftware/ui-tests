@@ -1,6 +1,9 @@
 package com.simplicite.menu.templateeditor;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 import com.simplicite.utils.Component;
 
@@ -26,17 +29,16 @@ public class TemplateEditor {
         else
             area = work.find("[data-areaname=\"" + areaname + "\"]").should(Condition.exist);
 
-        SelenideElement bouton = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
-
-
         SelenideElement element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
-        int count = area.findAll(".field").size();
+        /*int count = area.findAll(".field").size();
         if (count > 0)
-            area.findAll(".field").last().scrollIntoView(true);
-
-        while(!element.isDisplayed()){
-            actions().moveToElement(bouton).click().perform();
+            area.findAll(".field").last().scrollIntoView(true);*/
+        SelenideElement button = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
+        button.scrollIntoView(true);
+        while (!element.isDisplayed()) {
+            actions().moveToElement(button).click().perform();
             Selenide.sleep(500);
+            element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         }
         element.click();
     }
@@ -86,7 +88,7 @@ public class TemplateEditor {
         MainMenuProperties.close();
     }
 
-    public static void saveDlgmodal(){
+    public static void saveDlgmodal() {
         Component.clickOnButtonEndDlgmodal("[data-action=\"SAVE\"]");
     }
 }
