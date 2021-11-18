@@ -1,9 +1,8 @@
 package com.simplicite.menu.domaininterface;
 
-import com.codeborne.selenide.SelenideElement;
 import com.simplicite.utils.Component;
 
-import static com.simplicite.menu.MainMenuProperties.*;
+import static com.simplicite.menu.MainMenuProperties.domaininterface;
 
 public class Styles {
 

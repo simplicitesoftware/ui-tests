@@ -1,9 +1,9 @@
 package com.simplicite.menu.usersandrights;
 
-import com.codeborne.selenide.SelenideElement;
 import com.simplicite.utils.Component;
 
-import static com.simplicite.menu.MainMenuProperties.*;
+import static com.simplicite.menu.MainMenuProperties.domain;
+import static com.simplicite.menu.MainMenuProperties.work;
 
 public class Grant {
 

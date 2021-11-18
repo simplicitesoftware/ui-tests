@@ -7,7 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.simplicite.menu.MainMenuProperties.*;
+import static com.simplicite.menu.MainMenuProperties.administration;
+import static com.simplicite.menu.MainMenuProperties.work;
 
 public class SystemProperties {
 

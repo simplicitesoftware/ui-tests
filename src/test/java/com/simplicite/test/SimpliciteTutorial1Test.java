@@ -10,7 +10,6 @@ import com.simplicite.menu.domaininterface.FieldStyle;
 import com.simplicite.menu.domaininterface.PivotTable;
 import com.simplicite.menu.domaininterface.Theme;
 import com.simplicite.menu.domaininterface.Views;
-import com.simplicite.menu.templateeditor.TemplateEditor;
 import com.simplicite.menu.templateeditor.TemplateEditorBO;
 import com.simplicite.menu.templateeditor.TemplateEditorView;
 import com.simplicite.menu.usersandrights.Function;
@@ -26,7 +25,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
 import static com.simplicite.utils.DataStore.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

@@ -1,10 +1,8 @@
 package com.simplicite.menu.templateeditor;
 
 import com.codeborne.selenide.SelenideElement;
-import com.simplicite.utils.Component;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.work;

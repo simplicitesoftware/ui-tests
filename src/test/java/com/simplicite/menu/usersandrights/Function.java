@@ -9,7 +9,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
-import static com.simplicite.menu.MainMenuProperties.*;
+import static com.simplicite.menu.MainMenuProperties.domain;
+import static com.simplicite.menu.MainMenuProperties.work;
 
 public class Function {
 

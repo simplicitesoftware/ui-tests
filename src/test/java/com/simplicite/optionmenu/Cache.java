@@ -1,14 +1,10 @@
 package com.simplicite.optionmenu;
 
-import com.codeborne.selenide.Condition;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.actions;
 
 public class Cache {
 

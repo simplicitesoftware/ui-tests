@@ -3,7 +3,6 @@ package com.simplicite.optionmenu;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
-import java.util.Objects;
 
 import static com.codeborne.selenide.Selectors.byCssSelector;
 import static com.codeborne.selenide.Selenide.$;

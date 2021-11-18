@@ -1,11 +1,7 @@
 package com.simplicite.menu.domaininterface;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import com.simplicite.utils.Component;
-import com.simplicite.utils.Icon;
 
-import static com.codeborne.selenide.Selectors.byText;
 import static com.simplicite.menu.MainMenuProperties.*;
 
 public class FieldStyle {
