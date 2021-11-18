@@ -29,18 +29,18 @@ public class TemplateEditor {
         else
             area = work.find("[data-areaname=\"" + areaname + "\"]").should(Condition.exist);
 
-        SelenideElement element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         /*int count = area.findAll(".field").size();
         if (count > 0)
             area.findAll(".field").last().scrollIntoView(true);*/
-        SelenideElement button = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
-        button.scrollIntoView(true);
-        while (!element.isDisplayed()) {
+        SelenideElement element;
+        do {
+            SelenideElement button = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
+            button.scrollIntoView(true);
+
             actions().moveToElement(button).click().perform();
-            Selenide.sleep(500);
+            Selenide.sleep(1000);
             element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
-            button = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
-        }
+        } while (!element.isDisplayed());
         element.click();
     }
 
