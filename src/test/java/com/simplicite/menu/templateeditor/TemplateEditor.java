@@ -20,6 +20,7 @@ public class TemplateEditor {
         $("button[data-action*=\"editTemplate\"]").shouldBe(Condition.exist, ofSeconds(20)).click();
         SelenideElement element = $("#dlgmodal").find(".img-flow > img:nth-child(1)").shouldBe(Condition.appear);
         actions().pause(ofSeconds(1)).moveToElement(element).click(element).perform();
+        Selenide.sleep(1000);
     }
 
     public static void addButton(String areaname, String type) {
@@ -56,6 +57,7 @@ public class TemplateEditor {
 
     public static void clickEditor() {
         $("button[data-action*=\"editTemplate\"]").click();
+        Selenide.sleep(1000);
     }
 
 
