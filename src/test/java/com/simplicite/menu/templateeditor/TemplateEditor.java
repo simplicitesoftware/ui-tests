@@ -37,7 +37,7 @@ public class TemplateEditor {
             SelenideElement button = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
             button.scrollIntoView(true);
 
-            actions().moveToElement(button).click().perform();
+            actions().moveToElement(button).click().build().perform();
             Selenide.sleep(1000);
             element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
         } while (!element.isDisplayed());

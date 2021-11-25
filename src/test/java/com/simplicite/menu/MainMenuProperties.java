@@ -33,9 +33,6 @@ public class MainMenuProperties {
         $("button[data-action=\"saveclose\"]").click();
     }
 
-    void naviguateToCreate() {
-        $("button[data-action=\"create\"]").click();
-    }
 
     public static void next() {
         work.find("button[data-action=\"validate\"]").click();

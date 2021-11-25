@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 
 public class Component {
+
     public static void sendFormControl(SelenideElement selenideElement, String name) {
 
         actions().moveToElement(selenideElement).click().sendKeys(Keys.ENTER).keyDown(Keys.CONTROL).sendKeys("a")
