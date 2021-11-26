@@ -26,7 +26,18 @@ public class TemplateEditor {
         else
             area = work.find("[data-areaname=\"" + areaname + "\"]").should(Condition.exist);
 
-        SelenideElement zone = area.findAll("button").last();
+        SelenideElement element;
+        do {
+            SelenideElement button = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
+            button.scrollIntoView(true);
+
+            actions().moveToElement(button).click().perform();
+            Selenide.sleep(2000);
+            element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
+        } while (!element.isDisplayed());
+        element.click();
+
+        /*SelenideElement zone = area.findAll("button").last();
 
         zone.scrollIntoView(true);
         while (!$(".dock-zone.on").exists())
@@ -37,7 +48,7 @@ public class TemplateEditor {
 
         Selenide.sleep(1000);
         SelenideElement element = $(".dock-zone.on").find("[data-menu=\"" + type + "\"]");
-        element.click();
+        element.click();*/
     }
 
     public static void addRow() {
