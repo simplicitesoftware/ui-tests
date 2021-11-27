@@ -1,5 +1,6 @@
 package com.simplicite.menu.domaininterface;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.utils.Component;
 
@@ -19,8 +20,9 @@ public class Views {
         create();
 
         work.find("#field_viw_name").setValue(name);
-        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), modulename);
         work.find("#field_viw_order").setValue(String.valueOf(order));
+        Component.sendFormControl(work.find("#field_row_module_id__mdl_name"), modulename);
+
         save();
     }
 

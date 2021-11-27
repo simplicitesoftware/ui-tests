@@ -1,13 +1,16 @@
 package com.simplicite.menu.templateeditor;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 import com.simplicite.utils.Component;
 
 import static com.codeborne.selenide.Condition.cssClass;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.work;
-import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
 
 public class TemplateEditor {
@@ -20,35 +23,22 @@ public class TemplateEditor {
     }
 
     public static void addButton(String areaname, String type) {
-        SelenideElement area;
+        SelenideElement zone;
         if (areaname == null)
-            area = work.find(".dock-zone[data-dz=\"1\"]").should(Condition.exist);
-        else
-            area = work.find("[data-areaname=\"" + areaname + "\"]").should(Condition.exist);
+            zone = work.find(".dock-zone[data-dz=\"1\"]").should(Condition.exist);
+        else {
+            // card-body not needed but add because of a bug in template editor last is not last, dock-zone out of card-body
+            SelenideElement area = work.find("[data-areaname=\"" + areaname + "\"]").should(Condition.exist).find(".card-body");
+            zone = area.findAll(".dock-zone").last().should(visible);
 
-        SelenideElement element;
-        do {
-            SelenideElement button = area.findAll("button").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
-            button.scrollIntoView(true);
-
-            actions().moveToElement(button).click().perform();
-            Selenide.sleep(2000);
-            element = area.findAll("[data-menu=\"" + type + "\"]").shouldBe(CollectionCondition.sizeGreaterThan(0)).last();
-        } while (!element.isDisplayed());
-        element.click();
-
-        /*SelenideElement zone = area.findAll("button").last();
-
+        }
         zone.scrollIntoView(true);
-        while (!$(".dock-zone.on").exists())
-            actions().moveToElement(zone).pause(ofSeconds(1)).perform();
+        Selenide.executeJavaScript("arguments[0].classList.add(\"on\")", zone);
 
         SelenideElement button = $(".dock-zone.on").find(".btn-insert");
         button.click();
-
-        Selenide.sleep(1000);
-        SelenideElement element = $(".dock-zone.on").find("[data-menu=\"" + type + "\"]");
-        element.click();*/
+        SelenideElement element = $(".dock-zone.on").find("[data-menu=\"" + type + "\"]").shouldBe(visible);
+        element.click();
     }
 
     public static void addRow() {

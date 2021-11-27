@@ -21,7 +21,7 @@ public class ListOfValue {
         work.find("[data-key=\"FieldListCode_lov_list_id\"]").click();
         SelenideElement panel = work.find("[data-object=\"FieldListCode\"]");
         panel.findAll("[data-field=\"lov_code\"]").filter(Condition.text(code)).first().click();
-        Component.sendFormControl(work.find("#field_lov_icon"), icon);
+        work.find("#field_lov_icon").sendKeys(icon);
         saveAndClose();
     }
 
