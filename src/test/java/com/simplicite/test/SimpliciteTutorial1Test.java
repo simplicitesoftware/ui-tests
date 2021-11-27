@@ -78,8 +78,8 @@ public class SimpliciteTutorial1Test {
 
     @AfterEach
     public void close() {
-        //DropDownMenu.click(4);
-        //Cache.click('c');
+        DropDownMenu.click(4);
+        Cache.click('c');
     }
 
     @Test
