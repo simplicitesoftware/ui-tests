@@ -356,11 +356,11 @@ public class SimpliciteTutorial1Test {
         FieldStyle.createFieldStyle(ORDER, FIELDORDERSTATE, VALIDATED, "greenbg");
         FieldStyle.createFieldStyle(ORDER, FIELDORDERSTATE, SENT, "bluebg");
 
-        /*ListOfValue.click();
+        ListOfValue.click();
         ListOfValue.find(FIELDORDERSTATE);
         ListOfValue.modifyListCodeIcon(PROCESSING, "icon/color/btn_orange");
         ListOfValue.modifyListCodeIcon(CANCELED, "icon/color/btn_grey");
         ListOfValue.modifyListCodeIcon(VALIDATED, "icon/color/btn_green");
-        ListOfValue.modifyListCodeIcon(SENT, "icon/color/btn_blue");*/
+        ListOfValue.modifyListCodeIcon(SENT, "icon/color/btn_blue");
     }
 }
