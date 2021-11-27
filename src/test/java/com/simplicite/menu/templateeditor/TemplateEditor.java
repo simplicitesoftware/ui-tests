@@ -6,8 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.simplicite.menu.MainMenuProperties;
 import com.simplicite.utils.Component;
 
-import static com.codeborne.selenide.Condition.cssClass;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 import static com.simplicite.menu.MainMenuProperties.work;
@@ -35,9 +34,10 @@ public class TemplateEditor {
         zone.scrollIntoView(true);
         Selenide.executeJavaScript("arguments[0].classList.add(\"on\")", zone);
 
-        SelenideElement button = $(".dock-zone.on").find(".btn-insert");
+        SelenideElement button = $(".dock-zone.on").find(".btn-insert").should(exist);
         button.click();
-        SelenideElement element = $(".dock-zone.on").find("[data-menu=\"" + type + "\"]").shouldBe(visible);
+        SelenideElement element = $(".dock-zone.on").find("[data-menu=\"" + type + "\"]")
+                .shouldBe(and("exist and visible", exist, visible));
         element.click();
     }
 
