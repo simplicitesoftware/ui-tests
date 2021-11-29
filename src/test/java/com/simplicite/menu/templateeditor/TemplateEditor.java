@@ -54,7 +54,7 @@ public class TemplateEditor {
 
     public static void clickEditor() {
         $("button[data-action*=\"editTemplate\"]").click();
-        Selenide.sleep(1000);
+        Selenide.sleep(2000);
     }
 
 
