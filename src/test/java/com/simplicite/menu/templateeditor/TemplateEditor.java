@@ -62,6 +62,7 @@ public class TemplateEditor {
         $("button[data-action=\"save\"]").click();
         SelenideElement dlgmodal = $("#dlgmodal_saveAll");
         SelenideElement text = dlgmodal.find("textarea").shouldBe(Condition.visible);
+        Selenide.sleep(1000);
         text.clear();
         actions().moveToElement(text).click(text).sendKeys(html).build().perform();
         SelenideElement element = dlgmodal.find("button[data-action=\"SAVE\"]");

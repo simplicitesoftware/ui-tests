@@ -137,6 +137,7 @@ public class TemplateEditorBO extends TemplateEditor{
         $("button[data-action=\"save\"]").shouldBe(and("Clickable", visible, enabled)).click();
         SelenideElement element = $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").shouldBe(and("Clickable", visible, enabled));
         actions().moveToElement(element).pause(1).click(element).perform();
+        $("#dlgmodal_saveAll").shouldNot(visible);
     }
 
 }
