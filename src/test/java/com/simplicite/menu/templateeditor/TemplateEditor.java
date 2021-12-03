@@ -32,8 +32,8 @@ public class TemplateEditor {
 
         }
         zone.scrollIntoView(true);
+        zone.hover();
         Selenide.executeJavaScript("arguments[0].classList.add(\"on\")", zone);
-
         SelenideElement button = $(".dock-zone.on").find(".btn-insert").should(exist);
         button.click();
         SelenideElement element = $(".dock-zone.on").find("[data-menu=\"" + type + "\"]")

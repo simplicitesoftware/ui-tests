@@ -1,10 +1,12 @@
 package com.simplicite.menu.templateeditor;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.simplicite.utils.Component;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -78,6 +80,7 @@ public class TemplateEditorBO extends TemplateEditor{
         SelenideElement type = $("#dlgmodal_field").find("#" + join);
         type.click();
         type.find("[data-field=\"" + field + "\"]").click();
+
     }
 
     public static void editEnum(String... args) {
@@ -103,11 +106,6 @@ public class TemplateEditorBO extends TemplateEditor{
 
         SelenideElement save = dlgedit.find("[data-action=\"SAVE\"]");
         actions().moveToElement(save).click().perform();
-        //bug UI on dlgmodal didn't disapear
-        if ($("#dlgmodal").exists()){
-            save = $("#dlgmodal").find("button[data-action=\"SAVE\"]");
-            actions().moveToElement(save).click().perform();
-        }
     }
 
     public static void addStateModel(int[][] listaccessorderstate, String group, String[][] trad) {
@@ -136,7 +134,7 @@ public class TemplateEditorBO extends TemplateEditor{
     public static void saveEditor() {
         $("button[data-action=\"save\"]").shouldBe(and("Clickable", visible, enabled)).click();
         SelenideElement element = $("#dlgmodal_saveAll").find("button[data-action=\"SAVE\"]").shouldBe(and("Clickable", visible, enabled));
-        actions().moveToElement(element).pause(1).click(element).perform();
+        actions().moveToElement(element).pause(Duration.ofSeconds(1)).click(element).pause(Duration.ofSeconds(1)).perform();
         $("#dlgmodal_saveAll").shouldNot(visible);
     }
 

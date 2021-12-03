@@ -1,5 +1,7 @@
 package com.simplicite.ui;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
@@ -57,7 +59,8 @@ public class BusinessObjectFill {
 
     public static void find(String id, String idtext) {
         $("#" + id).setValue(idtext).pressEnter();
-        $("[data-field=\"" + id+ "\"]").click();
+        Selenide.sleep(1000);
+        $("[data-field=\"" + id+ "\"]").shouldHave(Condition.text(idtext)).click();
     }
 
 

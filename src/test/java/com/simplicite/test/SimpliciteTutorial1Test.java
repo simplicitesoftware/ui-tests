@@ -1,6 +1,7 @@
 package com.simplicite.test;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.simplicite.account.Authentication;
 import com.simplicite.menu.MainMenuProperties;
@@ -307,6 +308,7 @@ public class SimpliciteTutorial1Test {
         BusinessObject.find(ORDER);
         TemplateEditorBO.clickEditor();
         TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdSupId");
+        Selenide.sleep(1000);
         TemplateEditorBO.addFieldUnusedJoin(ORDERAREA3, "unusedjoin1", "trnPrdSupId__trnSupNom");
         TemplateEditorBO.saveEditor();
 
